@@ -1,0 +1,7 @@
+spring:
+  main:
+    banner-mode: off
+  datasource:
+    url: jdbc:mysql://localhost:3306/virtual_bank?serverTimezone=UTC
+    username: root
+    password: root

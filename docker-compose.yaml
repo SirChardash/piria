@@ -1,0 +1,29 @@
+services:
+  mysql:
+    build: backend-services/database
+    container_name: database
+    networks:
+      - sirchardash_piria_virtual_bank
+    volumes:
+      - 'mysql_data:/bitnami/mysql/data'
+      - './backend-services/database/init:/init'
+    environment:
+      - MYSQL_ROOT_PASSWORD=OS23D3F1N2P34aJswd
+  virtual_bank:
+    build: backend-services/virtual-bank
+    container_name: virtual_bank
+    ports:
+      - '8865:8080'
+    networks:
+      - sirchardash_piria_virtual_bank
+    environment:
+      - SPRING.DATASOURCE.URL=jdbc:mysql://mysql:3306/virtual_bank?serverTimezone=UTC
+      - SPRING.DATASOURCE.USERNAME=virtual_bank_user
+      - SPRING.DATASOURCE.PASSWORD=heckingsecure
+volumes:
+  mysql_data:
+    driver: local
+
+networks:
+  sirchardash_piria_virtual_bank:
+    driver: bridge
