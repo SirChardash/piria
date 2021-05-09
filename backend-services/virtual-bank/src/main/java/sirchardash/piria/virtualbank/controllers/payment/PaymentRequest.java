@@ -3,7 +3,7 @@ package sirchardash.piria.virtualbank.controllers.payment;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import sirchardash.piria.virtualbank.models.CreditCard;
+import sirchardash.piria.virtualbank.models.CreditCardInfo;
 
 @Data
 @NoArgsConstructor
@@ -12,7 +12,7 @@ class PaymentRequest {
 
     private double amount;
     private String referenceNumber;
-    private CreditCard payerCard;
+    private CreditCardInfo payerCard;
     private String inFavorOfAccountNumber;
 
 }

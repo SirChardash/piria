@@ -7,18 +7,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreditCard {
+public class CreditCardInfo {
     private String cardNumber;
-    private Type type;
+    private CreditCardType type;
     private String firstName;
     private String lastName;
     private String expirationDate;
     private String securityCode;
-
-    public enum Type {
-        VISA,
-        MASTERCARD,
-        AMERICAN_EXPRESS
-    }
 
 }
