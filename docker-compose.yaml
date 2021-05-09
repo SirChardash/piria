@@ -2,6 +2,8 @@ services:
   mysql:
     build: backend-services/database
     container_name: database
+    ports:
+      - '8306:3306'
     networks:
       - sirchardash_piria_virtual_bank
     volumes:
