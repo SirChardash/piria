@@ -11,6 +11,8 @@
 
     <modules>
         <module>virtual-bank</module>
+        <module>payment-report-grpc</module>
+        <module>museum-tour</module>
     </modules>
 
 </project>

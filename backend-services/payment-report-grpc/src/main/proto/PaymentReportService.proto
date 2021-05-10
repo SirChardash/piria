@@ -1,0 +1,23 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package sirchardash.piria.virtualbank.controllers.paymentreport;
+
+import "google/protobuf/timestamp.proto";
+
+message PaymentReportRequest {
+  string reference_number = 1;
+  string auth_token = 2;
+}
+
+message Payment {
+  double amount = 1;
+  google.protobuf.Timestamp time = 2;
+}
+
+message PaymentReportResponse {
+  repeated Payment reports = 1;
+}
+
+service PaymentReportService {
+  rpc getPayment(PaymentReportRequest) returns (PaymentReportResponse);
+}

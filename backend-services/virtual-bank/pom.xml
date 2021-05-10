@@ -41,6 +41,11 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.19</version>
 		</dependency>
+		<dependency>
+			<groupId>sirchardash.piria</groupId>
+			<artifactId>payment-report-grpc</artifactId>
+			<version>1.0</version>
+		</dependency>
 		<!-- Test dependencies -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
