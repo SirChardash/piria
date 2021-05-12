@@ -10,13 +10,13 @@ import sirchardash.piria.virtualbank.models.CreditCardInfo;
 public class CreditCardSearch {
 
     private final CreditCardRepository creditCardRepository;
-    private final CreditCardCheck creditCardCheck;
+    private final CreditCardInfoCheck creditCardInfoCheck;
 
     @Autowired
     public CreditCardSearch(CreditCardRepository creditCardRepository,
-                            CreditCardCheck creditCardCheck) {
+                            CreditCardInfoCheck creditCardInfoCheck) {
         this.creditCardRepository = creditCardRepository;
-        this.creditCardCheck = creditCardCheck;
+        this.creditCardInfoCheck = creditCardInfoCheck;
     }
 
     public CreditCard findAccountFor(CreditCardInfo creditCardInfo) {
@@ -24,7 +24,7 @@ public class CreditCardSearch {
                 creditCardInfo.getFirstName(),
                 creditCardInfo.getLastName()
         ).stream()
-                .filter(stored -> creditCardCheck.isValid(stored, creditCardInfo))
+                .filter(stored -> creditCardInfoCheck.isValid(stored, creditCardInfo))
                 .findFirst().orElse(null);
     }
 }

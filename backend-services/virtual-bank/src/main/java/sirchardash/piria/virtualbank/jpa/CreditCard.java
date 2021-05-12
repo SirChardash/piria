@@ -30,6 +30,6 @@ public class CreditCard {
     private String firstName;
     private String lastName;
     private String expirationDate;
-    private String securityCode;
+    private String securityCodeHash;
 
 }
