@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "grpc.port",
+      "type": "java.lang.Integer",
+      "description": "Port where gRPC will listen to."
+  }
+] }
