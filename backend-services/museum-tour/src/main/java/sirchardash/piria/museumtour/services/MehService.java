@@ -11,7 +11,7 @@ import sirchardash.piria.virtualbank.controllers.paymentreport.PaymentReportServ
 @Service
 public class MehService {
 
-    @PostConstruct
+//    @PostConstruct
     public void eh() {
         ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 8080)
                 .usePlaintext()

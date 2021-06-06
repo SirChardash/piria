@@ -36,3 +36,6 @@ build/
 /upload/
 /results/
 /python/model
+
+### Node.js ###
+node_modules

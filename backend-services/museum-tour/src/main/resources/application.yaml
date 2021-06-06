@@ -1,6 +1,10 @@
 spring:
   main:
     banner-mode: off
+  datasource:
+    url: jdbc:mysql://localhost:8306/museum_spinner?serverTimezone=UTC
+    username: museum_user
+    password: heckingsecure
 
 server:
   port: 8081

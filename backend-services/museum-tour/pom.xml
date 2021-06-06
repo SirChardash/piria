@@ -25,6 +25,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
         <!-- Other dependencies -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -35,6 +39,11 @@
             <groupId>sirchardash.piria</groupId>
             <artifactId>payment-report-grpc</artifactId>
             <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.19</version>
         </dependency>
         <!-- Test dependencies -->
         <dependency>
