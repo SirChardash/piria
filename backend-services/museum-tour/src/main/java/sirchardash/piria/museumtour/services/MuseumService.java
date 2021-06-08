@@ -19,9 +19,8 @@ public class MuseumService {
         this.storage = storage;
     }
 
-    public List<Museum> getMuseums(List<String> cities, String searchQuery, Language language) {
-        System.out.println(language);
-        return storage.getFor(language).find(searchQuery, cities);
+    public List<Museum> getMuseums(String searchQuery, Language language) {
+        return storage.getFor(language).find(searchQuery);
     }
 
 }

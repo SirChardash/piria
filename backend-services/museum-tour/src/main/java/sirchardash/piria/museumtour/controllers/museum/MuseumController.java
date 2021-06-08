@@ -1,6 +1,5 @@
 package sirchardash.piria.museumtour.controllers.museum;
 
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,9 +19,10 @@ public class MuseumController {
     }
 
     @GetMapping("/museums")
-    public ResponseEntity<MuseumResponse> museums(@RequestParam(defaultValue = "en") String language) {
+    public ResponseEntity<MuseumResponse> museums(@RequestParam(defaultValue = "en") String language,
+                                                  @RequestParam(defaultValue = "") String query) {
         return ResponseEntity.ok(
-                new MuseumResponse(service.getMuseums(List.of(), "", Language.forCode(language)))
+                new MuseumResponse(service.getMuseums(query, Language.forCode(language)))
         );
     }
 }

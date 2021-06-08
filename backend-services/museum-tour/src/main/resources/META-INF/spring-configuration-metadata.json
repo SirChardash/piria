@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "museum-tour.museum.max-returned",
+      "type": "java.lang.Integer",
+      "description": "How much museums can be returned at once through search."
+    },
+    {
+      "name": "museum-tour.museum.refresh-cron",
+      "type": "org.springframework.scheduling.support.CronExpression",
+      "description": "How often to refresh local data for museums."
+    }
+  ]
+}

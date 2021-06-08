@@ -1,6 +1,9 @@
 package sirchardash.piria.museumtour.components.museum;
 
+import java.io.IOException;
+import java.nio.file.Path;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import sirchardash.piria.museumtour.jpa.MuseumRepository;
@@ -20,13 +23,15 @@ public class MuseumDelegate {
     }
 
     @Bean("museumLuceneSearchEn")
-    public MuseumLuceneSearch luceneSearchEn(@Qualifier("museumRefreshEn") MuseumRefresh refresh) {
-        return new MuseumLuceneSearch(refresh);
+    public MuseumLuceneSearch luceneSearchEn(@Qualifier("museumRefreshEn") MuseumRefresh refresh,
+                                             @Value("${museum-tour.museum.max-returned}") int maxReturned) throws IOException {
+        return new MuseumLuceneSearch(refresh, Path.of("lucene/en"), maxReturned);
     }
 
     @Bean("museumLuceneSearchSr")
-    public MuseumLuceneSearch luceneSearchSr(@Qualifier("museumRefreshSr") MuseumRefresh refresh) {
-        return new MuseumLuceneSearch(refresh);
+    public MuseumLuceneSearch luceneSearchSr(@Qualifier("museumRefreshSr") MuseumRefresh refresh,
+                                             @Value("${museum-tour.museum.max-returned}") int maxReturned) throws IOException {
+        return new MuseumLuceneSearch(refresh, Path.of("lucene/sr"), maxReturned);
     }
 
 }

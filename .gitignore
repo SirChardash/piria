@@ -36,6 +36,7 @@ build/
 /upload/
 /results/
 /python/model
+lucene
 
 ### Node.js ###
 node_modules
