@@ -36,7 +36,9 @@ build/
 /upload/
 /results/
 /python/model
-lucene
+lucene/
+cities.json
+
 
 ### Node.js ###
 node_modules

@@ -13,3 +13,9 @@ museum-tour:
   museum:
     max-returned: 100
     refresh-cron: '* */2 * * * *'
+  weather:
+    cities-per-request: 3
+    openweather:
+      base-url: 'http://api.openweathermap.org/data/2.5/weather'
+      city-list-path: 'cities.json'
+      image-url: 'http://openweathermap.org/img/w/%s.png'

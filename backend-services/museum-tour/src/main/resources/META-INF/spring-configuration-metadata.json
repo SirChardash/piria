@@ -9,6 +9,26 @@
       "name": "museum-tour.museum.refresh-cron",
       "type": "org.springframework.scheduling.support.CronExpression",
       "description": "How often to refresh local data for museums."
+    },
+    {
+      "name": "museum-tour.weather.cities-per-request",
+      "type": "java.lang.Integer",
+      "description": "For how many cities should weather endpoint return forecasts."
+    },
+    {
+      "name": "museum-tour.weather.openweather.base-url",
+      "type": "java.lang.String",
+      "description": "Base url for openweather api."
+    },
+    {
+      "name": "museum-tour.weather.openweather.city-list-path",
+      "type": "java.lang.String",
+      "description": "File location of json file containing info about cities in openweather database."
+    },
+    {
+      "name": "museum-tour.weather.openweather.image-url",
+      "type": "java.lang.String",
+      "description": "Template for accessing weather icons for openweather."
     }
   ]
 }
