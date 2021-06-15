@@ -14,6 +14,7 @@ museum-tour:
     max-returned: 100
     refresh-cron: '* */2 * * * *'
   weather:
+    cache-response-time: 300
     cities-per-request: 3
     openweather:
       base-url: 'http://api.openweathermap.org/data/2.5/weather'

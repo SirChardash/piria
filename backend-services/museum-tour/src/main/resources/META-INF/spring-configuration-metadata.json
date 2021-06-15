@@ -29,6 +29,11 @@
       "name": "museum-tour.weather.openweather.image-url",
       "type": "java.lang.String",
       "description": "Template for accessing weather icons for openweather."
+    },
+    {
+      "name": "museum-tour.weather.cache-response-time",
+      "type": "java.lang.Integer",
+      "description": "For how long should a response be cached before retrieving a new set of cities (in seconds)."
     }
   ]
 }

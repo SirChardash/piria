@@ -63,6 +63,11 @@
             <artifactId>lucene-queryparser</artifactId>
             <version>8.8.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.infinispan</groupId>
+            <artifactId>infinispan-core</artifactId>
+            <version>12.1.4.Final</version>
+        </dependency>
         <!-- Test dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -70,6 +75,22 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.infinispan</groupId>
+                <artifactId>infinispan-bom</artifactId>
+                <version>12.1.4.Final</version>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.infinispan.protostream</groupId>
+                <artifactId>protostream-processor</artifactId>
+                <scope>provided</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <plugins>
