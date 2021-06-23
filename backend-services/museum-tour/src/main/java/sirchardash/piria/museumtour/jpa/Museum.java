@@ -15,8 +15,8 @@ import lombok.NoArgsConstructor;
 public class Museum {
 
     @Id
-    private Integer id;
-    private Integer masterId;
+    private int id;
+    private int masterId;
     private String language;
     private String name;
     private String address;
