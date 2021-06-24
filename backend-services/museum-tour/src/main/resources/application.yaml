@@ -5,6 +5,8 @@ spring:
     url: jdbc:mysql://localhost:8306/museum_spinner?serverTimezone=UTC
     username: museum_user
     password: heckingsecure
+  codec:
+    max-in-memory-size: 32MB
 
 server:
   port: 8081
@@ -20,3 +22,9 @@ museum-tour:
       base-url: 'http://api.openweathermap.org/data/2.5/weather'
       city-list-path: 'cities.json'
       image-url: 'http://openweathermap.org/img/w/%s.png'
+  geo:
+    cache-response-time: 3600
+    rest-countries:
+      base-url: 'https://restcountries.eu/rest/v2/all'
+    battuta:
+      base-url: 'https://battuta.medunes.net/api/'

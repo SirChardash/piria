@@ -1,4 +1,4 @@
-package sirchardash.piria.museumtour.components.weather.openweather;
+package sirchardash.piria.museumtour.components.geo.battuta;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -6,11 +6,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Component
-class OpenWeatherServiceDelegate {
+class BattutaServiceDelegate {
 
-    @Bean("openweatherWebClient")
-    public WebClient webClient(WebClient.Builder builder,
-                               @Value("${museum-tour.weather.openweather.base-url}") String baseUrl) {
+    @Bean("battutaWebClient")
+    WebClient webClient(WebClient.Builder builder,
+                               @Value("${museum-tour.geo.battuta.base-url}") String baseUrl) {
         return builder
                 .baseUrl(baseUrl)
                 .build();
