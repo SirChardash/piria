@@ -39,7 +39,18 @@ CREATE TABLE museum_localized
     UNIQUE (master_id, language)
 );
 
-DROP USER IF EXISTS  'museum_user'@'%';
+CREATE TABLE tracking_logs
+(
+    id          int       NOT NULL AUTO_INCREMENT,
+    time        timestamp NOT NULL,
+    category    varchar(500) DEFAULT NULL,
+    subcategory varchar(500) DEFAULT NULL,
+    label       varchar(500) DEFAULT NULL,
+    value       varchar(500) DEFAULT NULL,
+    PRIMARY KEY (id)
+);
+
+DROP USER IF EXISTS 'museum_user'@'%';
 CREATE USER 'museum_user'@'%' IDENTIFIED BY 'heckingsecure';
 GRANT SELECT, UPDATE, INSERT, DELETE ON museum_spinner.* TO 'museum_user'@'%';
 FLUSH PRIVILEGES;
