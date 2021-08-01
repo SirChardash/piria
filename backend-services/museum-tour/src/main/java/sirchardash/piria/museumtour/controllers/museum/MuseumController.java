@@ -1,16 +1,15 @@
 package sirchardash.piria.museumtour.controllers.museum;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import sirchardash.piria.museumtour.exceptions.DuplicateLanguageEntryException;
-import sirchardash.piria.museumtour.exceptions.LanguageNotSupportedException;
+import sirchardash.piria.museumtour.exceptions.ServiceLogicException;
 import sirchardash.piria.museumtour.models.Confirmation;
+import sirchardash.piria.museumtour.models.ConfirmationResponse;
 import sirchardash.piria.museumtour.models.Language;
 import sirchardash.piria.museumtour.services.AddMuseumService;
 import sirchardash.piria.museumtour.services.MuseumService;
@@ -37,14 +36,15 @@ public class MuseumController {
     }
 
     @PostMapping("/museums")
-    public ResponseEntity<Confirmation> addMuseum(@RequestBody NewMuseumRequest request) {
+    public ResponseEntity<ConfirmationResponse> addMuseum(@RequestBody NewMuseumRequest request) {
         try {
             addService.addNewMuseum(request.getMuseumLocalizations());
-        } catch (DuplicateLanguageEntryException | LanguageNotSupportedException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Confirmation(false, e.getMessage()));
+        } catch (ServiceLogicException e) {
+            return ResponseEntity.status(e.getStatusCode())
+                    .body(new ConfirmationResponse(new Confirmation(false, e.getServiceError().getCode())));
         }
 
-        return ResponseEntity.ok(Confirmation.SUCCESS);
+        return ResponseEntity.ok(ConfirmationResponse.SUCCESS);
     }
 
 }

@@ -8,15 +8,14 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sirchardash.piria.museumtour.exceptions.DuplicateLanguageEntryException;
-import sirchardash.piria.museumtour.exceptions.LanguageNotSupportedException;
+import sirchardash.piria.museumtour.exceptions.ServiceError;
+import sirchardash.piria.museumtour.exceptions.ServiceLogicException;
 import sirchardash.piria.museumtour.jpa.Language;
 import sirchardash.piria.museumtour.jpa.LanguageRepository;
 import sirchardash.piria.museumtour.jpa.MasterMuseum;
 import sirchardash.piria.museumtour.jpa.MasterMuseumRepository;
 import sirchardash.piria.museumtour.jpa.Museum;
 import sirchardash.piria.museumtour.jpa.MuseumRepository;
-import sirchardash.piria.museumtour.models.Errors;
 
 @Service
 public class AddMuseumService {
@@ -43,13 +42,13 @@ public class AddMuseumService {
     }
 
     @Transactional
-    public void addNewMuseum(Collection<Museum> museumLocalizations) throws DuplicateLanguageEntryException, LanguageNotSupportedException {
+    public void addNewMuseum(Collection<Museum> museumLocalizations) throws ServiceLogicException {
         Set<String> languages = museumLocalizations.stream().map(Museum::getLanguage).collect(Collectors.toSet());
 
         if (languages.size() != museumLocalizations.size()) {
-            throw new DuplicateLanguageEntryException(Errors.DUPLICATE_ENTRIES);
+            throw new ServiceLogicException(ServiceError.DUPLICATE_ENTRIES, 400);
         } else if (!supportedLanguages.containsAll(languages)) {
-            throw new LanguageNotSupportedException(Errors.UNSUPPORTED_LANGUAGE);
+            throw new ServiceLogicException(ServiceError.UNSUPPORTED_LANGUAGE, 400);
         }
 
         MasterMuseum masterMuseum = masterMuseumRepository.save(new MasterMuseum());

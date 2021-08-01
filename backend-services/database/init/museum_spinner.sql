@@ -7,14 +7,6 @@ CREATE TABLE language
     PRIMARY KEY (code)
 );
 
-CREATE TABLE language_names
-(
-    language    varchar(50)  NOT NULL,
-    in_language varchar(50)  NOT NULL,
-    name        varchar(100) NOT NULL,
-    PRIMARY KEY (language, in_language)
-);
-
 CREATE TABLE museum
 (
     id int NOT NULL AUTO_INCREMENT,
@@ -62,11 +54,36 @@ INSERT INTO language (code)
 VALUES ('SR'),
        ('EN');
 
-INSERT INTO language_names(language, in_language, name)
-VALUES ('EN', 'EN', 'English'),
-       ('EN', 'SR', 'Engleski'),
-       ('SR', 'EN', 'Serbian'),
-       ('SR', 'SR', 'Srpski');
+CREATE TABLE `user`
+(
+    id int NOT NULL AUTO_INCREMENT,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE `virtual_tour`
+(
+    id          int          NOT NULL AUTO_INCREMENT,
+    museum_id   int          NOT NULL,
+    title       varchar(500) NOT NULL,
+    description text         NOT NULL,
+    start_time  timestamp    NOT NULL,
+    end_time    timestamp    NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (museum_id) REFERENCES museum (id)
+);
+
+CREATE TABLE `virtual_tour_attendance`
+(
+    id             int       NOT NULL,
+    tour_id        int       NOT NULL,
+    user_id        int       NOT NULL,
+    time_confirmed timestamp NOT NULL,
+    end_time       timestamp NOT NULL,
+    ticket_id      char(16)  NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (tour_id) REFERENCES virtual_tour (id),
+    FOREIGN KEY (user_id) REFERENCES user (id)
+);
 
 INSERT INTO museum_localized (id, master_id, language, name, address, city, country, phone_number, museum_type,
                               google_location)
