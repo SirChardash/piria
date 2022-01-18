@@ -2,6 +2,7 @@ services:
   mysql:
     build: backend-services/database
     container_name: database
+    mem_limit: 512M
     ports:
       - '8306:3306'
     networks:
@@ -14,6 +15,7 @@ services:
   virtual_bank:
     build: backend-services/virtual-bank
     container_name: virtual_bank
+    mem_limit: 512M
     ports:
       - '8865:8080'
     networks:
