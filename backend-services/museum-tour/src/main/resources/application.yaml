@@ -16,14 +16,12 @@ museum-tour:
     max-returned: 100
     refresh-cron: '* */2 * * * *'
   weather:
-    cache-response-time: 300
     cities-per-request: 3
     openweather:
       base-url: 'http://api.openweathermap.org/data/2.5/weather'
       city-list-path: 'cities.json'
       image-url: 'http://openweathermap.org/img/w/%s.png'
   geo:
-    cache-response-time: 3600
     rest-countries:
       base-url: 'https://restcountries.eu/rest/v2/all'
     battuta:

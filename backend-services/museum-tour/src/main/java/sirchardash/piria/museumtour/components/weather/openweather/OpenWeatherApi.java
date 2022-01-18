@@ -3,10 +3,12 @@ package sirchardash.piria.museumtour.components.weather.openweather;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import static org.springframework.http.HttpMethod.GET;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import sirchardash.piria.museumtour.models.weather.openweather.OpenWeatherResponse;
+
+import static org.springframework.http.HttpMethod.GET;
 
 @Component
 public class OpenWeatherApi {
@@ -21,6 +23,7 @@ public class OpenWeatherApi {
         this.apiKey = apiKey;
     }
 
+    @Cacheable("OpenWeatherApi#getByCityId")
     public OpenWeatherResponse getByCityId(int cityId, String language) {
         return webClient.method(GET)
                 .uri("?id={1}&lang={2}&units=metric&appid={3}", cityId, language, apiKey)

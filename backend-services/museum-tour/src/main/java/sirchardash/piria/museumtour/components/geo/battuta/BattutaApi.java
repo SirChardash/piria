@@ -1,17 +1,18 @@
 package sirchardash.piria.museumtour.components.geo.battuta;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import javax.naming.ServiceUnavailableException;
-import org.infinispan.Cache;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.ParameterizedTypeReference;
-import static org.springframework.http.HttpMethod.GET;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import sirchardash.piria.museumtour.models.geo.City;
 import sirchardash.piria.museumtour.models.geo.Region;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.springframework.http.HttpMethod.GET;
 
 @Component
 public class BattutaApi {
@@ -23,31 +24,15 @@ public class BattutaApi {
 
     private final WebClient webClient;
     private final String apiKey;
-    private final Cache<String, List<Region>> regionCache;
-    private final Cache<String, List<City>> cityCache;
 
     BattutaApi(@Qualifier("battutaWebClient") WebClient webClient,
-               @Value("${museum-tour.geo.battuta.api-key}") String apiKey,
-               Cache<String, List<Region>> regionCache,
-               Cache<String, List<City>> cityCache) {
+               @Value("${museum-tour.geo.battuta.api-key}") String apiKey) {
         this.webClient = webClient;
         this.apiKey = apiKey;
-        this.regionCache = regionCache;
-        this.cityCache = cityCache;
     }
 
+    @Cacheable("BattutaApi#getRegions")
     public List<Region> getRegions(String countryCode) {
-        return regionCache.computeIfAbsent(countryCode, x -> getRegionsPrivate(countryCode));
-    }
-
-    public List<City> getCities(String countryCode, String regionName) {
-        return cityCache.computeIfAbsent(
-                countryCode + ":" + regionName,
-                x -> getCitiesPrivate(countryCode, regionName)
-        );
-    }
-
-    private List<Region> getRegionsPrivate(String countryCode) {
         List<BattutaRegion> regions = webClient.method(GET)
                 .uri("/region/{1}/all/?key={2}", countryCode, apiKey)
                 .retrieve()
@@ -61,7 +46,8 @@ public class BattutaApi {
                 .collect(Collectors.toList());
     }
 
-    private List<City> getCitiesPrivate(String countryCode, String regionName) {
+    @Cacheable("BattutaApi#getCities")
+    public List<City> getCities(String countryCode, String regionName) {
         List<BattutaCity> cities = webClient.method(GET)
                 .uri("/city/{1}/search/?key={2}&region={3}", countryCode, apiKey, regionName)
                 .retrieve()
@@ -74,4 +60,5 @@ public class BattutaApi {
                 .map(city -> new City(city.getName(), city.getRegion(), city.getCountryCode()))
                 .collect(Collectors.toList());
     }
+
 }

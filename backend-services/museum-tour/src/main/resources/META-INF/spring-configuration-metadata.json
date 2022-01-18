@@ -31,16 +31,6 @@
       "description": "Template for accessing weather icons for openweather."
     },
     {
-      "name": "museum-tour.weather.cache-response-time",
-      "type": "java.lang.Integer",
-      "description": "For how long should a response be cached before retrieving a new set of cities (in seconds)."
-    },
-    {
-      "name": "museum-tour.geo.cache-response-time",
-      "type": "java.lang.Integer",
-      "description": "How long should responses from geo-related services be cached for (in seconds)."
-    },
-    {
       "name": "museum-tour.geo.rest-countries.base-url",
       "type": "java.lang.String",
       "description": "Base url for RestCountries endpoint."

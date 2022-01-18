@@ -1,7 +1,5 @@
 package sirchardash.piria.museumtour.services;
 
-import java.util.List;
-import javax.naming.ServiceUnavailableException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sirchardash.piria.museumtour.components.geo.battuta.BattutaApi;
@@ -9,6 +7,8 @@ import sirchardash.piria.museumtour.components.geo.restcountries.RestCountriesAp
 import sirchardash.piria.museumtour.models.geo.City;
 import sirchardash.piria.museumtour.models.geo.Country;
 import sirchardash.piria.museumtour.models.geo.Region;
+
+import java.util.List;
 
 @Service
 public class GeoService {
@@ -18,7 +18,7 @@ public class GeoService {
 
     @Autowired
     GeoService(RestCountriesApi restCountriesApi,
-                      BattutaApi battutaApi) {
+               BattutaApi battutaApi) {
         this.restCountriesApi = restCountriesApi;
         this.battutaApi = battutaApi;
     }
