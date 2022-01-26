@@ -20,7 +20,8 @@ public class CacheConfig {
         return new ConcurrentMapCacheManager(
                 "BattutaApi#getCities",
                 "BattutaApi#getRegions",
-                "RestCountriesApi#getAllCountries"
+                "RestCountriesApi#getAllCountries",
+                "OpenWeatherApi#getByCityId"
         );
     }
 

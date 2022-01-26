@@ -1,0 +1,14 @@
+.footer {
+    background-color: rgb(36, 41, 47);
+    color: #838c95;
+    font-size: 8pt;
+}
+
+.block-title {
+    color: #babfc4;
+    font-variant: all-petite-caps;
+}
+
+.round {
+    border-radius: 9999px;
+}

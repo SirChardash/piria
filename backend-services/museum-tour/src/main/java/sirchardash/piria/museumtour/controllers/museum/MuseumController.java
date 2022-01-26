@@ -2,18 +2,16 @@ package sirchardash.piria.museumtour.controllers.museum;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import sirchardash.piria.museumtour.exceptions.ServiceLogicException;
+import sirchardash.piria.museumtour.jpa.Museum;
 import sirchardash.piria.museumtour.models.Confirmation;
 import sirchardash.piria.museumtour.models.ConfirmationResponse;
 import sirchardash.piria.museumtour.models.Language;
 import sirchardash.piria.museumtour.services.AddMuseumService;
 import sirchardash.piria.museumtour.services.MuseumService;
 
+@CrossOrigin("*")
 @RestController
 public class MuseumController {
 
@@ -33,6 +31,15 @@ public class MuseumController {
         return ResponseEntity.ok(
                 new MuseumResponse(service.getMuseums(query, Language.forCode(language)))
         );
+    }
+
+    @GetMapping("/museums/{id}")
+    public ResponseEntity<Museum> getMuseumById(@PathVariable int id) {
+        try {
+            return ResponseEntity.ok(service.getMuseum(id));
+        } catch (ServiceLogicException e) {
+            return ResponseEntity.status(e.getStatusCode()).body(null);
+        }
     }
 
     @PostMapping("/museums")

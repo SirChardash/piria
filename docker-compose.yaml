@@ -24,6 +24,15 @@ services:
       - SPRING.DATASOURCE.URL=jdbc:mysql://mysql:3306/virtual_bank?serverTimezone=UTC
       - SPRING.DATASOURCE.USERNAME=virtual_bank_user
       - SPRING.DATASOURCE.PASSWORD=heckingsecure
+  keycloak:
+    image: docker.io/jboss/keycloak:13.0.1
+    container_name: keycloak
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+    ports:
+      - '8020:8080'
+
 volumes:
   mysql_data:
     driver: local
