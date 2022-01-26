@@ -33,7 +33,6 @@ export default function MuseumCard({data}) {
                 </CardContent>
                 <CardActions>
                     <Link href={'/museum/' + data.id}>LEARN MORE</Link>
-                    <Link href={'/'}>SEE ON MAP</Link>
                 </CardActions>
             </Card>
         </Box>

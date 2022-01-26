@@ -14,9 +14,15 @@ export default function Header() {
 
     const userButtons = initialized
         ? (keycloak?.authenticated
-            ? <Button className={styles.button} onClick={keycloak.logout()}>Sign out</Button>
-            : <Button className={styles.button} href={''}>Sign in</Button>)
+            ? <Link href={'/signOut'}><Button className={styles.button}>Sign out</Button></Link>
+            : <Link href={'/signIn'}><Button className={styles.button}>Sign in</Button></Link>)
         : <div/>
+
+    const username = initialized && keycloak.authenticated
+        ? <Link href={'/profile'}><Typography className={styles.username}>
+            Welcome, {keycloak?.idTokenParsed?.name}
+        </Typography></Link>
+        : <Box/>
 
     return (
         <Box sx={{flexGrow: 1}}>
@@ -33,6 +39,7 @@ export default function Header() {
                     <Link href={'/visit'} className={styles.button}><Button
                         className={styles.button}>Visit</Button></Link>
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}> </Typography>
+                    {username}
                     {userButtons}
                 </Toolbar>
             </AppBar>

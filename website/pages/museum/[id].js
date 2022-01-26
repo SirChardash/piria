@@ -20,7 +20,7 @@ export default function Museum(props) {
     }
 
     return (
-        <Layout>
+        <Layout authenticated>
             <WeatherPanel countryCode={'GB'}/>
             <MuseumProfile data={data}/>
         </Layout>
@@ -52,7 +52,7 @@ function loading() {
     return (
         <Layout>
             <Grid container justifyContent={'center'}>
-                <Grid item height={'100%'} py={20}>
+                <Grid item py={20}>
                     <CircularProgress/>
                 </Grid>
             </Grid>
