@@ -9,6 +9,7 @@
     font-variant: all-petite-caps;
 }
 
-.round {
+.languageIcon {
     border-radius: 9999px;
+    cursor: pointer;
 }

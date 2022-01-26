@@ -1,12 +1,15 @@
-import {Container, Grid, Link} from "@mui/material";
+import {Container, Grid} from "@mui/material";
 import Box from "@mui/material/Box";
 import styles from '../styles/footer.module.css';
 import Image from 'next/image'
 import {useRouter} from "next/router";
 import fullL10n from "../l10n";
+import Link from 'next/link'
 
 export default function Footer() {
-    const {locale} = useRouter()
+    const router = useRouter()
+    const {locale} = router
+    const {pathname, query, asPath} = router
     const l10n = fullL10n[locale].footer
 
     return (
@@ -31,31 +34,31 @@ export default function Footer() {
                             <ul>
                                 <li>
                                     {l10n.p3.li1}<Link href={'https://github.com/SirChardash'}
-                                                             target={'_blank'}>{l10n.p3.li1Link}</Link>
+                                                       target={'_blank'}>{l10n.p3.li1Link}</Link>
                                 </li>
                                 <li>
                                     {l10n.p3.li2}<Link href={'https://etf.unibl.org/'}
-                                                        target={'_blank'}>{l10n.p3.li2Link}</Link>
+                                                       target={'_blank'}>{l10n.p3.li2Link}</Link>
                                 </li>
                                 <li>{l10n.p3.li3}</li>
                             </ul>
                         </Box>
                     </Grid>
                     <Grid justifyContent={'space-evenly'}>
-                        <Image
-                            priority
-                            src="/flag-english.png"
-                            className={styles.round}
-                            height={32}
-                            width={32}
-                        />
+                        <Link href={pathname} as={asPath} locale={'en'}>
+                            <Image priority
+                                   src="/flag-english.png"
+                                   className={styles.languageIcon}
+                                   height={32}
+                                   width={32}/>
+                        </Link>
                         {' '}
-                        <Image
-                            src="/flag-serbian.png"
-                            className={styles.round}
-                            height={32}
-                            width={32}
-                        />
+                        <Link href={{pathname, query}} as={asPath} locale={'sr'}>
+                            <Image src="/flag-serbian.png"
+                                   className={styles.languageIcon}
+                                   height={32}
+                                   width={32}/>
+                        </Link>
                     </Grid>
                 </Grid>
             </Container>
