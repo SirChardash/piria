@@ -5,20 +5,23 @@ import Button from "@mui/material/Button";
 import {useRouter} from 'next/router'
 import {useState} from "react";
 import MuseumLoader from "../components/museumLoader";
+import fullL10n from "../l10n";
 
 export default function Museums() {
     const [searchQuery, setSearchQuery] = useState(undefined)
 
     const router = useRouter()
+    const l10n = fullL10n[router.locale].museums
+
     if (router.isReady && searchQuery === undefined && router.query.s !== undefined) {
         setSearchQuery(router.query['s'])
     }
 
-    const searchUrl = 'http://localhost:8081/museums?query=' + searchQuery + '&language=sr'
+    const searchUrl = 'http://localhost:8081/museums?query=' + searchQuery + '&language=' + l10n.endpointSlug
     const searchField = <TextField fullWidth
                                    defaultValue={searchQuery}
                                    name='s'
-                                   placeholder={'Search for museums'}
+                                   placeholder={l10n.searchPlaceholder}
                                    InputProps={
                                        {
                                            startAdornment: (
@@ -47,7 +50,7 @@ export default function Museums() {
                         setSearchQuery(event.target.s.value)
                     }}>
                         {searchField}
-                        <Button type={"submit"} size={'large'}>Search</Button>
+                        <Button type={"submit"} size={'large'}>{l10n.search}</Button>
                     </form>
                 </Grid>
             </Grid>

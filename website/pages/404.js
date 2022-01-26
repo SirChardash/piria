@@ -1,12 +1,15 @@
 import Layout from "../components/layout";
-import Typography from "@mui/material/Typography";
+import {useRouter} from "next/router";
+import fullL10n from "../l10n";
+import FullScreenAlert from "../components/fullScreenAlert";
 
 export default function Custom404() {
+    const {locale} = useRouter()
+    const l10n = fullL10n[locale].page404
+
     return (
         <Layout>
-                <Typography py={10} px={10} variant={'h5'} color={'text.secondary'}>
-                    The page you're looking for was not found.
-                </Typography>
+            <FullScreenAlert severity={'error'} title={l10n.title}>{l10n.text}</FullScreenAlert>
         </Layout>
     )
 }

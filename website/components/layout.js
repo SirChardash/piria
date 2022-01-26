@@ -6,17 +6,19 @@ import Box from "@mui/material/Box";
 import {CircularProgress, Container, Grid} from "@mui/material";
 import {useKeycloak} from "@react-keycloak/ssr";
 import FullScreenAlert from "./fullScreenAlert";
+import {useRouter} from "next/router";
+import fullL10n from "../l10n";
 
 export default function Layout({children, authenticated}) {
     const {keycloak, initialized} = useKeycloak()
 
+    const {locale} = useRouter()
+    const l10n = fullL10n[locale].layout
+
     const content = !initialized
         ? <Loading/>
         : (!keycloak.authenticated && authenticated)
-            ? <FullScreenAlert severity={'error'}
-                               title={'No Access'}>
-                You need to sign in to see this page.
-            </FullScreenAlert>
+            ? <FullScreenAlert severity={'error'} title={l10n.noAccess.title}>{l10n.noAccess.text}</FullScreenAlert>
             : <Content children={children}/>
 
     return (

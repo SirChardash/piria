@@ -3,11 +3,17 @@ import {CircularProgress, Grid} from "@mui/material";
 import Layout from "../../components/layout";
 import MuseumProfile from "../../components/museumProfile";
 import WeatherPanel from "../../components/weatherPanel";
+import {useRouter} from "next/router";
+import l10n from "../../l10n";
 
 export default function Museum(props) {
+    const {locale} = useRouter()
+
     if (!('id' in props)) {
         return loading()
     }
+
+    console.log(locale)
 
     const {
         data,
@@ -30,7 +36,8 @@ export default function Museum(props) {
 export async function getStaticProps({params}) {
     return {
         props: {
-            id: params.id
+            id: params.id,
+            l10n: l10n
         }
     }
 }
