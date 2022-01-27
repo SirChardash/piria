@@ -1,18 +1,8 @@
 package sirchardash.piria.museumtour.components.museum;
 
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.Collection;
-import static java.util.Collections.emptyList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
-import static org.apache.lucene.document.Field.Store.NO;
 import org.apache.lucene.document.StoredField;
 import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.DirectoryReader;
@@ -23,11 +13,24 @@ import org.apache.lucene.index.IndexWriterConfig.OpenMode;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
+import org.apache.lucene.search.MatchAllDocsQuery;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.MMapDirectory;
 import sirchardash.piria.museumtour.jpa.Museum;
 import sirchardash.piria.museumtour.models.RefreshListener;
+
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static java.util.Collections.emptyList;
+import static org.apache.lucene.document.Field.Store.NO;
 
 @Slf4j
 public class MuseumLuceneSearch implements RefreshListener<Museum> {
@@ -73,9 +76,9 @@ public class MuseumLuceneSearch implements RefreshListener<Museum> {
 
     public List<Museum> find(String query) {
         try {
-            return query.isBlank()
-                    ? emptyList()
-                    : Stream.of(search.search(new QueryParser(DESC, analyzer).parse(query), maxReturned).scoreDocs)
+            return Stream.of(search.search(query.isBlank()
+                            ? new MatchAllDocsQuery()
+                            : new QueryParser(DESC, analyzer).parse(query), maxReturned).scoreDocs)
                     .map(scoreDoc -> toMuseumId(scoreDoc, search))
                     .map(museumMap::get)
                     .collect(Collectors.toList());
