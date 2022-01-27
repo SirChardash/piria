@@ -11,7 +11,6 @@ import sirchardash.piria.museumtour.models.Language;
 import sirchardash.piria.museumtour.services.AddMuseumService;
 import sirchardash.piria.museumtour.services.MuseumService;
 
-@CrossOrigin("*")
 @RestController
 public class MuseumController {
 
