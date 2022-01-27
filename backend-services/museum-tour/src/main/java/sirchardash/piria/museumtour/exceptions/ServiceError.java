@@ -18,7 +18,11 @@ public enum ServiceError {
      * Describes a generic-like situation where related data is requested, but doesn't exist. Example is logging a
      * message for user that doesn't exist, but not asking for user that doesn't exist.
      */
-    MODEL_REFERENCE_FAILS("3");
+    MODEL_REFERENCE_FAILS("3"),
+    /**
+     * Generic error related to 500 statuses.
+     */
+    SERVICE_UNAVAILABLE("4");
 
     @Getter
     private final String code;

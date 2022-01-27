@@ -100,6 +100,9 @@ const fullL10n = {
                 title: 'Sign Out',
                 text: 'Hold on. We\'re signing you out.'
             }
+        },
+        newsPanel: {
+            header: 'Culture and Art news from around the web:'
         }
     },
     sr: {
@@ -203,6 +206,9 @@ const fullL10n = {
                 title: 'Odjava',
                 text: 'Molimo, sačekajte.'
             }
+        },
+        newsPanel: {
+            header: 'Vijesti iz kulture:'
         }
     }
 }

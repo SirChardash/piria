@@ -71,6 +71,11 @@
             <artifactId>lucene-queryparser</artifactId>
             <version>8.8.2</version>
         </dependency>
+        <dependency>
+            <groupId>rome</groupId>
+            <artifactId>rome</artifactId>
+            <version>1.0</version>
+        </dependency>
         <!-- Test dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

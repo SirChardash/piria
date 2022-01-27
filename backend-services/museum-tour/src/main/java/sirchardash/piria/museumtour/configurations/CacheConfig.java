@@ -21,7 +21,8 @@ public class CacheConfig {
                 "BattutaApi#getCities",
                 "BattutaApi#getRegions",
                 "RestCountriesApi#getAllCountries",
-                "OpenWeatherApi#getByCityId"
+                "OpenWeatherApi#getByCityId",
+                "HuffpostFeed#getEntries"
         );
     }
 
