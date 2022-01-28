@@ -6,38 +6,44 @@ import Carousel from 'react-material-ui-carousel'
 import styles from '../styles/newsPanel.module.css'
 import {useRouter} from "next/router";
 import fullL10n from "../l10n";
+import fetcher from "../lib/fetch";
+import Loading from "./loading";
+import {useKeycloak} from "@react-keycloak/ssr";
 
 export default function NewsPanel({items}) {
+    const {keycloak, initialized} = useKeycloak()
+
+    if (!initialized) {
+        return <Loading authenticated withLayout/>
+    }
+
     const {locale} = useRouter()
     const l10n = fullL10n[locale].newsPanel
 
     const {
         data,
-        error
-    } = useSWR(
-        'http://localhost:8081/news',
-        url => fetch(url).then(r => r.json())
-    )
+        error,
+        isValidating
+    } = useSWR('http://localhost:8081/news', url => fetcher(url, keycloak.token))
 
-    if (error) return <Grid py={5}/>
-    if (!data) return (
-        <Grid container/>
-    )
 
-    return (
-        <Grid container justifyContent={'center'}>
-            <Typography variant={'h5'}>{l10n.header}</Typography>
-            <Carousel className={styles.container} interval={8000}>
-                {data.reduce(groupIntoChunks, []).map(chunkDisplay)}
-            </Carousel>
-        </Grid>
-    )
+    return isValidating
+        ? <Loading/>
+        : error || !data
+            ? <Grid py={5}/>
+            : <Grid container justifyContent={'center'}>
+                <Typography variant={'h5'}>{l10n.header}</Typography>
+                <Carousel className={styles.container} interval={8000}>
+                    {data.reduce((all, one, i) => groupIntoChunks(all, one, i, items), []).map(chunkDisplay)}
+                </Carousel>
+            </Grid>
 
-    function groupIntoChunks(all, one, i) {
-        const ch = Math.floor(i / items);
-        all[ch] = [].concat((all[ch] || []), one);
-        return all
-    }
+}
+
+function groupIntoChunks(all, one, i, items) {
+    const ch = Math.floor(i / items);
+    all[ch] = [].concat((all[ch] || []), one);
+    return all
 }
 
 function chunkDisplay(chunk) {

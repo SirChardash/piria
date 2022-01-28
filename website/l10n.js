@@ -102,7 +102,16 @@ const fullL10n = {
             }
         },
         newsPanel: {
-            header: 'Culture and Art news from around the web:'
+            header: 'Culture and Art news from around the web'
+        },
+        errorAlert: {
+            title: 'Error occurred',
+            status: {
+                '401': 'Make sure you are logged in.',
+                '403': 'Make sure you are allowed to see the content.',
+                '404': 'Make sure that the content you\'re looking for actually exists.',
+                '500': 'Server error occurred. Please try again later.'
+            }
         }
     },
     sr: {
@@ -208,7 +217,16 @@ const fullL10n = {
             }
         },
         newsPanel: {
-            header: 'Vijesti iz kulture:'
+            header: 'Vijesti iz kulture'
+        },
+        errorAlert: {
+            title: 'Dogodila se greška',
+            status: {
+                '401': 'Provjerite da li ste prijavljeni.',
+                '403': 'Budite sigurni da imate pravo da vidite ovaj sadržaj.',
+                '404': 'Provjerite da li tražite postojeći sadržaj.',
+                '500': 'Dogodila se greška na serveru. Molimo, probajte kasnije.'
+            }
         }
     }
 }

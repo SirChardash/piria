@@ -8,6 +8,15 @@ spring:
   codec:
     max-in-memory-size: 32MB
 
+keycloak:
+  realm: bravesmart
+  auth-server-url: http://localhost:8020/auth/
+  resource: bravesmart-api
+  ssl-required: 'none'
+  use-resource-role-mappings: false
+  disable-trust-manager: true
+  bearer-only: true
+
 server:
   port: 8081
 
