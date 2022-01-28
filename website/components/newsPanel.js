@@ -9,6 +9,8 @@ import fullL10n from "../l10n";
 import fetcher from "../lib/fetch";
 import Loading from "./loading";
 import {useKeycloak} from "@react-keycloak/ssr";
+import {logEvent} from "../lib/tracking";
+import getUserId from "../lib/userId";
 
 export default function NewsPanel({items}) {
     const {keycloak, initialized} = useKeycloak()
@@ -59,6 +61,8 @@ function chunkDisplay(chunk) {
 
 
 function NewsCard({image, title, description, articleUrl}) {
+    const {keycloak, initialized} = useKeycloak()
+
     return (
         <Card sx={{maxWidth: 345, height: 500}} className={styles.card}>
             <CardMedia
@@ -72,7 +76,15 @@ function NewsCard({image, title, description, articleUrl}) {
                 <Typography variant="body2" color="text.secondary">{description}</Typography>
             </CardContent>
             <CardActions>
-                <Button size="small" href={articleUrl} target={'_blank'}>See Full Article</Button>
+                <Button size="small" href={articleUrl} target={'_blank'} onClick={
+                    () => logEvent(
+                        initialized && keycloak.authenticated ? keycloak.idTokenParsed.sub : getUserId(),
+                        'home page',
+                        'news',
+                        'article opened',
+                        articleUrl
+                    )
+                }>See Full Article</Button>
             </CardActions>
         </Card>
     );

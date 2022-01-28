@@ -4,12 +4,17 @@ import {useState} from 'react'
 import MuseumList from "./museumList";
 import {useRouter} from "next/router";
 import fullL10n from "../l10n";
+import {logEvent} from "../lib/tracking";
+import {useKeycloak} from "@react-keycloak/ssr";
+import getUserId from "../lib/userId";
 
 export default function MuseumPanel({museums}) {
     const [allMuseums] = useState(museums)
     const [countryFilterValue, setCountryFilterValue] = useState('All')
     const [cityFilterValue, setCityFilterValue] = useState('All')
     const [typeFilterValue, setTypeFilterValue] = useState('All')
+
+    const {keycloak, initialized} = useKeycloak()
 
     const {locale} = useRouter()
     const l10n = fullL10n[locale].museumPanel
@@ -25,17 +30,26 @@ export default function MuseumPanel({museums}) {
                 <p>{l10n.filterResults}</p>
                 <DropdownFilter items={distinct(museums, 'country')}
                                 label={l10n.country}
-                                onChange={newValue => setCountryFilterValue(newValue)}
+                                onChange={newValue => {
+                                    setCountryFilterValue(newValue)
+                                    logFilterChange('country', newValue)
+                                }}
                                 value={countryFilterValue}
                                 key={'country'}/>
                 <DropdownFilter items={distinct(museums, 'city')}
                                 label={l10n.city}
-                                onChange={newValue => setCityFilterValue(newValue)}
+                                onChange={newValue => {
+                                    setCityFilterValue(newValue)
+                                    logFilterChange('city', newValue)
+                                }}
                                 value={cityFilterValue}
                                 key={'city'}/>
                 <DropdownFilter items={distinct(museums, 'museumType')}
                                 label={l10n.type}
-                                onChange={newValue => setTypeFilterValue(newValue)}
+                                onChange={newValue => {
+                                    setTypeFilterValue(newValue)
+                                    logFilterChange('type', newValue)
+                                }}
                                 value={typeFilterValue}
                                 key={'museumType'}/>
             </Grid>
@@ -56,6 +70,16 @@ export default function MuseumPanel({museums}) {
                 </Select>
             </FormControl>
         </Box>)
+    }
+
+    function logFilterChange(type, newValue) {
+        logEvent(
+            initialized && keycloak.authenticated ? keycloak.idTokenParsed.sub : getUserId(),
+            'museums',
+            'search filters',
+            type + ' filter changed',
+            newValue
+        )
     }
 }
 

@@ -10,6 +10,8 @@ import Link from 'next/link';
 import {useKeycloak} from "@react-keycloak/ssr";
 import {useRouter} from "next/router";
 import fullL10n from "../l10n";
+import getUserId from "../lib/userId";
+import {logEvent} from "../lib/tracking";
 
 export default function Header() {
     const {keycloak, initialized} = useKeycloak()
@@ -18,8 +20,16 @@ export default function Header() {
 
     const userButtons = initialized
         ? (keycloak?.authenticated
-            ? <Link href={'/signOut'}><Button className={styles.button}>{l10n.signOut}</Button></Link>
-            : <Link href={'/signIn'}><Button className={styles.button}>{l10n.signIn}</Button></Link>)
+            ? <Link href={'/signOut'}>
+                <Button className={styles.button} onClick={() => logNavigation('signOut')}>
+                    {l10n.signOut}
+                </Button>
+            </Link>
+            : <Link href={'/signIn'}>
+                <Button className={styles.button} onClick={() => logNavigation('signOut')}>
+                    {l10n.signIn}
+                </Button>
+            </Link>)
         : <div/>
 
     const username = initialized && keycloak.authenticated
@@ -38,13 +48,14 @@ export default function Header() {
                         </IconButton>
                     </Link>
                     <Link href={'/museums'} className={styles.button}>
-                        <Button className={styles.button}>{l10n.museums}</Button>
+                        <Button className={styles.button}
+                                onClick={() => logNavigation('museums')}>{l10n.museums}</Button>
                     </Link>
                     <Link href={'/tours'} className={styles.button}>
-                        <Button className={styles.button}>{l10n.tours}</Button>
+                        <Button className={styles.button} onClick={() => logNavigation('tours')}>{l10n.tours}</Button>
                     </Link>
                     <Link href={'/visit'} className={styles.button}>
-                        <Button className={styles.button}>{l10n.visit}</Button>
+                        <Button className={styles.button} onClick={() => logNavigation('visit')}>{l10n.visit}</Button>
                     </Link>
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}> </Typography>
                     {username}
@@ -53,4 +64,14 @@ export default function Header() {
             </AppBar>
         </Box>
     );
+
+    function logNavigation(section) {
+        logEvent(
+            initialized && keycloak.authenticated ? keycloak.idTokenParsed.sub : getUserId(),
+            'header',
+            null,
+            'header navigation',
+            section
+        )
+    }
 }

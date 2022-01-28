@@ -4,10 +4,14 @@ import Box from "@mui/material/Box";
 import Link from 'next/link';
 import {useRouter} from "next/router";
 import fullL10n from "../l10n";
+import {logEvent} from "../lib/tracking";
+import getUserId from "../lib/userId";
+import {useKeycloak} from "@react-keycloak/ssr";
 
 export default function MuseumCard({data}) {
     const {locale} = useRouter()
     const l10n = fullL10n[locale].museumCard
+    const {keycloak, initialized} = useKeycloak()
 
     return (
         <Box py={1}>
@@ -37,7 +41,17 @@ export default function MuseumCard({data}) {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Link href={'/museum/' + data.id}>{l10n.seeMore}</Link>
+                    <Link href={'/museum/' + data.id}>
+                        <a onClick={() => logEvent(
+                            initialized && keycloak.authenticated ? keycloak.idTokenParsed.sub : getUserId(),
+                            'museums',
+                            'search results',
+                            'museum page visit',
+                            data.masterId
+                        )}>
+                            {l10n.seeMore}
+                        </a>
+                    </Link>
                 </CardActions>
             </Card>
         </Box>

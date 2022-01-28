@@ -5,8 +5,12 @@ import Image from 'next/image'
 import {useRouter} from "next/router";
 import fullL10n from "../l10n";
 import Link from 'next/link'
+import {useKeycloak} from "@react-keycloak/ssr";
+import {logEvent} from "../lib/tracking";
+import getUserId from "../lib/userId";
 
 export default function Footer() {
+    const {keycloak, initialized} = useKeycloak()
     const router = useRouter()
     const {locale} = router
     const {pathname, query, asPath} = router
@@ -46,7 +50,13 @@ export default function Footer() {
                     </Grid>
                     <Grid justifyContent={'space-evenly'}>
                         <Link href={pathname} as={asPath} locale={'en'}>
-                            <a>
+                            <a onClick={() => logEvent(
+                                initialized && keycloak.authenticated ? keycloak.idTokenParsed.sub : getUserId(),
+                                'footer',
+                                null,
+                                'language changed',
+                                'en'
+                            )}>
                                 <Image priority
                                        src="/flag-english.png"
                                        className={styles.languageIcon}
@@ -56,7 +66,13 @@ export default function Footer() {
                         </Link>
                         {' '}
                         <Link href={{pathname, query}} as={asPath} locale={'sr'}>
-                            <a>
+                            <a onClick={() => logEvent(
+                                initialized && keycloak.authenticated ? keycloak.idTokenParsed.sub : getUserId(),
+                                'footer',
+                                null,
+                                'language changed',
+                                'sr'
+                            )}>
                                 <Image src="/flag-serbian.png"
                                        className={styles.languageIcon}
                                        height={32}
