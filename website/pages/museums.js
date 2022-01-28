@@ -6,9 +6,12 @@ import {useRouter} from 'next/router'
 import {useState} from "react";
 import MuseumLoader from "../components/museumLoader";
 import fullL10n from "../l10n";
+import {logEvent} from "../lib/tracking";
+import {useKeycloak} from "@react-keycloak/ssr";
 
 export default function Museums() {
     const [searchQuery, setSearchQuery] = useState(undefined)
+    const {keycloak} = useKeycloak()
 
     const router = useRouter()
     const l10n = fullL10n[router.locale].museums
@@ -34,11 +37,18 @@ export default function Museums() {
     />
 
     return (
-        <Layout>
+        <Layout authenticated>
             <Grid container justifyContent={'space-around'}>
                 <Grid item xs={10} sm={6} key={'museums'}>
                     <form onSubmit={(event) => {
                         event.preventDefault()
+                        logEvent(
+                            keycloak?.idTokenParsed?.sub,
+                            'museums',
+                            null,
+                            'search',
+                            event.target.s.value
+                        )
                         router.query['s'] = event.target.s.value
                         router.push({
                                 pathname: '/museums/',

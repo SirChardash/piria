@@ -1,11 +1,13 @@
 package sirchardash.piria.museumtour.controllers.tracking;
 
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import sirchardash.piria.museumtour.models.tracking.TrackingLog;
 import sirchardash.piria.museumtour.services.TrackingService;
+
+import javax.validation.Valid;
 
 @RestController
 class TrackingController {
@@ -18,8 +20,8 @@ class TrackingController {
     }
 
     @PostMapping("/tracking")
-    public void saveTrackingLogs(@Valid @RequestBody TrackingRequest request) {
-        service.saveTrackingLogs(request.getTrackingLogs());
+    public void saveTrackingLogs(@Valid @RequestBody TrackingLog log) {
+        service.save(log);
     }
 
 }
