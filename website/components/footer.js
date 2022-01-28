@@ -46,18 +46,22 @@ export default function Footer() {
                     </Grid>
                     <Grid justifyContent={'space-evenly'}>
                         <Link href={pathname} as={asPath} locale={'en'}>
-                            <Image priority
-                                   src="/flag-english.png"
-                                   className={styles.languageIcon}
-                                   height={32}
-                                   width={32}/>
+                            <a>
+                                <Image priority
+                                       src="/flag-english.png"
+                                       className={styles.languageIcon}
+                                       height={32}
+                                       width={32}/>
+                            </a>
                         </Link>
                         {' '}
                         <Link href={{pathname, query}} as={asPath} locale={'sr'}>
-                            <Image src="/flag-serbian.png"
-                                   className={styles.languageIcon}
-                                   height={32}
-                                   width={32}/>
+                            <a>
+                                <Image src="/flag-serbian.png"
+                                       className={styles.languageIcon}
+                                       height={32}
+                                       width={32}/>
+                            </a>
                         </Link>
                     </Grid>
                 </Grid>
