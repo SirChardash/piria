@@ -112,6 +112,22 @@ const fullL10n = {
                 '404': 'Make sure that the content you\'re looking for actually exists.',
                 '500': 'Server error occurred. Please try again later.'
             }
+        },
+        tours: {
+            pastMonth: 'Past Month',
+            upcoming: 'Upcoming',
+            bookedTours: 'Booked Tours',
+            failedToLoad: 'No data. It\'s not you, it\'s us.',
+            noUpcomingTours: 'No upcoming tours. Cultural famine, eh.',
+            noRecentTours: 'No tours held recently.',
+            noBookedTours: 'No booked tours. Check museums tab and book a few.',
+            from: 'from',
+            to: 'to',
+            inProgress: 'IN PROGRESS',
+            finished: 'FINISHED'
+        },
+        prettyDate: {
+            dateFormat: 'L. d. yyyy'
         }
     },
     sr: {
@@ -227,6 +243,22 @@ const fullL10n = {
                 '404': 'Provjerite da li tražite postojeći sadržaj.',
                 '500': 'Dogodila se greška na serveru. Molimo, probajte kasnije.'
             }
+        },
+        tours: {
+            pastMonth: 'Prošli mjesec',
+            upcoming: 'Uskoro',
+            bookedTours: 'Uplaćeno',
+            failedToLoad: 'Nema podataka. Do nas je.',
+            noUpcomingTours: 'Nijedan obilazak se ne održava uskoro.',
+            noRecentTours: 'Nijedan obilazak se nije održao u skorije vrijeme.',
+            noBookedTours: 'Niste se prijavili ni za jedan obilazak.',
+            from: 'od',
+            to: 'do',
+            inProgress: 'U TOKU',
+            finished: 'ZAVRŠENO'
+        },
+        prettyDate: {
+            dateFormat: 'd. L. yyyy'
         }
     }
 }

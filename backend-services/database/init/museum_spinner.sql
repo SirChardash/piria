@@ -34,7 +34,7 @@ CREATE TABLE museum_localized
 CREATE TABLE tracking_logs
 (
     id          int          NOT NULL AUTO_INCREMENT,
-    user_id    varchar(500) NOT NULL,
+    user_id     varchar(500) NOT NULL,
     time        timestamp    NOT NULL,
     category    varchar(500) DEFAULT NULL,
     subcategory varchar(500) DEFAULT NULL,
@@ -104,12 +104,6 @@ INSERT INTO language (code)
 VALUES ('SR'),
        ('EN');
 
-CREATE TABLE `user`
-(
-    id int NOT NULL AUTO_INCREMENT,
-    PRIMARY KEY (id)
-);
-
 CREATE TABLE `virtual_tour`
 (
     id          int          NOT NULL AUTO_INCREMENT,
@@ -124,15 +118,13 @@ CREATE TABLE `virtual_tour`
 
 CREATE TABLE `virtual_tour_attendance`
 (
-    id             int       NOT NULL,
-    tour_id        int       NOT NULL,
-    user_id        int       NOT NULL,
-    time_confirmed timestamp NOT NULL,
-    end_time       timestamp NOT NULL,
-    ticket_id      char(16)  NOT NULL,
+    id             int          NOT NULL AUTO_INCREMENT,
+    tour_id        int          NOT NULL,
+    user_id        varchar(500) NOT NULL,
+    time_confirmed timestamp    NOT NULL,
+    ticket_id      char(16)     NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (tour_id) REFERENCES virtual_tour (id),
-    FOREIGN KEY (user_id) REFERENCES user (id)
+    FOREIGN KEY (tour_id) REFERENCES virtual_tour (id)
 );
 
 INSERT INTO museum_localized (master_id, language, name, address, city, country, phone_number, museum_type,
