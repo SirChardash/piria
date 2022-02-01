@@ -6,7 +6,7 @@ CREATE TABLE `account`
     `id`             int          NOT NULL AUTO_INCREMENT,
     `account_number` char(16)     NOT NULL,
     `owner`          varchar(500) NOT NULL,
-    `balance`        decimal      NOT NULL DEFAULT 0,
+    `balance`        decimal(10,2)      NOT NULL DEFAULT 0,
     PRIMARY KEY (`id`)
 );
 
@@ -27,7 +27,7 @@ CREATE TABLE `credit_card`
 CREATE TABLE `payment`
 (
     `id`       int     NOT NULL AUTO_INCREMENT,
-    `amount`   decimal NOT NULL,
+    `amount` decimal(10,2) NOT NULL,
     `time`     datetime DEFAULT NOW(),
     `card_id`  int     NOT NULL,
     `in_favor` int     NOT NULL,

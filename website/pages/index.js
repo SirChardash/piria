@@ -5,6 +5,7 @@ import {useRouter} from "next/router";
 import fullL10n from "../l10n";
 import NewsPanel from "../components/newsPanel";
 import {useKeycloak} from "@react-keycloak/ssr";
+import Button from "@mui/material/Button";
 
 export default function Home() {
     const {locale} = useRouter()
@@ -16,6 +17,15 @@ export default function Home() {
         return (
             <Layout>
                 <NewsPanel items={3}/>
+                <Grid container py={5} justifyContent={'center'}>
+                    <form action={'http://localhost:3005/' + locale}>
+                        <input value={'123456'} name={'paymentNumber'} hidden/>
+                        <input value={552} name={'amount'} hidden/>
+                        <input value={'3205732519283123'} name={'receiver'} hidden/>
+                        <input value={'http://localhost:3000/?paymentId=123456'} name={'successUrl'} hidden/>
+                        <Button variant={'contained'} size={'small'} type={'submit'}>Donate</Button>
+                    </form>
+                </Grid>
             </Layout>
         )
     }
