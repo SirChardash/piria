@@ -7,6 +7,7 @@ services:
       - '8306:3306'
     networks:
       - sirchardash_piria_virtual_bank
+      - sirchardash_piria_keycloak
     volumes:
       - 'mysql_data:/bitnami/mysql/data'
       - './backend-services/database/init:/init'
@@ -25,9 +26,16 @@ services:
       - SPRING.DATASOURCE.USERNAME=virtual_bank_user
       - SPRING.DATASOURCE.PASSWORD=heckingsecure
   keycloak:
-    image: docker.io/jboss/keycloak:13.0.1
+    build: keycloak
     container_name: keycloak
+    networks:
+      - sirchardash_piria_keycloak
     environment:
+      DB_VENDOR: MYSQL
+      DB_ADDR: mysql
+      DB_DATABASE: keycloak
+      DB_USER: keycloak
+      DB_PASSWORD: securecloak
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: admin
     ports:
@@ -39,4 +47,6 @@ volumes:
 
 networks:
   sirchardash_piria_virtual_bank:
+    driver: bridge
+  sirchardash_piria_keycloak:
     driver: bridge
