@@ -41,7 +41,7 @@ email:
     host: smtp.gmail.com
     port: 587
     username: nebojsa.baabic@gmail.com
-    password: zhfqtaovsdsvbokz
+    password:
     protocol: smtp
     auth: true
     enable-start-tls: true
