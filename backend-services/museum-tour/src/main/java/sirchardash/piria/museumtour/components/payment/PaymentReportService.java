@@ -1,32 +1,38 @@
-package sirchardash.piria.museumtour.services;
+package sirchardash.piria.museumtour.components.payment;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import javax.annotation.PostConstruct;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import sirchardash.piria.virtualbank.controllers.paymentreport.PaymentReportRequest;
 import sirchardash.piria.virtualbank.controllers.paymentreport.PaymentReportResponse;
 import sirchardash.piria.virtualbank.controllers.paymentreport.PaymentReportServiceGrpc;
 
-@Service
-public class MehService {
+import javax.annotation.PreDestroy;
 
-//    @PostConstruct
-    public void eh() {
-        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 8080)
+@Component
+public class PaymentReportService {
+
+    private final ManagedChannel channel;
+
+    PaymentReportService() {
+        channel = ManagedChannelBuilder.forAddress("localhost", 8083)
                 .usePlaintext()
                 .build();
+    }
 
+    public PaymentReportResponse get(String referenceNumber) {
         PaymentReportServiceGrpc.PaymentReportServiceBlockingStub stub
                 = PaymentReportServiceGrpc.newBlockingStub(channel);
 
-        PaymentReportResponse response = stub.getPayment(PaymentReportRequest.newBuilder()
-                .setReferenceNumber("1337420699")
+        return stub.getPayment(PaymentReportRequest.newBuilder()
+                .setReferenceNumber(referenceNumber)
                 .setAuthToken("oh")
                 .build());
+    }
 
-        System.out.println("Response received from server:\n" + response);
-
+    @PreDestroy
+    void shutdown() {
         channel.shutdown();
     }
+
 }

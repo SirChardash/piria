@@ -106,12 +106,13 @@ VALUES ('SR'),
 
 CREATE TABLE `virtual_tour`
 (
-    id          int          NOT NULL AUTO_INCREMENT,
-    museum_id   int          NOT NULL,
-    title       varchar(500) NOT NULL,
-    description text         NOT NULL,
-    start_time  timestamp    NOT NULL,
-    end_time    timestamp    NOT NULL,
+    id           int           NOT NULL AUTO_INCREMENT,
+    museum_id    int           NOT NULL,
+    title        varchar(500)  NOT NULL,
+    description  text          NOT NULL,
+    start_time   timestamp     NOT NULL,
+    end_time     timestamp     NOT NULL,
+    ticket_price decimal(5, 2) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (museum_id) REFERENCES museum (id)
 );

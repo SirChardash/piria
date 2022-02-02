@@ -51,10 +51,14 @@ class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
                         "/museums/**",
                         "/news",
                         "/weather",
-                        "/geo/**"
+                        "/geo/**",
+                        "/tours/**"
+                ).hasRole("user")
+                .antMatchers(HttpMethod.POST,
+                        "/attendance/**"
                 ).hasRole("user")
                 .anyRequest()
-                .permitAll().and().httpBasic().and().csrf().disable();
+                .denyAll().and().httpBasic().and().csrf().disable();
     }
 
 }

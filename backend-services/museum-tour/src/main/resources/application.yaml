@@ -35,3 +35,14 @@ museum-tour:
       base-url: 'https://restcountries.eu/rest/v2/all'
     battuta:
       base-url: 'https://battuta.medunes.net/api/'
+
+email:
+  sender:
+    host: smtp.gmail.com
+    port: 587
+    username: nebojsa.baabic@gmail.com
+    password: zhfqtaovsdsvbokz
+    protocol: smtp
+    auth: true
+    enable-start-tls: true
+    debug: false

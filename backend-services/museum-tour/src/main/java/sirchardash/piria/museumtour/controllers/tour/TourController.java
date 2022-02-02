@@ -1,5 +1,6 @@
 package sirchardash.piria.museumtour.controllers.tour;
 
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -55,9 +56,9 @@ class TourController {
         );
     }
 
+    @SneakyThrows
     @GetMapping("/tours/booked")
     ResponseEntity<TourResponse> getBookedTours(Principal user) {
-        System.out.println(user.getName());
         return ResponseEntity.ok(new TourResponse(service.getForUser(user.getName())));
     }
 

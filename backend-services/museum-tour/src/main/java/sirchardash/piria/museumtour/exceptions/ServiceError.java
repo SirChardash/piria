@@ -22,7 +22,12 @@ public enum ServiceError {
     /**
      * Generic error related to 500 statuses.
      */
-    SERVICE_UNAVAILABLE("4");
+    SERVICE_UNAVAILABLE("4"),
+
+    /**
+     * Describes a situation where an attempt to send ticket is made, but no one paid for it.
+     */
+    TICKET_NOT_PAID("5");
 
     @Getter
     private final String code;
