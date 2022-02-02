@@ -13,6 +13,7 @@ class PaymentRequest {
     private double amount;
     private String referenceNumber;
     private CreditCardInfo payerCard;
+    private String purpose;
     private String inFavorOfAccountNumber;
 
 }

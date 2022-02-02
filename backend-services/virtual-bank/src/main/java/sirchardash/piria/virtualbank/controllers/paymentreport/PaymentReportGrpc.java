@@ -2,12 +2,13 @@ package sirchardash.piria.virtualbank.controllers.paymentreport;
 
 import com.google.protobuf.Timestamp;
 import io.grpc.stub.StreamObserver;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import sirchardash.piria.virtualbank.controllers.paymentreport.PaymentReportServiceGrpc.PaymentReportServiceImplBase;
 import sirchardash.piria.virtualbank.services.PaymentReportService;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class PaymentReportGrpc extends PaymentReportServiceImplBase {
@@ -28,6 +29,7 @@ public class PaymentReportGrpc extends PaymentReportServiceImplBase {
                 .map(payment -> Payment.newBuilder()
                         .setAmount(payment.getAmount())
                         .setTime(Timestamp.newBuilder().setSeconds(payment.getTime().getTime() / 1000).build())
+                        .setPurpose(payment.getPurpose())
                         .build()
                 ).collect(Collectors.toList());
 

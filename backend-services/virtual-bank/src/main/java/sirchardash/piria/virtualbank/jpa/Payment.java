@@ -1,10 +1,13 @@
 package sirchardash.piria.virtualbank.jpa;
 
-import java.util.Date;
-import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -19,6 +22,7 @@ public class Payment {
     private Date time;
     private int cardId;
     private int inFavor;
+    private String purpose;
     private String referenceNumber;
 
 }

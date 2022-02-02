@@ -1,17 +1,14 @@
 package sirchardash.piria.virtualbank.services;
 
-import java.util.Date;
-import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sirchardash.piria.virtualbank.components.CreditCardSearch;
-import sirchardash.piria.virtualbank.jpa.Account;
-import sirchardash.piria.virtualbank.jpa.AccountRepository;
-import sirchardash.piria.virtualbank.jpa.CreditCard;
-import sirchardash.piria.virtualbank.jpa.Payment;
-import sirchardash.piria.virtualbank.jpa.PaymentRepository;
+import sirchardash.piria.virtualbank.jpa.*;
 import sirchardash.piria.virtualbank.models.CreditCardInfo;
 import sirchardash.piria.virtualbank.models.PaymentStatus;
+
+import javax.transaction.Transactional;
+import java.util.Date;
 
 @Service
 public class PaymentService {
@@ -33,6 +30,7 @@ public class PaymentService {
     public PaymentStatus pay(CreditCardInfo payerCard,
                              String receivingAccountNumber,
                              double amount,
+                             String purpose,
                              String referenceNumber) {
         CreditCard payer = creditCardSearch.findAccountFor(payerCard);
         Account receiver = accountRepository.findByAccountNumber(receivingAccountNumber);
@@ -51,6 +49,7 @@ public class PaymentService {
                 new Date(),
                 payer.getId(),
                 receiver.getId(),
+                purpose,
                 referenceNumber
         );
 

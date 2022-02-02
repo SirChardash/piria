@@ -11,7 +11,8 @@ message PaymentReportRequest {
 
 message Payment {
   double amount = 1;
-  google.protobuf.Timestamp time = 2;
+  string purpose = 2;
+  google.protobuf.Timestamp time = 3;
 }
 
 message PaymentReportResponse {

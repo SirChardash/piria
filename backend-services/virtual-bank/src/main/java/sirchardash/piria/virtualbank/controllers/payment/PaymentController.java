@@ -25,6 +25,7 @@ public class PaymentController {
                 request.getPayerCard(),
                 request.getInFavorOfAccountNumber(),
                 request.getAmount(),
+                request.getPurpose(),
                 request.getReferenceNumber()
         );
         HttpStatus httpStatus = status == PaymentStatus.OK

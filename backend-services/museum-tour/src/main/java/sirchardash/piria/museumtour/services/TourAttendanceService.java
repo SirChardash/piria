@@ -39,10 +39,17 @@ public class TourAttendanceService {
         this.ticketSender = ticketSender;
     }
 
-    public void logAttendance(int tourId, String paymentId, AccessToken user) throws ServiceLogicException {
+    public VirtualTour logAttendance(int tourId,
+                                     String paymentId,
+                                     AccessToken user,
+                                     String locale) throws ServiceLogicException {
         VirtualTour tour = tourRepository.findById(tourId)
                 .orElseThrow(() -> new ServiceLogicException(MODEL_REFERENCE_FAILS, 400));
+
+        String userId = user.getOtherClaims().get("user_id").toString();
+
         double amountPaid = paymentReportService.get(paymentId).getReportsList().stream()
+                .filter(report -> report.getPurpose().equals("attendance of " + userId + " to tour " + tourId))
                 .map(Payment::getAmount)
                 .reduce(0d, Double::sum);
 
@@ -59,7 +66,9 @@ public class TourAttendanceService {
                 ticketId
         ));
 
-        ticketSender.send(ticketId, user.getEmail(), "en");
+        ticketSender.send(ticketId, user.getEmail(), locale);
+
+        return tour;
     }
 
 }
