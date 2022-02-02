@@ -40,16 +40,16 @@ email:
   localization:
     templateEn:
       title: Your ticket is ready
-      body: 'You have bought a ticket for a virtual tour. To access it, go to BraveSmart website, then click on Visit. 
-      When prompted, input <strong>{ticketId}</strong>. This is your virtual ticket id. No one but you can use this 
-      ticket.<br>To know when the tour begins, visit the Tours page and check under Booked tours section.<br>Don''t be 
-      late.<br>BraveSmart "team"'
+      body: '<p>You have bought a ticket for a virtual tour. To access it, go to BraveSmart website, then click on 
+      Visit. When prompted, input <strong>{ticketId}</strong>. This is your virtual ticket id. No one but you can use 
+      this ticket.</p><p>To know when the tour begins, visit the Tours page and check under Booked tours section.<p>
+      </p>Don''t be late.<br>BraveSmart "team"</p>'
     templateSr:
       title: Vaša karta je spremna
-      body: 'Kupili ste kartu za virtuelnu posjetu. Kako bi ušli na posjetu, otiđite na vebsajt BraveSmart, a zatim 
+      body: '<p>Kupili ste kartu za virtuelnu posjetu. Kako bi ušli na posjetu, otiđite na vebsajt BraveSmart, a zatim 
       kliknite na Posjeti. Unesite <strong>{ticketId}</strong> - to je vaša virtuelna karta. Niko sem vas je ne može 
-      iskoristiti.<br>Kako bi saznali kad posjeta počinje, otiđite na stranu Obilasci, te pogledajte sekciju Uplaćeno.
-      <br>Nemojte zakasniti.<br>BraveSmart "tim"'
+      iskoristiti.</p><p>Kako bi saznali kad posjeta počinje, otiđite na stranu Obilasci, te pogledajte sekciju 
+      Uplaćeno.</p><p>Nemojte zakasniti.<br>BraveSmart "tim"</p>'
   sender:
     host: smtp.gmail.com
     port: 587
