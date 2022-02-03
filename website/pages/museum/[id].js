@@ -2,7 +2,6 @@ import useSWR from "swr";
 import Layout from "../../components/layout";
 import MuseumProfile from "../../components/museumProfile";
 import WeatherPanel from "../../components/weatherPanel";
-import l10n from "../../l10n";
 import Box from "@mui/material/Box";
 import fetcher from "../../lib/fetch";
 import ErrorAlert from "../../components/errorAlert";
@@ -40,8 +39,7 @@ export default function Museum(props) {
 export async function getStaticProps({params}) {
     return {
         props: {
-            id: params.id,
-            l10n: l10n
+            id: params.id
         }
     }
 }

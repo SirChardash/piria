@@ -22,7 +22,6 @@ function TourItem({data, showStatus}) {
         ? <strong>{getStatus(data.startTime, data.endTime)}{' '}</strong>
         : ''
 
-    console.log(status)
     return (
         <Card sx={{minWidth: 275}} variant={'outlined'} className={styles.card}>
             <Grid container py={2} px={2}>
