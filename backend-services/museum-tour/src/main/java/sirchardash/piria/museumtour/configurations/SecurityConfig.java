@@ -59,6 +59,8 @@ class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
                 ).hasRole("user")
                 .antMatchers("/tracking")
                 .permitAll()
+                .antMatchers(HttpMethod.OPTIONS)
+                .permitAll()
                 .anyRequest()
                 .denyAll().and().httpBasic().and().csrf().disable();
     }
