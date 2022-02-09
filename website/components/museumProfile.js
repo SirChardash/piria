@@ -3,6 +3,7 @@ import {Grid} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {useRouter} from "next/router";
 import fullL10n from "../l10n";
+import TourLoader from "./tourLoader";
 
 export default function MuseumProfile({data}) {
     const {locale} = useRouter()
@@ -22,6 +23,14 @@ export default function MuseumProfile({data}) {
             <Typography sx={{mb: 1.5}} color="text.secondary">
                 <strong>{l10n.contact} </strong>{data.phoneNumber}
             </Typography>
+            <Box py={2}>
+                <Typography variant="h5" color="text.secondary" component="div">
+                    {l10n.tours}
+                </Typography>
+                <TourLoader endpoint={'http://localhost:8081/tours/upcoming/' + data.masterId}
+                            noResultText={l10n.noTours}
+                            canBook/>
+            </Box>
             <Grid container height={500} py={5}>
                 <iframe
                     src={data.googleLocation}

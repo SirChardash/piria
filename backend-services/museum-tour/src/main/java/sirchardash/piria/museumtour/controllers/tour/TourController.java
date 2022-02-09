@@ -30,6 +30,15 @@ class TourController {
         return ResponseEntity.ok(new TourResponse(service.getTours(museumId)));
     }
 
+    @GetMapping("/tours/upcoming/{museumId}")
+    ResponseEntity<TourResponse> getUpcomingToursForMuseum(@PathVariable int museumId) {
+        return ResponseEntity.ok(new TourResponse(service.getTours(
+                museumId,
+                LocalDateTime.now(),
+                LocalDateTime.now().plusDays(30)
+        )));
+    }
+
     @PostMapping("/tours")
     ResponseEntity<ConfirmationResponse> addTour(@RequestBody VirtualTour tour) {
         try {

@@ -2,7 +2,9 @@ const fullL10n = {
     en: {
         museumProfile: {
             category: 'Category',
-            contact: 'Contact'
+            contact: 'Contact',
+            tours: 'Upcoming Tours',
+            noTours: 'This museum does not have any upcoming tours.'
         },
         weatherPanel: {
             endpointSlug: 'en',
@@ -145,7 +147,9 @@ const fullL10n = {
     sr: {
         museumProfile: {
             category: 'Kategorija',
-            contact: 'Kontakt'
+            contact: 'Kontakt',
+            tours: 'Nadolazece Posjete',
+            noTours: 'Nema nadolazećih posjeta.'
         },
         weatherPanel: {
             endpointSlug: 'hr',
