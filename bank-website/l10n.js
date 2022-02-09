@@ -14,7 +14,8 @@ const fullL10n = {
             infoMessage: {
                 youAreRequestedToPay: 'You\'ve been requested to pay',
                 to: 'to',
-                referToTheNumber: 'In case of disagreement, refer to the payment number'
+                referToTheNumber: 'In case of disagreement, refer to the payment number',
+                purpose: 'Stated purpose:'
             },
             errorTitle: 'An error occurred!',
             invalidPaymentRequest: 'The link you followed leads to an incomplete or invalid payment request.',
@@ -43,7 +44,8 @@ const fullL10n = {
             infoMessage: {
                 youAreRequestedToPay: 'Ovim putem uplaćujete svotu ',
                 to: 'na račun',
-                referToTheNumber: 'U slučaju nesuglasice, pozovite se na broj uplate '
+                referToTheNumber: 'U slučaju nesuglasice, pozovite se na broj uplate ',
+                purpose: 'Navedena svrha:'
             },
             errorTitle: 'Došlo je do greške!',
             invalidPaymentRequest: 'Proces koji ste inicirali vodi do nekompletnog ili nevalidnog zahtjeva za uplatu.',

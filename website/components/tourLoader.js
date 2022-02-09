@@ -7,7 +7,7 @@ import {useKeycloak} from "@react-keycloak/ssr";
 import fetcher from "../lib/fetch";
 import TourList from "./tourList";
 
-export default function TourLoader({endpoint, noResultText, showStatus}) {
+export default function TourLoader({endpoint, noResultText, showStatus, context, canBook}) {
     const {locale} = useRouter()
     const l10n = fullL10n[locale].tours
     const {keycloak} = useKeycloak()
@@ -33,5 +33,5 @@ export default function TourLoader({endpoint, noResultText, showStatus}) {
         )
     }
 
-    return <TourList list={data.tours} showStatus={showStatus}/>
+    return <TourList list={data.tours} showStatus={showStatus} canBook={canBook} context={context}/>
 }

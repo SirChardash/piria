@@ -124,7 +124,8 @@ const fullL10n = {
             from: 'from',
             to: 'to',
             inProgress: 'IN PROGRESS',
-            finished: 'FINISHED'
+            finished: 'FINISHED',
+            buyTicket: 'BUY A TICKET'
         },
         prettyDate: {
             dateFormat: 'L. d. yyyy'
@@ -255,7 +256,8 @@ const fullL10n = {
             from: 'od',
             to: 'do',
             inProgress: 'U TOKU',
-            finished: 'ZAVRŠENO'
+            finished: 'ZAVRŠENO',
+            buyTicket: 'KUPI KARTU'
         },
         prettyDate: {
             dateFormat: 'd. L. yyyy'

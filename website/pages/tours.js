@@ -30,7 +30,10 @@ export default function Tours() {
                 <TourLoader endpoint={'http://localhost:8081/tours/previous'} noResultText={l10n.noRecentTours}/>
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <TourLoader endpoint={'http://localhost:8081/tours/upcoming'} noResultText={l10n.noUpcomingTours}/>
+                <TourLoader endpoint={'http://localhost:8081/tours/upcoming'}
+                            noResultText={l10n.noUpcomingTours}
+                            canBook
+                            context={'tours'}/>
             </TabPanel>
             <TabPanel value={value} index={2}>
                 <TourLoader endpoint={'http://localhost:8081/tours/booked'}

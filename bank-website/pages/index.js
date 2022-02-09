@@ -27,9 +27,9 @@ export default function Home() {
     const {locale} = router
     const l10n = fullL10n[locale].paymentPage
 
-    const {paymentNumber, amount, receiver, successUrl} = router.query
+    const {paymentNumber, amount, receiver, callbackUrl, purpose} = router.query
 
-    const content = (!paymentNumber || !amount || !receiver || !successUrl)
+    const content = (!paymentNumber || !amount || !receiver || !callbackUrl || !purpose)
         ? <BadRequest/>
         : paymentStep === 'pay'
             ? <PaymentForm/>
@@ -76,10 +76,17 @@ export default function Home() {
             <Grid item xs={10} sm={8} md={6}>
                 <form onSubmit={submit}>
                     <Alert severity="info">
-                        {l10n.infoMessage.youAreRequestedToPay}{' '}
-                        <strong>{amount}</strong>{' '}
-                        {l10n.infoMessage.to}{' '}<strong>{receiver}</strong>.{' '}
-                        {l10n.infoMessage.referToTheNumber}{' '}<strong>[{paymentNumber}]</strong>.
+                        <p>
+                            {l10n.infoMessage.youAreRequestedToPay}{' '}
+                            <strong>{amount}</strong>{' '}
+                            {l10n.infoMessage.to}{' '}<strong>{receiver}</strong>.{' '}
+                        </p>
+                        <p>
+                            {l10n.infoMessage.referToTheNumber}{' '}<strong>[{paymentNumber}]</strong>.
+                        </p>
+                        <p>
+                            <strong>{l10n.infoMessage.purpose}</strong>{' '}{purpose}
+                        </p>
                     </Alert>
                     <TextField className={styles.input}
                                id="standard-basic"
@@ -137,7 +144,8 @@ export default function Home() {
                 "expirationDate": event.target.expirationDate.value,
                 "securityCode": event.target.securityCode.value
             },
-            "inFavorOfAccountNumber": receiver
+            "inFavorOfAccountNumber": receiver,
+            "purpose": purpose
         })], {
             type: "application/json"
         });
@@ -170,7 +178,7 @@ export default function Home() {
         const severity = statusCode === 'OK' ? 'success' : 'error'
         const title = statusCode === 'OK' ? l10n.transactionSuccess : l10n.transactionFail
         const action = statusCode === 'OK'
-            ? <Typography>{l10n.redirecting}{' '}<a href={successUrl}>{l10n.clickHere}</a>.</Typography>
+            ? <Typography>{l10n.redirecting}{' '}<a href={callbackUrl}>{l10n.clickHere}</a>.</Typography>
             : <Button color={'error'} size={'small'} onClick={() => setPaymentStep('pay')}>{l10n.back}</Button>
 
         return (

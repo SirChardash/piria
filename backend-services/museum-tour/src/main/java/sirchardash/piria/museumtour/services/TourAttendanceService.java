@@ -61,7 +61,7 @@ public class TourAttendanceService {
         attendanceRepository.save(new VirtualTourAttendance(
                 0,
                 tour.getId(),
-                user.getId(),
+                userId,
                 LocalDateTime.now(),
                 ticketId
         ));
