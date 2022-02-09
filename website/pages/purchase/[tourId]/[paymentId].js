@@ -4,10 +4,15 @@ import {useState} from "react";
 import Loading from "../../../components/loading";
 import FullScreenAlert from "../../../components/fullScreenAlert";
 import {useKeycloak} from "@react-keycloak/ssr";
+import fullL10n from "../../../l10n";
+import {useRouter} from "next/router";
 
 export default function Purchase(props) {
     const [state, setState] = useState('ready') // ready, loading, done, error
     const {keycloak, initialized} = useKeycloak()
+    const {locale} = useRouter()
+    const l10n = fullL10n[locale].purchase
+
 
     if (state === 'ready' && initialized && props.tourId && props.paymentId) {
         setState('loading')
@@ -24,8 +29,8 @@ export default function Purchase(props) {
     const content = state === 'loading'
         ? <Loading/>
         : state === 'done'
-            ? <FullScreenAlert title={'Sucess'} severity={'success'}>Is done.</FullScreenAlert>
-            : <FullScreenAlert title={'Ohno!'} severity={'error'}>Is fuked.</FullScreenAlert>
+            ? <FullScreenAlert title={l10n.success.title} severity={'success'}>{l10n.success.text}</FullScreenAlert>
+            : <FullScreenAlert title={l10n.error.title} severity={'error'}>{l10n.error.text}</FullScreenAlert>
     return (
         <Layout authenticated>
             {content}

@@ -129,6 +129,17 @@ const fullL10n = {
         },
         prettyDate: {
             dateFormat: 'L. d. yyyy'
+        },
+        purchase: {
+            success: {
+                title: 'Success',
+                text: 'You\'ve successfully booked a tour. We\'ve sent you an email containing the digital ticket.'
+            },
+            error: {
+                title: 'An Error Occurred',
+                text: 'We couldn\'t process the payment. Bookmark this site and check it later. If the problem ' +
+                    'persists, contact us.'
+            }
         }
     },
     sr: {
@@ -261,6 +272,18 @@ const fullL10n = {
         },
         prettyDate: {
             dateFormat: 'd. L. yyyy'
+        },
+        purchase: {
+            success: {
+                title: 'Čestitamo',
+                text: 'Uspješno ste kupili kartu za virtuelnu posjetu. Digitalnu kartu možete pronaći u svom mejl' +
+                    'sandučetu.'
+            },
+            error: {
+                title: 'Greška',
+                text: 'Ne možemo da potvrdimo vašu uplatu. Sačuvajte ovu stranicu, te je posjetite malo kasnije. U ' +
+                    'slučaju da ponovo dobijete ovu grešku, kontaktirajte nas.'
+            }
         }
     }
 }
