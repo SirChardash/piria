@@ -14,6 +14,7 @@ import sirchardash.piria.museumtour.jpa.VirtualTourRepository;
 import sirchardash.piria.virtualbank.controllers.paymentreport.Payment;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import static sirchardash.piria.museumtour.exceptions.ServiceError.MODEL_REFERENCE_FAILS;
 import static sirchardash.piria.museumtour.exceptions.ServiceError.TICKET_NOT_PAID;
@@ -47,6 +48,13 @@ public class TourAttendanceService {
                 .orElseThrow(() -> new ServiceLogicException(MODEL_REFERENCE_FAILS, 400));
 
         String userId = user.getOtherClaims().get("user_id").toString();
+
+        Optional<VirtualTourAttendance> existingAttendance = attendanceRepository.findByTourIdAndUserId(tourId, userId);
+
+        if (existingAttendance.isPresent()) {
+            ticketSender.send(existingAttendance.get().getTicketId(), user.getEmail(), locale);
+            return tour;
+        }
 
         double amountPaid = paymentReportService.get(paymentId).getReportsList().stream()
                 .filter(report -> report.getPurpose().equals("attendance of " + userId + " to tour " + tourId))

@@ -125,6 +125,7 @@ CREATE TABLE `virtual_tour_attendance`
     time_confirmed timestamp    NOT NULL,
     ticket_id      char(16)     NOT NULL,
     PRIMARY KEY (id),
+    UNIQUE (tour_id, user_id),
     FOREIGN KEY (tour_id) REFERENCES virtual_tour (id)
 );
 
