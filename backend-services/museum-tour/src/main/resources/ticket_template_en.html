@@ -1,0 +1,35 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<body>
+<div style="background-color: cadetblue"> </div>
+
+<h1 style="text-align: center; color: black">
+    YOUR TICKET IS HERE
+</h1>
+
+<p>
+    This ticket allows you to visit <span th:text="${museumName}"></span>. To attend the virtual tour, use the
+    BraveSmart website.
+</p>
+
+<h3>Details:</h3>
+<ul>
+    <li><strong>Time:</strong><span th:text="${time}"></span></li>
+    <li><strong>Museum Name:</strong> <span th:text="${museumName}"></span></li>
+    <li><strong>Tour Name:</strong> <span th:text="${tourName}"></span></li>
+    <li><strong>Tour Description:</strong> <span th:text="${tourDescription}"></span></li>
+</ul>
+
+<h3 style="text-align: center; color: black">
+    When prompted, use this code:
+</h3>
+<h2 style="text-align: center; color: black">
+    <span th:text="${ticketId}"></span>
+</h2>
+
+<p style="font-style: italic; text-align: right">
+    *this ticket is valid exclusively for the user <span th:text="${userName}"></span>
+</p>
+<div style="background-color: cadetblue"> </div>
+
+</body>
+</html>

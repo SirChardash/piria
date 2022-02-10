@@ -280,7 +280,7 @@ const fullL10n = {
         purchase: {
             success: {
                 title: 'Čestitamo',
-                text: 'Uspješno ste kupili kartu za virtuelnu posjetu. Digitalnu kartu možete pronaći u svom mejl' +
+                text: 'Uspješno ste kupili kartu za virtuelnu posjetu. Digitalnu kartu možete pronaći u svom mejl ' +
                     'sandučetu.'
             },
             error: {

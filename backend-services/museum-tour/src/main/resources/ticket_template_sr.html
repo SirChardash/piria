@@ -1,0 +1,36 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="sr">
+<body>
+<div style="background-color: cadetblue"> </div>
+
+<h1 style="text-align: center; color: black">
+    VAŠA KARTA JE SPREMNA
+</h1>
+
+<p>
+    Ova ulaznica vam dozvoljava da posjetite <span th:text="${museumName}"></span>. Kako bi prisustvovali posjeti,
+    koristite BraveSmart veb sajt.
+</p>
+
+<h3>Detalji:</h3>
+<ul>
+    <li><strong>Vrijeme ulaska:</strong><span th:text="${time}"></span></li>
+    <li><strong>Ime muzeja:</strong> <span th:text="${museumName}"></span></li>
+    <li><strong>Naziv posjete:</strong> <span th:text="${tourName}"></span></li>
+    <li><strong>Opis posjete:</strong> <span th:text="${tourDescription}"></span></li>
+</ul>
+
+<h3 style="text-align: center; color: black">
+    Pri ulasku, iskoristite ovaj kod:
+</h3>
+<h2 style="text-align: center; color: black">
+    <span th:text="${ticketId}"></span>
+</h2>
+
+<p style="font-style: italic; text-align: right">
+    *ova ulaznica važi samo za korisnika <span th:text="${userName}"></span>
+</p>
+
+<div style="background-color: cadetblue"> </div>
+
+</body>
+</html>

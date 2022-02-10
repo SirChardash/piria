@@ -17,7 +17,7 @@ export default function Purchase(props) {
     if (state === 'ready' && initialized && props.tourId && props.paymentId) {
         setState('loading')
         axios.post(
-            'http://localhost:8081/attendance/' + props.tourId + '/' + props.paymentId,
+            'http://localhost:8081/attendance/' + props.tourId + '/' + props.paymentId + '?locale=' + locale,
             '', {headers: {authorization: 'Bearer ' + keycloak.token}})
             .then(response => {
                 setState('done')

@@ -7,10 +7,7 @@ import sirchardash.piria.museumtour.components.email.TicketSender;
 import sirchardash.piria.museumtour.components.payment.PaymentReportService;
 import sirchardash.piria.museumtour.components.tours.TicketIdGenerator;
 import sirchardash.piria.museumtour.exceptions.ServiceLogicException;
-import sirchardash.piria.museumtour.jpa.VirtualTour;
-import sirchardash.piria.museumtour.jpa.VirtualTourAttendance;
-import sirchardash.piria.museumtour.jpa.VirtualTourAttendanceRepository;
-import sirchardash.piria.museumtour.jpa.VirtualTourRepository;
+import sirchardash.piria.museumtour.jpa.*;
 import sirchardash.piria.virtualbank.controllers.paymentreport.Payment;
 
 import java.time.LocalDateTime;
@@ -24,6 +21,7 @@ public class TourAttendanceService {
 
     private final VirtualTourAttendanceRepository attendanceRepository;
     private final VirtualTourRepository tourRepository;
+    private final MuseumRepository museumRepository;
     private final PaymentReportService paymentReportService;
     private final TicketIdGenerator ticketIdGenerator;
     private final TicketSender ticketSender;
@@ -31,10 +29,13 @@ public class TourAttendanceService {
     @Autowired
     TourAttendanceService(VirtualTourAttendanceRepository attendanceRepository,
                           VirtualTourRepository tourRepository,
+                          MuseumRepository museumRepository,
                           PaymentReportService paymentReportService,
-                          TicketIdGenerator ticketIdGenerator, TicketSender ticketSender) {
+                          TicketIdGenerator ticketIdGenerator,
+                          TicketSender ticketSender) {
         this.attendanceRepository = attendanceRepository;
         this.tourRepository = tourRepository;
+        this.museumRepository = museumRepository;
         this.paymentReportService = paymentReportService;
         this.ticketIdGenerator = ticketIdGenerator;
         this.ticketSender = ticketSender;
@@ -51,31 +52,32 @@ public class TourAttendanceService {
 
         Optional<VirtualTourAttendance> existingAttendance = attendanceRepository.findByTourIdAndUserId(tourId, userId);
 
+        VirtualTourAttendance attendance;
+
         if (existingAttendance.isPresent()) {
-            ticketSender.send(existingAttendance.get().getTicketId(), user.getEmail(), locale);
-            return tour;
+            attendance = existingAttendance.get();
+        } else {
+            double amountPaid = paymentReportService.get(paymentId).getReportsList().stream()
+                    .filter(report -> report.getPurpose().equals("attendance of " + userId + " to tour " + tourId))
+                    .map(Payment::getAmount)
+                    .reduce(0d, Double::sum);
+
+            if (amountPaid < tour.getTicketPrice()) {
+                throw new ServiceLogicException(TICKET_NOT_PAID, 400);
+            }
+
+            String ticketId = ticketIdGenerator.generate();
+            attendance = new VirtualTourAttendance(
+                    0,
+                    tour.getId(),
+                    userId,
+                    LocalDateTime.now(),
+                    ticketId
+            );
+            attendanceRepository.save(attendance);
         }
 
-        double amountPaid = paymentReportService.get(paymentId).getReportsList().stream()
-                .filter(report -> report.getPurpose().equals("attendance of " + userId + " to tour " + tourId))
-                .map(Payment::getAmount)
-                .reduce(0d, Double::sum);
-
-        if (amountPaid < tour.getTicketPrice()) {
-            throw new ServiceLogicException(TICKET_NOT_PAID, 400);
-        }
-
-        String ticketId = ticketIdGenerator.generate();
-        attendanceRepository.save(new VirtualTourAttendance(
-                0,
-                tour.getId(),
-                userId,
-                LocalDateTime.now(),
-                ticketId
-        ));
-
-        ticketSender.send(ticketId, user.getEmail(), locale);
-
+        ticketSender.send(locale, user, museumRepository.getOne(tourId), tour, attendance);
         return tour;
     }
 
