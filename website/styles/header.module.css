@@ -8,6 +8,12 @@
     font-size: 12pt;
 }
 
+.adminButton {
+    color: lightcoral;
+    font-weight: bolder;
+    font-size: 12pt;
+}
+
 .username {
     color: #babfc4
 }

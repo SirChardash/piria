@@ -32,6 +32,36 @@ export default function Header() {
             </Link>)
         : <div/>
 
+    const adminButtons = initialized && keycloak?.authenticated && keycloak?.realmAccess?.roles.includes('admin')
+        ? <>
+            <Link href={'/admin/messages'}>
+                <Button className={styles.adminButton}>
+                    MESSAGES
+                </Button>
+            </Link>
+            <Link href={'/admin/museums'}>
+                <Button className={styles.adminButton}>
+                    MUSEUMS
+                </Button>
+            </Link>
+            <Link href={'/admin/stats'}>
+                <Button className={styles.adminButton}>
+                    STATS
+                </Button>
+            </Link>
+            <Link href={'/admin/tours'}>
+                <Button className={styles.adminButton}>
+                    TOURS
+                </Button>
+            </Link>
+            <Link href={'/admin/users'}>
+                <Button className={styles.adminButton}>
+                    USERS
+                </Button>
+            </Link>
+        </>
+        : <div/>
+
     const username = initialized && keycloak.authenticated
         ? <Link href={'/profile'}><Typography className={styles.username}>
             {l10n.welcome}, {keycloak?.idTokenParsed?.name}
@@ -57,6 +87,7 @@ export default function Header() {
                     <Link href={'/visit'} className={styles.button}>
                         <Button className={styles.button} onClick={() => logNavigation('visit')}>{l10n.visit}</Button>
                     </Link>
+                    {adminButtons}
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}> </Typography>
                     {username}
                     {userButtons}
