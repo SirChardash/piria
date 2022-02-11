@@ -17,6 +17,12 @@ keycloak:
   disable-trust-manager: true
   bearer-only: true
 
+user-access:
+  server-url: http://localhost:8020/auth/
+  realm: bravesmart
+  username:
+  password:
+
 server:
   port: 8081
 
@@ -38,18 +44,26 @@ museum-tour:
 
 email:
   localization:
-    templateEn:
-      title: Your ticket is ready
-      body: '<p>You have bought a ticket for a virtual tour. To access it, go to BraveSmart website, then click on 
-      Visit. All the information you need is attached to this message in form of a virtual ticket.</p><p>To know when 
-      the tour begins, visit the Tours page and check under Booked tours section.<p>
-      </p>Don''t be late.<br>BraveSmart "team"</p>'
-    templateSr:
-      title: Vaša karta je spremna
-      body: '<p>Kupili ste kartu za virtuelnu posjetu. Kako bi ušli na posjetu, otiđite na vebsajt BraveSmart, a zatim 
-      kliknite na Posjeti. Svi potrebni podaci su priloženi uz ovu poruku u obliku virtuelne karte.</p><p>Kako bi 
-      saznali kad posjeta počinje, otiđite na stranu Obilasci, te pogledajte sekciju Uplaćeno.
-      </p><p>Nemojte zakasniti.<br>BraveSmart "tim"</p>'
+    template-en:
+      purchase-title: Your ticket is ready
+      purchase-body: '<p>You have bought a ticket for a virtual tour. To access it, go to BraveSmart website, then 
+      click on Visit. All the information you need is attached to this message in form of a virtual ticket.</p>
+      <p>To know when the tour begins, visit the Tours page and check under Booked tours section.</p>
+      <p>Don''t be late.<br>BraveSmart "team"</p>'
+      reminder-title: A museum is opening soon
+      reminder-body: '<p>A tour for which you bought a ticket will soon start. For more informations, sign into 
+      Bravesmart website and look for booked tours.<p>
+      <p>Don''t be late.<br>BraveSmart "team"</p>'
+    template-sr:
+      purchase-title: Vaša karta je spremna
+      purchase-body: '<p>Kupili ste kartu za virtuelnu posjetu. Kako bi ušli na posjetu, otiđite na vebsajt BraveSmart, 
+      a zatim kliknite na Posjeti. Svi potrebni podaci su priloženi uz ovu poruku u obliku virtuelne karte.</p>
+      <p>Kako bi saznali kad posjeta počinje, otiđite na stranu Obilasci, te pogledajte sekciju Uplaćeno.</p>
+      <p>Nemojte zakasniti.<br>BraveSmart "tim"</p>'
+      reminder-title: Muzej se uskoro otvara
+      reminder-body: '<p>Posjeta se koju ste kupili kartu će se uskoro otvoriti. Za više informacija, prijavite se na
+      Bravesmart stranicu i pogledajte sekciju Uplaćeno.<p>
+      <p>Nemojte zakasniti.<br>BraveSmart "tim"</p>'
   sender:
     host: smtp.gmail.com
     port: 587

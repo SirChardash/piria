@@ -43,14 +43,14 @@ public class TicketSender {
                 tour,
                 attendance
         ), "application/pdf");
-        EmailLocalization.Template template = this.localization.get(locale);
+        EmailLocalization.Template template = localization.get(locale);
 
         MimeMessage mimeMessage = sender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "utf-8");
-        helper.setText(template.getBody(), true);
+        helper.setText(template.getPurchaseBody(), true);
         helper.addAttachment("ticket.pdf", ticket);
         helper.setTo(user.getEmail());
-        helper.setSubject(template.getTitle());
+        helper.setSubject(template.getPurchaseTitle());
         helper.setFrom("noreply@bravesmart.com");
 
         sender.send(mimeMessage);

@@ -29,8 +29,10 @@ public class EmailLocalization {
     @AllArgsConstructor
     public static class Template {
 
-        private String title;
-        private String body;
+        private String purchaseTitle;
+        private String purchaseBody;
+        private String reminderTitle;
+        private String reminderBody;
 
     }
 
