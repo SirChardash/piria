@@ -9,17 +9,30 @@ import FullScreenAlert from "./fullScreenAlert";
 import {useRouter} from "next/router";
 import fullL10n from "../l10n";
 
-export default function Layout({children, authenticated}) {
+export default function Layout({children, authenticated, admin}) {
     const {keycloak, initialized} = useKeycloak()
 
     const {locale} = useRouter()
     const l10n = fullL10n[locale].layout
 
-    const content = !initialized
-        ? <Loading/>
-        : (!keycloak.authenticated && authenticated)
-            ? <FullScreenAlert severity={'error'} title={l10n.noAccess.title}>{l10n.noAccess.text}</FullScreenAlert>
-            : <Content children={children}/>
+    console.log(!admin && keycloak?.realmAccess?.roles.includes('admin'))
+    let content
+
+    if (initialized) {
+        if (!keycloak.authenticated && (authenticated || admin)) {
+            content = <FullScreenAlert severity={'error'} title={l10n.noAccess.title}>
+                {l10n.notAllowed.text}
+            </FullScreenAlert>
+        } else if (!keycloak?.realmAccess?.roles.includes('admin') && admin) {
+            content = <FullScreenAlert severity={'error'} title={l10n.noAccess.title}>
+                {l10n.notAllowed.text}
+            </FullScreenAlert>
+        } else {
+            content = <Content children={children}/>
+        }
+    } else {
+        content = <Loading/>
+    }
 
     return (
         <div className={styles.container}>

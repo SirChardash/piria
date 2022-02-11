@@ -56,6 +56,10 @@ const fullL10n = {
             noAccess: {
                 title: 'No Access',
                 text: 'You need to sign in to see this page.'
+            },
+            notAllowed: {
+                title: 'No Access',
+                text: 'You are not authorized to see this page.'
             }
         },
         page404: {
@@ -201,6 +205,10 @@ const fullL10n = {
             noAccess: {
                 title: 'Zabranjen pristup',
                 text: 'Morate biti prijavljeni da bi vidjeli ovu stranicu.'
+            },
+            notAllowed: {
+                title: 'Zabranjen pristup',
+                text: 'Nemate privilegije da vidite ovu stranicu.'
             }
         },
         page404: {

@@ -77,6 +77,14 @@
         "attributes": {}
       },
       {
+        "id": "f4442dcd-4e7d-47d0-8c15-2e6e259198df",
+        "name": "admin",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "bravesmart",
+        "attributes": {}
+      },
+      {
         "id": "07d74cab-4612-40ac-9143-2ad9141239ab",
         "name": "user",
         "composite": false,
