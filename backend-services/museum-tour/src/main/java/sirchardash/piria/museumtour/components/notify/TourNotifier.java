@@ -1,5 +1,6 @@
 package sirchardash.piria.museumtour.components.notify;
 
+import org.keycloak.admin.client.resource.RealmResource;
 import org.keycloak.admin.client.resource.UsersResource;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,10 @@ public class TourNotifier {
 
     @Autowired
     public TourNotifier(Reminder reminder,
-                        UsersResource usersResource,
+                        RealmResource usersResource,
                         VirtualTourAttendanceRepository repository) {
         this.reminder = reminder;
-        this.usersResource = usersResource;
+        this.usersResource = usersResource.users();
         this.repository = repository;
     }
 

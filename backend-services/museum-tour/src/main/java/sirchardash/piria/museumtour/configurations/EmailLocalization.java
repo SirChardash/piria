@@ -33,6 +33,8 @@ public class EmailLocalization {
         private String purchaseBody;
         private String reminderTitle;
         private String reminderBody;
+        private String passwordResetTitle;
+        private String passwordResetBody;
 
     }
 

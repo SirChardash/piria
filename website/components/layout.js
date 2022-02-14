@@ -15,7 +15,6 @@ export default function Layout({children, authenticated, admin}) {
     const {locale} = useRouter()
     const l10n = fullL10n[locale].layout
 
-    console.log(!admin && keycloak?.realmAccess?.roles.includes('admin'))
     let content
 
     if (initialized) {
