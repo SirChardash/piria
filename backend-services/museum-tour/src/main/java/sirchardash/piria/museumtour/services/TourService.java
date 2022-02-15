@@ -12,7 +12,6 @@ import sirchardash.piria.museumtour.jpa.VirtualTourRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -50,10 +49,7 @@ public class TourService {
 
     public List<VirtualTour> getForUser(String userId) {
         return attendanceRepository.findAllByUserId(userId).stream()
-                .map(VirtualTourAttendance::getTourId)
-                .map(repository::findById)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
+                .map(VirtualTourAttendance::getTour)
                 .collect(Collectors.toList());
     }
 

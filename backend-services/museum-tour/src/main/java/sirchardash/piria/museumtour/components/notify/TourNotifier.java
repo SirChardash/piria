@@ -9,6 +9,9 @@ import sirchardash.piria.museumtour.components.email.Reminder;
 import sirchardash.piria.museumtour.jpa.VirtualTourAttendance;
 import sirchardash.piria.museumtour.jpa.VirtualTourAttendanceRepository;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 @Component
 public class TourNotifier {
 
@@ -27,9 +30,15 @@ public class TourNotifier {
 
     public void sendNotifications() {
         repository.findAll().stream()
+                .filter(TourNotifier::isOneHourBeforeStart)
                 .filter(attendance -> !attendance.isNotified())
                 .peek(this::sendNotification)
                 .forEach(repository::save);
+    }
+
+    private static boolean isOneHourBeforeStart(VirtualTourAttendance attendance) {
+        long difference = Duration.between(LocalDateTime.now(), attendance.getTour().getStartTime()).getSeconds();
+        return difference > 0 && difference <= 3600;
     }
 
     private void sendNotification(VirtualTourAttendance attendance) {

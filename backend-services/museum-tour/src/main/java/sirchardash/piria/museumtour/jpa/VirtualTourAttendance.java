@@ -17,7 +17,9 @@ public class VirtualTourAttendance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int tourId;
+    @ManyToOne
+    @JoinColumn(name="tour_id")
+    private VirtualTour tour;
     private String userId;
     private LocalDateTime timeConfirmed;
     private String ticketId;

@@ -69,7 +69,7 @@ public class TourAttendanceService {
             String ticketId = ticketIdGenerator.generate();
             attendance = new VirtualTourAttendance(
                     0,
-                    tour.getId(),
+                    tour,
                     userId,
                     LocalDateTime.now(),
                     ticketId,

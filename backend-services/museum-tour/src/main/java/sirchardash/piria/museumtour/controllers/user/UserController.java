@@ -1,4 +1,4 @@
-package sirchardash.piria.museumtour.controllers;
+package sirchardash.piria.museumtour.controllers.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +33,14 @@ class UserController {
     @PostMapping("/admin/user/{userId}/disable")
     void disableUser(@PathVariable String userId) {
         service.disable(userId);
+    }
+
+    @GetMapping("/admin/user/stats")
+    StatsResponse userStats() {
+        return new StatsResponse(
+                service.activeUsersPerHours(),
+                service.activeUsers()
+        );
     }
 
 }
