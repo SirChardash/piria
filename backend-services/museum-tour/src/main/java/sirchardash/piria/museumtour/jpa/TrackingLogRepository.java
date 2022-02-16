@@ -20,4 +20,6 @@ public interface TrackingLogRepository extends JpaRepository<TrackingLog, Intege
                     "GROUP BY hour, day")
     List<HourlyUserCount> getHourlyUserCount();
 
+    List<TrackingLog> findAllByOrderByTimeDesc();
+
 }

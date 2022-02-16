@@ -1,0 +1,35 @@
+<html lang="en">
+<head>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 4pt;
+        }
+    </style>
+    <title></title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>User ID</th>
+        <th>Time</th>
+        <th>Category</th>
+        <th>Subcategory</th>
+        <th>Label</th>
+        <th>Value</th>
+    </tr>
+    <tr th:each="log : ${logs}">
+        <td th:text="${log.userId}"></td>
+        <td th:text="${log.time}"></td>
+        <td th:text="${log.category}"></td>
+        <td th:text="${log.subcategory}"></td>
+        <td th:text="${log.label}"></td>
+        <td th:text="${log.value}"></td>
+    </tr>
+</table>
+</body>
+</html>

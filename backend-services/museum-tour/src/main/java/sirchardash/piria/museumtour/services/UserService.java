@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sirchardash.piria.museumtour.components.auth.UserFactory;
 import sirchardash.piria.museumtour.components.email.ResetPasswordSender;
+import sirchardash.piria.museumtour.components.logs.LogReportGenerator;
 import sirchardash.piria.museumtour.components.random.RandomString;
 import sirchardash.piria.museumtour.jpa.HourlyUserCount;
 import sirchardash.piria.museumtour.jpa.TrackingLog;
@@ -31,17 +32,20 @@ public class UserService {
     private final RandomString randomString;
     private final ResetPasswordSender email;
     private final TrackingLogRepository trackingLogRepository;
+    private final LogReportGenerator logReportGenerator;
 
     @Autowired
     public UserService(RealmResource keycloak,
                        UserFactory factory,
                        RandomString randomString, ResetPasswordSender email,
-                       TrackingLogRepository trackingLogRepository) {
+                       TrackingLogRepository trackingLogRepository,
+                       LogReportGenerator logReportGenerator) {
         this.keycloak = keycloak;
         this.factory = factory;
         this.randomString = randomString;
         this.email = email;
         this.trackingLogRepository = trackingLogRepository;
+        this.logReportGenerator = logReportGenerator;
     }
 
     public List<User> getAllUsers() {
@@ -76,7 +80,11 @@ public class UserService {
     }
 
     public List<TrackingLog> logs() {
-        return trackingLogRepository.findAll();
+        return trackingLogRepository.findAllByOrderByTimeDesc();
+    }
+
+    public byte[] logsAsPdf() {
+        return logReportGenerator.generatePdf(logs());
     }
 
     public void resetPassword(String userId) {

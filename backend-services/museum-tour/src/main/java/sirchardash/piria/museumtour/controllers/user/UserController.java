@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import sirchardash.piria.museumtour.jpa.TrackingLog;
 import sirchardash.piria.museumtour.models.User;
 import sirchardash.piria.museumtour.services.UserService;
 
@@ -33,6 +34,16 @@ class UserController {
     @PostMapping("/admin/user/{userId}/disable")
     void disableUser(@PathVariable String userId) {
         service.disable(userId);
+    }
+
+    @GetMapping("/admin/user/logs")
+    List<TrackingLog> logs() {
+        return service.logs();
+    }
+
+    @GetMapping(value = "/admin/user/logs/pdf", produces = "application/pdf")
+    byte[] logsAsPdf() {
+        return service.logsAsPdf();
     }
 
     @GetMapping("/admin/user/stats")
