@@ -1,6 +1,6 @@
 import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import styles from '../styles/userTable.module.css'
-import UserButton from "./userButton";
+import ResponsiveButton from "./responsiveButton";
 
 export default function UserTable({data}) {
     return (
@@ -25,10 +25,16 @@ export default function UserTable({data}) {
                             <TableCell align="right">{user.lastName}</TableCell>
                             <TableCell align="right">{user.email}</TableCell>
                             <TableCell align="right">
-                                <UserButton action={'resetPassword'} userId={user.id}>RESET</UserButton>
+                                <ResponsiveButton
+                                    action={'http://localhost:8081/admin/user/' + user.id + '/resetPassword'}>
+                                    RESET
+                                </ResponsiveButton>
                             </TableCell>
                             <TableCell align="right">
-                                <UserButton action={'disable'} userId={user.id}>DISABLE</UserButton>
+                                <ResponsiveButton
+                                    action={'http://localhost:8081/admin/user/' + user.id + '/disable'}>
+                                    DISABLE
+                                </ResponsiveButton>
                             </TableCell>
                         </TableRow>
                     ))}
