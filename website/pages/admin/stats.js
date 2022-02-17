@@ -10,9 +10,14 @@ import LogTableLoader from "../../components/logTableLoader";
 import {Download} from "@mui/icons-material";
 import Button from "@mui/material/Button";
 import axios from "axios";
+import {useRouter} from "next/router";
+import fullL10n from "../../l10n";
 
 export default function Stats() {
     const {keycloak, initialized} = useKeycloak()
+
+    const {locale} = useRouter()
+    const l10n = fullL10n[locale].stats
 
     if (!initialized) {
         return <Loading withLayout/>
@@ -38,11 +43,11 @@ export default function Stats() {
                     <ArgumentAxis/>
                     <ValueAxis/>
                     <BarSeries valueField="users" argumentField="period"/>
-                    <Title text={'Active Users (' + data.activeUsers + ' right now)'}/>
+                    <Title text={l10n.activeUsers + ' (' + data.activeUsers + ' ' + l10n.atTheMoment + ')'}/>
                     <Animation/>
                 </Chart>
             </Paper>
-            <Button onClick={downloadLogs}><Download/>Download logs</Button>
+            <Button onClick={downloadLogs}><Download/>{l10n.downloadLogs}</Button>
             <Grid container py={3}>
                 <LogTableLoader endpoint={'http://localhost:8081/admin/user/logs'}/>
             </Grid>

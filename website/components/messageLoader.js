@@ -5,14 +5,19 @@ import {Grid, LinearProgress} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Message from "./message";
 import FullScreenAlert from "./fullScreenAlert";
+import {useRouter} from "next/router";
+import fullL10n from "../l10n";
 
 export default function MessageLoader({endpoint}) {
+    const {locale} = useRouter()
+    const l10n = fullL10n[locale].messages
+
     const {keycloak} = useKeycloak()
 
     const {data, error} = useSWR(endpoint, url => fetcher(url, keycloak.token))
 
     if (error) return <Grid justifyContent={'center'} py={18}>
-        <Typography variant={'h5'} color={'text.secondary'}>failed to load</Typography>
+        <Typography variant={'h5'} color={'text.secondary'}>{l10n.failedToLoad}</Typography>
     </Grid>
 
     if (!data) return (
@@ -24,7 +29,7 @@ export default function MessageLoader({endpoint}) {
 
     if (data.length === 0) {
         return (
-            <FullScreenAlert severity={'info'} title={'No messages'}>No user messages at the moment.</FullScreenAlert>
+            <FullScreenAlert severity={'info'} title={l10n.noMessagesTitle}>{l10n.noMessagesBody}</FullScreenAlert>
         )
     }
 

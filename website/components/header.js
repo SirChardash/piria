@@ -36,27 +36,22 @@ export default function Header() {
         ? <>
             <Link href={'/admin/messages'}>
                 <Button className={styles.adminButton}>
-                    MESSAGES
+                    {l10n.messages}
                 </Button>
             </Link>
             <Link href={'/admin/museums'}>
                 <Button className={styles.adminButton}>
-                    MUSEUMS
+                    {l10n.addMuseums}
                 </Button>
             </Link>
             <Link href={'/admin/stats'}>
                 <Button className={styles.adminButton}>
-                    STATS
-                </Button>
-            </Link>
-            <Link href={'/admin/tours'}>
-                <Button className={styles.adminButton}>
-                    TOURS
+                    {l10n.stats}
                 </Button>
             </Link>
             <Link href={'/admin/users'}>
                 <Button className={styles.adminButton}>
-                    USERS
+                    {l10n.users}
                 </Button>
             </Link>
         </>

@@ -4,8 +4,12 @@ import fetcher from "../lib/fetch";
 import {Grid, LinearProgress} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import UserTable from "./userTable";
+import {useRouter} from "next/router";
+import fullL10n from "../l10n";
 
 export default function UserTableLoader({endpoint}) {
+    const {locale} = useRouter()
+    const l10n = fullL10n[locale].users
     const {keycloak} = useKeycloak()
 
     const {data, error} = useSWR(endpoint, url => fetcher(url, keycloak.token))
@@ -25,7 +29,7 @@ export default function UserTableLoader({endpoint}) {
         <>
             <Grid container justifyContent={'right'}>
                 <Typography color={'text.secondary'} sx={{mb: 1.5, fontSize: 14}}>
-                    Total users: {data.length}
+                    {l10n.totalUsers}{' '}{data.length}
                 </Typography>
             </Grid>
             <UserTable data={data}/>

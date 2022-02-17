@@ -15,6 +15,10 @@ const fullL10n = {
             tours: 'Tours',
             visit: 'Visit',
             welcome: 'Welcome',
+            messages: 'Messages',
+            addMuseums: 'Add Museums',
+            stats: 'Stats',
+            users: 'Users',
             signIn: 'Sign In',
             signOut: 'Sign Out'
         },
@@ -157,7 +161,33 @@ const fullL10n = {
             successBody: 'Thanks! We always value our user\'s opinions - even when they\'re objectively wrong.',
             errorTitle: 'Message not sent',
             errorBody: 'Something broke. Please try again later.',
-            back: 'Back'
+            back: 'Back',
+            delete: 'Delete',
+            noMessagesTitle: 'No Messages',
+            noMessagesBody: 'No user messages at the moment.',
+        },
+        users: {
+            totalUsers: 'Total users: ',
+            username: 'Username',
+            firstName: 'First Name',
+            lastName: 'Last Name',
+            email: 'Email Address',
+            resetPassword: 'Reset Password',
+            resetPasswordButton: 'Reset',
+            disableLogin: 'Disable Login',
+            disableLoginButton: 'Disable'
+        },
+        stats: {
+            activeUsers: 'Active Users',
+            atTheMoment: 'right now',
+            downloadLogs: 'Download Logs',
+            userId: 'User ID',
+            time: 'Time',
+            category: 'Category',
+            subcategory: 'Subcategory',
+            label: 'Label',
+            value: 'Value',
+            failedToLoad: 'Failed to load'
         }
     },
     sr: {
@@ -176,6 +206,10 @@ const fullL10n = {
             tours: 'Obilasci',
             visit: 'Posjeti',
             welcome: 'Dobrodošli',
+            messages: 'Poruke',
+            addMuseums: 'Dodaj Muzej',
+            stats: 'Statistika',
+            users: 'Korisnici',
             signIn: 'Prijava',
             signOut: 'Odjava'
         },
@@ -319,7 +353,33 @@ const fullL10n = {
             successBody: 'Hvala! Poruka je uspješno poslata.',
             errorTitle: 'Poruka nije poslata',
             errorBody: 'Došlo je do greške. Molimo, probajte kasnije.',
-            back: 'Nazad'
+            back: 'Nazad',
+            delete: 'Obriši',
+            noMessagesTitle: 'Nema poruka',
+            noMessagesBody: 'Trenutno nema nijedne korisničke poruke.',
+        },
+        users: {
+            totalUsers: 'Ukupno korisnika',
+            username: 'Korisničko ime',
+            firstName: 'Ime',
+            lastName: 'Prezime',
+            email: 'Imejl adresa',
+            resetPassword: 'Resetuj šifru',
+            resetPasswordButton: 'Resetuj',
+            disableLogin: 'Onemogući prijavu',
+            disableLoginButton: 'Onemogući'
+        },
+        stats: {
+            activeUsers: 'Aktivni korisnici',
+            atTheMoment: 'trenutno',
+            downloadLogs: 'Preuzmi logove',
+            userId: 'Korisnički ID',
+            time: 'Vrijeme',
+            category: 'Kategorija',
+            subcategory: 'Podkategorija',
+            label: 'Akcija',
+            value: 'Vrijednost',
+            failedToLoad: 'Neuspjelo učitavanje'
         }
     }
 }
