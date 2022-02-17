@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreditCardInfo {
+
     private String cardNumber;
     private CreditCardType type;
     private String firstName;

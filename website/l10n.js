@@ -35,7 +35,9 @@ const fullL10n = {
                 li1Link: 'GitHub',
                 li2: 'Contact the ',
                 li2Link: 'Faculty',
-                li3: 'I\'m not giving you my phone number'
+                li3: 'I\'m not giving you my phone number',
+                li4: 'Send us a ',
+                li4Link: 'Message'
             }
         },
         museumPanel: {
@@ -146,6 +148,16 @@ const fullL10n = {
                 text: 'We couldn\'t process the payment. Bookmark this site and check it later. If the problem ' +
                     'persists, contact us.'
             }
+        },
+        messages: {
+            text: 'Send us a message. If needed, we will contact you via email.',
+            label: 'Message',
+            submit: 'Send',
+            successTitle: 'Message sent',
+            successBody: 'Thanks! We always value our user\'s opinions - even when they\'re objectively wrong.',
+            errorTitle: 'Message not sent',
+            errorBody: 'Something broke. Please try again later.',
+            back: 'Back'
         }
     },
     sr: {
@@ -184,7 +196,9 @@ const fullL10n = {
                 li1Link: 'Githab',
                 li2: 'Kontaktirajte ',
                 li2Link: 'fakultet',
-                li3: 'Ne dam broj telefona'
+                li3: 'Ne dam broj telefona',
+                li4: 'Pošaljite nam ',
+                li4Link: 'poruku'
             }
         },
         museumPanel: {
@@ -296,6 +310,16 @@ const fullL10n = {
                 text: 'Ne možemo da potvrdimo vašu uplatu. Sačuvajte ovu stranicu, te je posjetite malo kasnije. U ' +
                     'slučaju da ponovo dobijete ovu grešku, kontaktirajte nas.'
             }
+        },
+        messages: {
+            text: 'Pošaljite nam poruku. Ako situacija to zahtjeva, kontaktiraćemo vas putem imejla.',
+            label: 'Poruka',
+            submit: 'Pošalji',
+            successTitle: 'Poruka poslata',
+            successBody: 'Hvala! Poruka je uspješno poslata.',
+            errorTitle: 'Poruka nije poslata',
+            errorBody: 'Došlo je do greške. Molimo, probajte kasnije.',
+            back: 'Nazad'
         }
     }
 }

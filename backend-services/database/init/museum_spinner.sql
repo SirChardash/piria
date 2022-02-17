@@ -130,6 +130,14 @@ CREATE TABLE `virtual_tour_attendance`
     FOREIGN KEY (tour_id) REFERENCES virtual_tour (id)
 );
 
+CREATE TABLE `messages`
+(
+    id      int          NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id varchar(500) NOT NULL,
+    content text         NOT NULL,
+    contact varchar(500)
+);
+
 INSERT INTO museum_localized (master_id, language, name, address, city, country, phone_number, museum_type,
                               google_location)
 VALUES (1, 'EN', 'Skara Brae', 'KW16 3LR', 'Stromnes', 'Scotland', '+441856841815', 'Archeology',

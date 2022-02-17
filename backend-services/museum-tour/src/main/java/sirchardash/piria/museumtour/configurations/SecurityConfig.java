@@ -55,11 +55,14 @@ class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
                         "/tours/**"
                 ).hasRole("user")
                 .antMatchers(HttpMethod.POST,
-                        "/attendance/**"
+                        "/attendance/**",
+                        "/message"
                 ).hasRole("user")
                 .antMatchers(HttpMethod.GET, "/admin/**")
                 .hasRole("admin")
                 .antMatchers(HttpMethod.POST, "/admin/**")
+                .hasRole("admin")
+                .antMatchers(HttpMethod.DELETE, "/admin/**")
                 .hasRole("admin")
                 .antMatchers("/tracking")
                 .permitAll()

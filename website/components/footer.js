@@ -45,6 +45,9 @@ export default function Footer() {
                                                        target={'_blank'}>{l10n.p3.li2Link}</Link>
                                 </li>
                                 <li>{l10n.p3.li3}</li>
+                                <li>
+                                    {l10n.p3.li4}<Link href={'/messages'}>{l10n.p3.li4Link}</Link>
+                                </li>
                             </ul>
                         </Box>
                     </Grid>
