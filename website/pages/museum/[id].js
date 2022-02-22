@@ -26,7 +26,7 @@ export default function Museum(props) {
         : error
             ? <ErrorAlert status={error.status}/>
             : <Box>
-                <WeatherPanel countryCode={'GB'}/>
+                <WeatherPanel countryCode={data.countryCode}/>
                 <MuseumProfile data={data}/>
             </Box>
     return (

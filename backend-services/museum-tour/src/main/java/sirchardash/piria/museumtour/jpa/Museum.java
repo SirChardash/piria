@@ -21,7 +21,6 @@ public class Museum {
     private int id;
     private int masterId;
     @NotNull
-    @Pattern(regexp = "(EN)|(SR)")
     private String language;
     @NotBlank
     private String name;
@@ -31,6 +30,7 @@ public class Museum {
     private String city;
     @NotBlank
     private String country;
+    private String countryCode;
     private String phoneNumber;
     @NotBlank
     private String museumType;

@@ -43,4 +43,12 @@ public class RestCountriesApi {
                 .collect(Collectors.toList());
     }
 
+    public String toCountryCode(String countryName) {
+        return getAllCountries().stream()
+                .filter(country -> countryName.equals(country.getName()))
+                .findFirst()
+                .map(Country::getCode)
+                .orElse(null);
+    }
+
 }

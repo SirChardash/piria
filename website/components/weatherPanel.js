@@ -22,7 +22,7 @@ export default function WeatherPanel({countryCode}) {
         error,
         isValidating
     } = useSWR(
-        'http://localhost:8081/weather?language=' + l10n.endpointSlug + '&countryCode=' + countryCode,
+        'http://localhost:8081/weather?language=' + l10n.endpointSlug + '&countryCode=' + countryCode.toUpperCase(),
         url => fetcher(url, keycloak.token)
     )
 

@@ -1,38 +1,28 @@
 package sirchardash.piria.museumtour.services;
 
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import sirchardash.piria.museumtour.components.geo.restcountries.RestCountriesApi;
+import sirchardash.piria.museumtour.exceptions.ServiceError;
+import sirchardash.piria.museumtour.exceptions.ServiceLogicException;
+import sirchardash.piria.museumtour.jpa.*;
+
+import javax.annotation.PostConstruct;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import javax.annotation.PostConstruct;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import sirchardash.piria.museumtour.exceptions.ServiceError;
-import sirchardash.piria.museumtour.exceptions.ServiceLogicException;
-import sirchardash.piria.museumtour.jpa.Language;
-import sirchardash.piria.museumtour.jpa.LanguageRepository;
-import sirchardash.piria.museumtour.jpa.MasterMuseum;
-import sirchardash.piria.museumtour.jpa.MasterMuseumRepository;
-import sirchardash.piria.museumtour.jpa.Museum;
-import sirchardash.piria.museumtour.jpa.MuseumRepository;
 
 @Service
+@AllArgsConstructor
 public class AddMuseumService {
 
     private final MuseumRepository museumRepository;
     private final MasterMuseumRepository masterMuseumRepository;
     private final LanguageRepository languageRepository;
-    private List<String> supportedLanguages = List.of();
-
-    @Autowired
-    public AddMuseumService(MuseumRepository museumRepository,
-                            MasterMuseumRepository masterMuseumRepository,
-                            LanguageRepository languageRepository) {
-        this.museumRepository = museumRepository;
-        this.masterMuseumRepository = masterMuseumRepository;
-        this.languageRepository = languageRepository;
-    }
+    private final RestCountriesApi restCountriesApi;
+    private List<String> supportedLanguages;
 
     @PostConstruct
     void loadSupportedLanguages() {
@@ -51,6 +41,9 @@ public class AddMuseumService {
             throw new ServiceLogicException(ServiceError.UNSUPPORTED_LANGUAGE, 400);
         }
 
+        museumLocalizations.forEach(museum -> museum.setCountryCode(
+                restCountriesApi.toCountryCode(museum.getCountry())
+        ));
         MasterMuseum masterMuseum = masterMuseumRepository.save(new MasterMuseum());
         museumLocalizations.forEach(museum -> museum.setMasterId(masterMuseum.getId()));
         museumRepository.saveAll(museumLocalizations);
