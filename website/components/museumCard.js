@@ -13,6 +13,9 @@ export default function MuseumCard({data}) {
     const l10n = fullL10n[locale].museumCard
     const {keycloak, initialized} = useKeycloak()
 
+    const addTour = initialized && keycloak?.realmAccess?.roles.includes('admin')
+        ? <Link href={'/admin/tour/' + data.masterId}>{l10n.newTour}</Link>
+        : ''
     return (
         <Box py={1}>
             <Card sx={{minWidth: 275}} variant={'outlined'}>
@@ -52,6 +55,7 @@ export default function MuseumCard({data}) {
                             {l10n.seeMore}
                         </a>
                     </Link>
+                    {addTour}
                 </CardActions>
             </Card>
         </Box>

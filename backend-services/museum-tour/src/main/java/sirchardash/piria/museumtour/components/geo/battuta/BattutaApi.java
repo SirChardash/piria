@@ -47,7 +47,15 @@ public class BattutaApi {
     }
 
     @Cacheable("BattutaApi#getCities")
-    public List<City> getCities(String countryCode, String regionName) {
+    public List<City> getCities(String countryCode) {
+        return getRegions(countryCode).stream()
+                .map(Region::getName)
+                .map(regionName -> getCities(countryCode, regionName))
+                .flatMap(List::stream)
+                .collect(Collectors.toList());
+    }
+
+    private List<City> getCities(String countryCode, String regionName) {
         List<BattutaCity> cities = webClient.method(GET)
                 .uri("/city/{1}/search/?key={2}&region={3}", countryCode, apiKey, regionName)
                 .retrieve()
@@ -55,7 +63,7 @@ public class BattutaApi {
                 .block();
 
         return cities == null
-                ? null
+                ? List.of()
                 : cities.stream()
                 .map(city -> new City(city.getName(), city.getRegion(), city.getCountryCode()))
                 .collect(Collectors.toList());

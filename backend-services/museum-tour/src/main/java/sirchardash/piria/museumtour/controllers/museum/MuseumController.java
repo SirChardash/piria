@@ -11,6 +11,8 @@ import sirchardash.piria.museumtour.models.Language;
 import sirchardash.piria.museumtour.services.AddMuseumService;
 import sirchardash.piria.museumtour.services.MuseumService;
 
+import javax.validation.Valid;
+
 @RestController
 public class MuseumController {
 
@@ -42,7 +44,7 @@ public class MuseumController {
     }
 
     @PostMapping("/museums")
-    public ResponseEntity<ConfirmationResponse> addMuseum(@RequestBody NewMuseumRequest request) {
+    public ResponseEntity<ConfirmationResponse> addMuseum(@RequestBody @Valid NewMuseumRequest request) {
         try {
             addService.addNewMuseum(request.getMuseumLocalizations());
         } catch (ServiceLogicException e) {

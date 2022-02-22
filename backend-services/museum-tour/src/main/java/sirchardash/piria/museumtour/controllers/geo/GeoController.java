@@ -5,9 +5,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import sirchardash.piria.museumtour.exceptions.ServiceLogicException;
 import sirchardash.piria.museumtour.models.geo.City;
 import sirchardash.piria.museumtour.models.geo.Country;
-import sirchardash.piria.museumtour.models.geo.Region;
 import sirchardash.piria.museumtour.services.GeoService;
 
 import java.util.List;
@@ -27,15 +27,9 @@ class GeoController {
         return ResponseEntity.ok(service.getAllCountries());
     }
 
-    @GetMapping("/geo/regions/{countryCode}")
-    public ResponseEntity<List<Region>> region(@PathVariable String countryCode) {
-        return ResponseEntity.ok(service.getRegions(countryCode));
-    }
-
-    @GetMapping("/geo/cities/{countryCode}/{region}")
-    public ResponseEntity<List<City>> city(@PathVariable String countryCode,
-                                           @PathVariable String region) {
-        return ResponseEntity.ok(service.getCities(countryCode, region));
+    @GetMapping("/geo/cities/{countryName}")
+    public ResponseEntity<List<City>> city(@PathVariable String countryName) throws ServiceLogicException {
+        return ResponseEntity.ok(service.getCities(countryName));
     }
 
 }

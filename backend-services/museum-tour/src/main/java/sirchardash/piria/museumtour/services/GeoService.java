@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sirchardash.piria.museumtour.components.geo.battuta.BattutaApi;
 import sirchardash.piria.museumtour.components.geo.restcountries.RestCountriesApi;
+import sirchardash.piria.museumtour.exceptions.ServiceLogicException;
 import sirchardash.piria.museumtour.models.geo.City;
 import sirchardash.piria.museumtour.models.geo.Country;
-import sirchardash.piria.museumtour.models.geo.Region;
 
 import java.util.List;
 
@@ -27,12 +27,16 @@ public class GeoService {
         return restCountriesApi.getAllCountries();
     }
 
-    public List<Region> getRegions(String countryCode) {
-        return battutaApi.getRegions(countryCode);
+    public List<City> getCities(String countryName) throws ServiceLogicException {
+        return battutaApi.getCities(countryNameToCode(countryName));
     }
 
-    public List<City> getCities(String country, String regionName) {
-        return battutaApi.getCities(country, regionName);
+    private String countryNameToCode(String countryName) throws ServiceLogicException {
+        return getAllCountries().stream()
+                .filter(country -> country.getName().equals(countryName))
+                .findFirst()
+                .map(Country::getCode)
+                .orElseThrow(() -> new ServiceLogicException(null, 404));
     }
 
 }

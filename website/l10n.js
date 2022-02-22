@@ -56,7 +56,8 @@ const fullL10n = {
             noResults: 'Nothing found. Try searching for something else.'
         },
         museumCard: {
-            seeMore: 'SEE MORE'
+            seeMore: 'SEE MORE',
+            newTour: 'NEW TOUR'
         },
         layout: {
             noAccess: {
@@ -188,6 +189,22 @@ const fullL10n = {
             label: 'Label',
             value: 'Value',
             failedToLoad: 'Failed to load'
+        },
+        addMuseum: {
+            name: 'Name',
+            address: 'Address',
+            city: 'City',
+            country: 'Country',
+            phoneNumber: 'Phone Number',
+            museumType: 'Museum Type',
+            googleLocation: 'Google Embedded Map URL',
+            submit: 'Add Museum',
+            language: 'Language',
+            back: 'Back',
+            successTitle: 'Museum added',
+            successBody: 'You\'ve successfully added a new museum entry set. Check the museum list in a few minutes.',
+            errorTitle: 'There was an error',
+            errorBody: 'Double-check the data and try again.'
         }
     },
     sr: {
@@ -247,7 +264,8 @@ const fullL10n = {
             noResults: 'Nema rezultata. Probajte tražiti nešto opštije.'
         },
         museumCard: {
-            seeMore: 'DETALJNIJE'
+            seeMore: 'DETALJNIJE',
+            newTour: 'NOVA POSJETA'
         },
         layout: {
             noAccess: {
@@ -380,6 +398,22 @@ const fullL10n = {
             label: 'Akcija',
             value: 'Vrijednost',
             failedToLoad: 'Neuspjelo učitavanje'
+        },
+        addMuseum: {
+            name: 'Naziv',
+            address: 'Adresa',
+            city: 'Grad',
+            country: 'Država',
+            phoneNumber: 'Broj telefona',
+            museumType: 'Tip muzeja',
+            googleLocation: 'URL Gugl mape',
+            submit: 'Dodaj muzej',
+            language: 'Jezik',
+            back: 'Nazad',
+            successTitle: 'Uspjeh',
+            successBody: 'Uspješno ste dodali novi muzej. Dostupna lista muzeja ce se azurirati kroz koji minut.',
+            errorTitle: 'Greška',
+            errorBody: 'Molimo, provjerite unešene podatke i probajte ponovo.'
         }
     }
 }
