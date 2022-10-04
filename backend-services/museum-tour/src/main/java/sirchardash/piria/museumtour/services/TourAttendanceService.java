@@ -44,7 +44,7 @@ public class TourAttendanceService {
     public VirtualTour logAttendance(int tourId,
                                      String paymentId,
                                      AccessToken user,
-                                     String locale) throws ServiceLogicException {
+                                     String locale) {
         VirtualTour tour = tourRepository.findById(tourId)
                 .orElseThrow(() -> new ServiceLogicException(MODEL_REFERENCE_FAILS, 400));
 

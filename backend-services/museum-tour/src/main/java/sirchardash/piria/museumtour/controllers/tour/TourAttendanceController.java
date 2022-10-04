@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sirchardash.piria.museumtour.components.auth.TokenParser;
-import sirchardash.piria.museumtour.exceptions.ServiceLogicException;
 import sirchardash.piria.museumtour.jpa.VirtualTour;
 import sirchardash.piria.museumtour.services.TourAttendanceService;
 
@@ -36,8 +35,6 @@ class TourAttendanceController {
             ));
         } catch (VerificationException e) {
             return ResponseEntity.status(400).build();
-        } catch (ServiceLogicException e) {
-            return ResponseEntity.status(e.getStatusCode()).build();
         }
     }
 }

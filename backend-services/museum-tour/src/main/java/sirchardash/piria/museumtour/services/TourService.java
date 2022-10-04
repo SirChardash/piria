@@ -1,18 +1,20 @@
 package sirchardash.piria.museumtour.services;
 
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import sirchardash.piria.museumtour.exceptions.ServiceError;
 import sirchardash.piria.museumtour.exceptions.ServiceLogicException;
-import sirchardash.piria.museumtour.jpa.VirtualTour;
-import sirchardash.piria.museumtour.jpa.VirtualTourAttendance;
-import sirchardash.piria.museumtour.jpa.VirtualTourAttendanceRepository;
-import sirchardash.piria.museumtour.jpa.VirtualTourRepository;
+import sirchardash.piria.museumtour.jpa.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static sirchardash.piria.museumtour.jpa.TourContent.Type.*;
 
 @Slf4j
 @Service
@@ -53,12 +55,42 @@ public class TourService {
                 .collect(Collectors.toList());
     }
 
-    public void addTour(VirtualTour tour) throws ServiceLogicException {
+    public void addTour(VirtualTour tour,
+                        List<MultipartFile> images,
+                        List<MultipartFile> videos,
+                        List<String> links) {
         try {
+            tour.setContent(
+                    Stream.of(
+                            images.stream().map(file -> toContent(file, IMAGE, tour)).collect(Collectors.toList()),
+                            videos.stream().map(file -> toContent(file, VIDEO, tour)).collect(Collectors.toList()),
+                            links.stream().map(link -> toContent(link, tour)).collect(Collectors.toList())
+                    ).flatMap(List::stream).collect(Collectors.toList())
+            );
+
             repository.saveAndFlush(tour);
         } catch (Exception e) {
             throw new ServiceLogicException(ServiceError.MODEL_REFERENCE_FAILS, 400);
         }
+    }
+
+    @SneakyThrows
+    private TourContent toContent(MultipartFile file, TourContent.Type type, VirtualTour tour) {
+        return new TourContent(
+                null,
+                file.getBytes(),
+                type,
+                tour
+        );
+    }
+
+    private TourContent toContent(String text, VirtualTour tour) {
+        return new TourContent(
+                null,
+                text.getBytes(),
+                LINK,
+                tour
+        );
     }
 
 }

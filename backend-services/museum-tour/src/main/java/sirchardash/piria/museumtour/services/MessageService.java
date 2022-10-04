@@ -30,7 +30,7 @@ public class MessageService {
         return repository.findAll();
     }
 
-    public void delete(int id) throws ServiceLogicException {
+    public void delete(int id) {
         Message message = repository.findById(id)
                 .orElseThrow(() -> new ServiceLogicException(ServiceError.MODEL_REFERENCE_FAILS, 404));
         repository.delete(message);

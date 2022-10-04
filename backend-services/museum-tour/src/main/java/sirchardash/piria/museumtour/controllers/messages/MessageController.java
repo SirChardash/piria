@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import org.keycloak.common.VerificationException;
 import org.springframework.web.bind.annotation.*;
 import sirchardash.piria.museumtour.components.auth.TokenParser;
-import sirchardash.piria.museumtour.exceptions.ServiceLogicException;
 import sirchardash.piria.museumtour.jpa.Message;
 import sirchardash.piria.museumtour.services.MessageService;
 
@@ -30,7 +29,7 @@ public class MessageController {
     }
 
     @DeleteMapping("/admin/message/{id}")
-    public void delete(@PathVariable int id) throws ServiceLogicException {
+    public void delete(@PathVariable int id) {
         service.delete(id);
     }
 

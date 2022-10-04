@@ -5,14 +5,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import sirchardash.piria.museumtour.exceptions.ServiceLogicException;
+import org.springframework.web.multipart.MultipartFile;
 import sirchardash.piria.museumtour.jpa.VirtualTour;
-import sirchardash.piria.museumtour.models.Confirmation;
 import sirchardash.piria.museumtour.models.ConfirmationResponse;
 import sirchardash.piria.museumtour.services.TourService;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -40,15 +40,12 @@ class TourController {
     }
 
     @PostMapping("/tours")
-    ResponseEntity<ConfirmationResponse> addTour(@RequestBody VirtualTour tour) {
-        try {
-            service.addTour(tour);
-            return ResponseEntity.ok(ConfirmationResponse.SUCCESS);
-        } catch (ServiceLogicException e) {
-            return ResponseEntity
-                    .status(e.getStatusCode())
-                    .body(new ConfirmationResponse(new Confirmation(false, e.getServiceError().getCode())));
-        }
+    ResponseEntity<ConfirmationResponse> addTour(@RequestParam("image") List<MultipartFile> images,
+                                                 @RequestParam("video") List<MultipartFile> videos,
+                                                 @RequestParam("link") List<String> links,
+                                                 @ModelAttribute VirtualTour tour) {
+        service.addTour(tour, images, videos, links);
+        return ResponseEntity.ok(ConfirmationResponse.SUCCESS);
     }
 
     @GetMapping("/tours/upcoming")

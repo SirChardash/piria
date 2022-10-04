@@ -1,8 +1,5 @@
 package sirchardash.piria.museumtour.services;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
@@ -11,6 +8,9 @@ import sirchardash.piria.museumtour.exceptions.ServiceLogicException;
 import sirchardash.piria.museumtour.jpa.Museum;
 import sirchardash.piria.museumtour.jpa.MuseumRepository;
 import sirchardash.piria.museumtour.models.Language;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @DependsOn("dataRefresh")
@@ -30,7 +30,7 @@ public class MuseumService {
         return storage.getFor(language).find(searchQuery);
     }
 
-    public Museum getMuseum(int id) throws ServiceLogicException {
+    public Museum getMuseum(int id) {
         Optional<Museum> museum = repository.findById(id);
         if (museum.isPresent()) {
             return museum.get();

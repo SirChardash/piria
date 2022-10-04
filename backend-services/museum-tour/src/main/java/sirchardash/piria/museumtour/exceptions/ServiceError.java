@@ -27,7 +27,11 @@ public enum ServiceError {
     /**
      * Describes a situation where an attempt to send ticket is made, but no one paid for it.
      */
-    TICKET_NOT_PAID("5");
+    TICKET_NOT_PAID("5"),
+
+    ATTENDANCE_FORBIDDEN("6"),
+
+    CONTENT_UNAVAILABLE_OUTSIDE_TIMEFRAME("7");
 
     @Getter
     private final String code;

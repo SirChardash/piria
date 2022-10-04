@@ -52,7 +52,8 @@ class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
                         "/news",
                         "/weather",
                         "/geo/**",
-                        "/tours/**"
+                        "/tours/**",
+                        "/content/**"
                 ).hasRole("user")
                 .antMatchers(HttpMethod.POST,
                         "/attendance/**",
@@ -62,7 +63,8 @@ class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
                 .hasRole("admin")
                 .antMatchers(HttpMethod.POST,
                         "/admin/**",
-                        "/museums"
+                        "/museums",
+                        "/tours/**"
                 ).hasRole("admin")
                 .antMatchers(HttpMethod.DELETE, "/admin/**")
                 .hasRole("admin")

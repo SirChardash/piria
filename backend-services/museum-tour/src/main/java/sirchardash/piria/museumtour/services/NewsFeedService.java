@@ -25,7 +25,7 @@ public class NewsFeedService {
         this.maxEntries = maxEntries;
     }
 
-    public List<FeedEntry> getEntries() throws ServiceLogicException {
+    public List<FeedEntry> getEntries() {
         try {
             return feed.getEntries(maxEntries);
         } catch (IOException | FeedException e) {
