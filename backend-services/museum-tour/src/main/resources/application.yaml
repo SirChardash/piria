@@ -42,7 +42,7 @@ museum-tour:
       image-url: 'http://openweathermap.org/img/w/%s.png'
   geo:
     rest-countries:
-      base-url: 'https://restcountries.eu/rest/v2/all'
+      base-url: 'https://restcountries.com/v3.1/all'
     battuta:
       base-url: 'https://battuta.medunes.net/api/'
 

@@ -39,7 +39,7 @@ public class RestCountriesApi {
                 ? null
                 : countries.stream()
                 .filter(country -> "Europe".equals(country.getRegion()))
-                .map(country -> new Country(country.getName(), country.getCountryCode().toLowerCase()))
+                .map(country -> new Country(country.getName().getCommon(), country.getCountryCode().toLowerCase()))
                 .collect(Collectors.toList());
     }
 

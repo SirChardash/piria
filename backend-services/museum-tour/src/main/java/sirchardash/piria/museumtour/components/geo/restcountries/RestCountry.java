@@ -10,9 +10,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 class RestCountry {
 
-    private String name;
-    @JsonProperty("alpha2Code")
+    private Name name;
+    @JsonProperty("cca2")
     private String countryCode;
     private String region;
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class Name {
+
+        private String common;
+
+    }
 
 }

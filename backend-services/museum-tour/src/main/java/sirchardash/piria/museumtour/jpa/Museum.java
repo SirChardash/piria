@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "museum_localized")
@@ -34,7 +33,6 @@ public class Museum {
     private String phoneNumber;
     @NotBlank
     private String museumType;
-    @Pattern(regexp = "^https://www[.]google[.]com/maps/embed[?]pb=.+$")
     private String googleLocation;
 
 }

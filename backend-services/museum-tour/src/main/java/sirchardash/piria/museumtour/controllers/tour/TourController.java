@@ -1,6 +1,5 @@
 package sirchardash.piria.museumtour.controllers.tour;
 
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +11,7 @@ import sirchardash.piria.museumtour.services.TourService;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 
 @Slf4j
@@ -40,11 +40,17 @@ class TourController {
     }
 
     @PostMapping("/tours")
-    ResponseEntity<ConfirmationResponse> addTour(@RequestParam("image") List<MultipartFile> images,
-                                                 @RequestParam("video") List<MultipartFile> videos,
-                                                 @RequestParam("link") List<String> links,
+    ResponseEntity<ConfirmationResponse> addTour(@RequestParam(value = "image", required = false) List<MultipartFile> images,
+                                                 @RequestParam(value = "video", required = false) List<MultipartFile> videos,
+                                                 @RequestParam(value = "link", required = false) List<String> links,
                                                  @ModelAttribute VirtualTour tour) {
-        service.addTour(tour, images, videos, links);
+        service.addTour(
+                tour,
+                images != null ? images : Collections.emptyList(),
+                videos != null ? videos : Collections.emptyList(),
+                links != null ? links : Collections.emptyList()
+        );
+
         return ResponseEntity.ok(ConfirmationResponse.SUCCESS);
     }
 
@@ -62,7 +68,6 @@ class TourController {
         );
     }
 
-    @SneakyThrows
     @GetMapping("/tours/booked")
     ResponseEntity<TourResponse> getBookedTours(Principal user) {
         return ResponseEntity.ok(new TourResponse(service.getForUser(user.getName())));

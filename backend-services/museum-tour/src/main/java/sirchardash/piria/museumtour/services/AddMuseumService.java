@@ -32,7 +32,7 @@ public class AddMuseumService {
     }
 
     @Transactional
-    public void addNewMuseum(Collection<Museum> museumLocalizations) throws ServiceLogicException {
+    public void addNewMuseum(Collection<Museum> museumLocalizations) {
         Set<String> languages = museumLocalizations.stream().map(Museum::getLanguage).collect(Collectors.toSet());
 
         if (languages.size() != museumLocalizations.size()) {

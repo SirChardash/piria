@@ -1,5 +1,6 @@
 package sirchardash.piria.museumtour.jpa;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,8 +28,10 @@ public class VirtualTour {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime endTime;
     private double ticketPrice;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "virtualTour")
     private List<TourContent> content;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tour")
     private List<VirtualTourAttendance> attendances;
 
