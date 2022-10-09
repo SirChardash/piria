@@ -41,14 +41,18 @@ class TourController {
 
     @PostMapping("/tours")
     ResponseEntity<ConfirmationResponse> addTour(@RequestParam(value = "image", required = false) List<MultipartFile> images,
-                                                 @RequestParam(value = "video", required = false) List<MultipartFile> videos,
-                                                 @RequestParam(value = "link", required = false) List<String> links,
+                                                 @RequestParam(value = "video", required = false) MultipartFile video,
+                                                 @RequestParam(value = "link", required = false) String link,
                                                  @ModelAttribute VirtualTour tour) {
+        if (images == null || images.size() < 5 || images.size() > 10 || (video == null) == (link == null)) {
+            return ResponseEntity.status(400).build();
+        }
+
         service.addTour(
                 tour,
-                images != null ? images : Collections.emptyList(),
-                videos != null ? videos : Collections.emptyList(),
-                links != null ? links : Collections.emptyList()
+                images,
+                video != null ? List.of(video) : Collections.emptyList(),
+                link != null ? List.of(link) : Collections.emptyList()
         );
 
         return ResponseEntity.ok(ConfirmationResponse.SUCCESS);
