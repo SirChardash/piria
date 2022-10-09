@@ -23,14 +23,32 @@ public class Reminder {
     }
 
     @SneakyThrows
-    public void remind(String locale, String address) {
+    public void remindForStart(String locale, String address) {
         EmailLocalization.Template template = localization.get(locale);
 
         MimeMessage mimeMessage = sender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
-        helper.setText(template.getReminderBody(), true);
+        helper.setText(template.getReminderStartBody(), true);
         helper.setTo(address);
-        helper.setSubject(template.getReminderTitle());
+        helper.setSubject(template.getReminderStartTitle());
+        helper.setFrom("noreply@bravesmart.com");
+
+        sender.send(mimeMessage);
+    }
+
+    @SneakyThrows
+    public void remindForEnd(String locale, String address) {
+        EmailLocalization.Template template = localization.get(locale);
+
+        System.out.println("$$$$$$$$$$$$$");
+        System.out.println(template.getReminderEndTitle());
+        System.out.println(template.getReminderEndBody());
+
+        MimeMessage mimeMessage = sender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
+        helper.setText(template.getReminderEndBody(), true);
+        helper.setTo(address);
+        helper.setSubject(template.getReminderEndTitle());
         helper.setFrom("noreply@bravesmart.com");
 
         sender.send(mimeMessage);

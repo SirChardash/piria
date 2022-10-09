@@ -54,10 +54,12 @@ email:
       click on Visit. All the information you need is attached to this message in form of a virtual ticket.</p>
       <p>To know when the tour begins, visit the Tours page and check under Booked tours section.</p>
       <p>Don''t be late.<br>BraveSmart "team"</p>'
-      reminder-title: A museum is opening soon
-      reminder-body: '<p>A tour for which you bought a ticket will soon start. For more informations, sign into 
+      reminder-start-title: A museum is opening soon
+      reminder-start-body: '<p>A tour for which you bought a ticket will soon start. For more informations, sign into 
       Bravesmart website and look for booked tours.<p>
       <p>Don''t be late.<br>BraveSmart "team"</p>'
+      reminder-end-title: The tour is closing soon
+      reminder-end-body: '<pd>The tour you bought ticket for is closing in 5 minutes.</p>'
       password-reset-title: Password changed
       password-reset-body: '<p>Your password was changed. Your new temporary password is <strong>{password}</strong>.
       </p>'
@@ -67,10 +69,12 @@ email:
       a zatim kliknite na Posjeti. Svi potrebni podaci su priloženi uz ovu poruku u obliku virtuelne karte.</p>
       <p>Kako bi saznali kad posjeta počinje, otiđite na stranu Obilasci, te pogledajte sekciju Uplaćeno.</p>
       <p>Nemojte zakasniti.<br>BraveSmart "tim"</p>'
-      reminder-title: Muzej se uskoro otvara
-      reminder-body: '<p>Posjeta se koju ste kupili kartu će se uskoro otvoriti. Za više informacija, prijavite se na
+      reminder-start-title: Muzej se uskoro otvara
+      reminder-start-body: '<p>Posjeta se koju ste kupili kartu će se uskoro otvoriti. Za više informacija, prijavite se na
       Bravesmart stranicu i pogledajte sekciju Uplaćeno.<p>
       <p>Nemojte zakasniti.<br>BraveSmart "tim"</p>'
+      reminder-end-title: Posjeta se uskoro zatvara
+      reminder-end-body: '<pd>Posjeta za koju ste kupili kartu se zatvara za 5 minuta.</p>'
       password-reset-title: Promjena šifre
       password-reset-body: '<p>Vaša šifra je promjenjena. Vaša nova privremena šifra je <strong>{password}</strong>.
       </p>'

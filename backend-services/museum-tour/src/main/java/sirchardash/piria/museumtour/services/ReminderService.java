@@ -15,7 +15,7 @@ class ReminderService {
         this.tourNotifier = tourNotifier;
     }
 
-    @Scheduled(cron = "0 */5 * * * *")
+    @Scheduled(cron = "*/15 * * * * *")
     void notifyOneHourBefore() {
         tourNotifier.sendNotifications();
     }

@@ -73,6 +73,7 @@ public class TourAttendanceService {
                     userId,
                     LocalDateTime.now(),
                     ticketId,
+                    false,
                     false
             );
             attendanceRepository.save(attendance);

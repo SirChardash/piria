@@ -23,6 +23,7 @@ public class VirtualTourAttendance {
     private String userId;
     private LocalDateTime timeConfirmed;
     private String ticketId;
-    private boolean notified;
+    private boolean notifiedForStart;
+    private boolean notifiedForEnd;
 
 }

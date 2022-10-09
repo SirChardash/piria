@@ -31,9 +31,21 @@ public class TourNotifier {
     public void sendNotifications() {
         repository.findAll().stream()
                 .filter(TourNotifier::isOneHourBeforeStart)
-                .filter(attendance -> !attendance.isNotified())
-                .peek(this::sendNotification)
+                .filter(attendance -> !attendance.isNotifiedForStart())
+                .peek(this::sendTourStartNotification)
                 .forEach(repository::save);
+
+        repository.findAll().stream()
+                .filter(TourNotifier::isFiveMinutesBeforeEnd)
+                .filter(attendance -> !attendance.isNotifiedForEnd())
+                .peek(this::sendTourEndNotification)
+                .forEach(repository::save);
+    }
+
+    private static boolean isFiveMinutesBeforeEnd(VirtualTourAttendance attendance) {
+        long difference = Duration.between(LocalDateTime.now(), attendance.getTour().getEndTime()).getSeconds();
+        System.out.println(attendance.getId() + "#" + difference);
+        return difference > 0 && difference <= 300;
     }
 
     private static boolean isOneHourBeforeStart(VirtualTourAttendance attendance) {
@@ -41,14 +53,24 @@ public class TourNotifier {
         return difference > 0 && difference <= 3600;
     }
 
-    private void sendNotification(VirtualTourAttendance attendance) {
+    private void sendTourStartNotification(VirtualTourAttendance attendance) {
         UserRepresentation user = usersResource.get(attendance.getUserId()).toRepresentation();
         String locale = user.firstAttribute("locale") != null
                 ? user.firstAttribute("locale")
                 : "en";
 
-        reminder.remind(locale, user.getEmail());
-        attendance.setNotified(true);
+        reminder.remindForEnd(locale, user.getEmail());
+        attendance.setNotifiedForStart(true);
+    }
+
+    private void sendTourEndNotification(VirtualTourAttendance attendance) {
+        UserRepresentation user = usersResource.get(attendance.getUserId()).toRepresentation();
+        String locale = user.firstAttribute("locale") != null
+                ? user.firstAttribute("locale")
+                : "en";
+
+        reminder.remindForEnd(locale, user.getEmail());
+        attendance.setNotifiedForEnd(true);
     }
 
 }

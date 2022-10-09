@@ -1,5 +1,6 @@
 CREATE SCHEMA museum_spinner;
-USE museum_spinner;
+USE
+museum_spinner;
 
 CREATE TABLE language
 (
@@ -44,10 +45,19 @@ CREATE TABLE tracking_logs
     PRIMARY KEY (id)
 );
 
-DROP USER IF EXISTS 'museum_user'@'%';
-CREATE USER 'museum_user'@'%' IDENTIFIED BY 'heckingsecure';
-GRANT SELECT, UPDATE, INSERT, DELETE ON museum_spinner.* TO 'museum_user'@'%';
-FLUSH PRIVILEGES;
+DROP
+USER IF EXISTS 'museum_user'@'%';
+CREATE
+USER 'museum_user'@'%' IDENTIFIED BY 'heckingsecure';
+GRANT
+SELECT,
+UPDATE,
+INSERT
+,
+DELETE
+ON museum_spinner.* TO 'museum_user'@'%';
+FLUSH
+PRIVILEGES;
 
 INSERT INTO museum (id)
 VALUES (1),
@@ -120,12 +130,13 @@ CREATE TABLE `virtual_tour`
 
 CREATE TABLE `virtual_tour_attendance`
 (
-    id             int          NOT NULL AUTO_INCREMENT,
-    tour_id        int          NOT NULL,
-    user_id        varchar(500) NOT NULL,
-    time_confirmed timestamp    NOT NULL,
-    ticket_id      char(16)     NOT NULL,
-    notified       bool         NOT NULL DEFAULT FALSE,
+    id                 int          NOT NULL AUTO_INCREMENT,
+    tour_id            int          NOT NULL,
+    user_id            varchar(500) NOT NULL,
+    time_confirmed     timestamp    NOT NULL,
+    ticket_id          char(16)     NOT NULL,
+    notified_for_start bool         NOT NULL DEFAULT FALSE,
+    notified_for_end   bool         NOT NULL DEFAULT FALSE,
     PRIMARY KEY (id),
     UNIQUE (tour_id, user_id),
     FOREIGN KEY (tour_id) REFERENCES virtual_tour (id)
