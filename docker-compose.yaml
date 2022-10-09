@@ -26,7 +26,7 @@ services:
       - SPRING.DATASOURCE.USERNAME=virtual_bank_user
       - SPRING.DATASOURCE.PASSWORD=heckingsecure
   keycloak:
-    build: keycloak
+    build: backend-services/keycloak
     container_name: keycloak
     networks:
       - sirchardash_piria_keycloak
