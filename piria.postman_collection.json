@@ -1,0 +1,1204 @@
+{
+	"info": {
+		"_postman_id": "bf0759aa-b269-45ec-b4e1-541c884e1b95",
+		"name": "piria",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15663915"
+	},
+	"item": [
+		{
+			"name": "virtual_bank",
+			"item": [
+				{
+					"name": "pay",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\": 24.90,\r\n    \"referenceNumber\": \"1337420699\",\r\n    \"payerCard\": {\r\n        \"cardNumber\": \"4024007183796514\",\r\n        \"type\": \"VISA\",\r\n        \"firstName\": \"Nikola\",\r\n        \"lastName\": \"Karnstein\",\r\n        \"expirationDate\": \"12/25\",\r\n        \"securityCode\": \"152\"\r\n    },\r\n    \"inFavorOfAccountNumber\": \"3205732519283123\",\r\n    \"purpose\": \"jebi srbe\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{bank}}/pay",
+							"host": [
+								"{{bank}}"
+							],
+							"path": [
+								"pay"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "attendance",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "username",
+									"value": "hehe",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "hehe",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "bravesmart-web",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "http://localhost:8020/auth/realms/bravesmart/protocol/openid-connect/token",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "password_credentials",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{museum}}/attendance/1/123456?locale=en",
+							"host": [
+								"{{museum}}"
+							],
+							"path": [
+								"attendance",
+								"1",
+								"123456"
+							],
+							"query": [
+								{
+									"key": "locale",
+									"value": "en"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "external_apis",
+			"item": [
+				{
+					"name": "huffpost",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessTokenUrl",
+									"value": "{{keycloak}}",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "bravesmart-web",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "hehe",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "hehe",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "password_credentials",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{museum}}/news",
+							"host": [
+								"{{museum}}"
+							],
+							"path": [
+								"news"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "weather",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "username",
+									"value": "hehe",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "hehe",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "bravesmart-web",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "http://localhost:8020/auth/realms/bravesmart/protocol/openid-connect/token",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "password_credentials",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{museum}}/weather?language=hr&countryCode=FR",
+							"host": [
+								"{{museum}}"
+							],
+							"path": [
+								"weather"
+							],
+							"query": [
+								{
+									"key": "language",
+									"value": "hr"
+								},
+								{
+									"key": "countryCode",
+									"value": "FR"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "geo/countries",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful request\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Data is returned\", function() {\r",
+									"    pm.expect(pm.response.json().length)\r",
+									"    .to.be.greaterThan(0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessTokenUrl",
+									"value": "{{keycloak}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "min",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "ad",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "bravesmart-web",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "password_credentials",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{museum}}/geo/countries",
+							"host": [
+								"{{museum}}"
+							],
+							"path": [
+								"geo",
+								"countries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "geo/cities",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful request\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Data is returned\", function() {\r",
+									"    pm.expect(pm.response.json().length)\r",
+									"    .to.be.greaterThan(5);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "password",
+									"value": "min",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "ad",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "bravesmart-web",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "http://localhost:8020/auth/realms/bravesmart/protocol/openid-connect/token",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "password_credentials",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{museum}}/geo/cities/Cyprus",
+							"host": [
+								"{{museum}}"
+							],
+							"path": [
+								"geo",
+								"cities",
+								"Cyprus"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "tracking",
+			"item": [
+				{
+					"name": "tracking",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"timestamp\": 1625425543006,\r\n    \"userId\": \"hehuser\",\r\n    \"category\": \"browse museums\",\r\n    \"label\": \"click on museum\",\r\n    \"value\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{museum}}/tracking",
+							"host": [
+								"{{museum}}"
+							],
+							"path": [
+								"tracking"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "admin/users/logs/pdf",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "password",
+									"value": "min",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "ad",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "bravesmart-web",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "http://localhost:8020/auth/realms/bravesmart/protocol/openid-connect/token",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "password_credentials",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{museum}}/admin/user/logs/pdf",
+							"host": [
+								"{{museum}}"
+							],
+							"path": [
+								"admin",
+								"user",
+								"logs",
+								"pdf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "admin/users/logs",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "password",
+									"value": "min",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "ad",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "bravesmart-web",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "http://localhost:8020/auth/realms/bravesmart/protocol/openid-connect/token",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "password_credentials",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{museum}}/admin/user/logs",
+							"host": [
+								"{{museum}}"
+							],
+							"path": [
+								"admin",
+								"user",
+								"logs"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "museums",
+			"item": [
+				{
+					"name": "museums",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessTokenUrl",
+									"value": "http://localhost:8020/auth/realms/bravesmart/protocol/openid-connect/token",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "hehe",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "hehe",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "bravesmart-web",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "password_credentials",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{museum}}/museums?query=art&language=en",
+							"host": [
+								"{{museum}}"
+							],
+							"path": [
+								"museums"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "art"
+								},
+								{
+									"key": "language",
+									"value": "en"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "museums/{id}",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "username",
+									"value": "hehe",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "hehe",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "bravesmart-web",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "http://localhost:8020/auth/realms/bravesmart/protocol/openid-connect/token",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "password_credentials",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJoZXdZcVVMQk5oYXNvd1htOXlEenRpUy13UTh4ZmNPbXNwX04zMVM0ZjJzIn0.eyJleHAiOjE2NTkyODY2MjIsImlhdCI6MTY1OTI4NjMyMiwianRpIjoiM2QzYjA3MmUtZDg3Yi00ZTBmLTk5YTQtOGUwNDY0MjAyZWQxIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDIwL2F1dGgvcmVhbG1zL2JyYXZlc21hcnQiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiN2M0ZWZjNDYtY2ExNi00NmMxLTlkOTQtZWE2OTYxZDNmMjBmIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiYnJhdmVzbWFydC13ZWIiLCJzZXNzaW9uX3N0YXRlIjoiM2Q4NmE3NmYtZjMxNS00ZjllLWEwMTgtZGE2ODBmNDk4OTNiIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsImRlZmF1bHQtcm9sZXMtYnJhdmVzbWFydCIsInVtYV9hdXRob3JpemF0aW9uIiwidXNlciJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwidXNlcl9pZCI6IjdjNGVmYzQ2LWNhMTYtNDZjMS05ZDk0LWVhNjk2MWQzZjIwZiIsIm5hbWUiOiJOZWJvanNhIEJhYmljIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiaGVoZSIsImxvY2FsZSI6ImVuIiwiZ2l2ZW5fbmFtZSI6Ik5lYm9qc2EiLCJmYW1pbHlfbmFtZSI6IkJhYmljIiwiZW1haWwiOiJuZWJvanNhLmJhYWJpY0BnbWFpbC5jb20ifQ.Ke_VJnp63OawlIfWZI4CZgJ-RGajJz4_Q-swPAZWy8KStIXeRTEsqq30ICtKNZTD6ZTw2NzGxdwU2mXmMiC-Us7w3HZ_rgsyqAX3oCo243g-9ODqaqhOAP-cb8tZlY9NhS8bzKxzPRFD72ppivG5OwE--dYBr5kwX0k_jyaTSNGTtWFOeYgggB3gADSSjFmQlne0t6Gg8U_SU-GP7czqmJlGHZWTUCI1P5TUdHlU3Lgh_k_jj3n_cvNw8E34eqauzyAcEnrCGg7bwz5uEiJM7A4vTfzbhAl4V4qSKlDQvLE2Jqj7w3cJj45pxQUhBZcrbq765Sa3xKCmDeD5rxjQzQ",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{museum}}/museums/4",
+							"host": [
+								"{{museum}}"
+							],
+							"path": [
+								"museums",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "tours",
+			"item": [
+				{
+					"name": "tours",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "password",
+									"value": "min",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "ad",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "bravesmart-web",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "http://localhost:8020/auth/realms/bravesmart/protocol/openid-connect/token",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "password_credentials",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{museum}}/tours/6",
+							"host": [
+								"{{museum}}"
+							],
+							"path": [
+								"tours",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tours",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "password",
+									"value": "min",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "ad",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "http://localhost:8020/auth/realms/bravesmart/protocol/openid-connect/token",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "bravesmart-web",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "password_credentials",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "museumId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "heh",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "please do not heh. it's rude",
+									"type": "text"
+								},
+								{
+									"key": "startTime",
+									"value": "2021-07-19T21:44:04",
+									"type": "text"
+								},
+								{
+									"key": "endTime",
+									"value": "2021-07-19T23:44:04",
+									"type": "text"
+								},
+								{
+									"key": "link",
+									"value": "https://hehe.heh",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{museum}}/tours",
+							"host": [
+								"{{museum}}"
+							],
+							"path": [
+								"tours"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tours/upcoming",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "username",
+									"value": "hehe",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "hehe",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "bravesmart-web",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "http://localhost:8020/auth/realms/bravesmart/protocol/openid-connect/token",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "password_credentials",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{museum}}/tours/upcoming",
+							"host": [
+								"{{museum}}"
+							],
+							"path": [
+								"tours",
+								"upcoming"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "content/{id}",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "password",
+									"value": "min",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "ad",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "http://localhost:8020/auth/realms/bravesmart/protocol/openid-connect/token",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "bravesmart-web",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "password_credentials",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-tour-ticket",
+								"value": "sexytime",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{museum}}/content/4",
+							"host": [
+								"{{museum}}"
+							],
+							"path": [
+								"content",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tours/{id}/content",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "password",
+									"value": "min",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "ad",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "http://localhost:8020/auth/realms/bravesmart/protocol/openid-connect/token",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "bravesmart-web",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "password_credentials",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-tour-ticket",
+								"value": "sexytime",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{museum}}/tours/12/content",
+							"host": [
+								"{{museum}}"
+							],
+							"path": [
+								"tours",
+								"12",
+								"content"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "admin/users",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "password",
+									"value": "min",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "ad",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "bravesmart-web",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "http://localhost:8020/auth/realms/bravesmart/protocol/openid-connect/token",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "password_credentials",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{museum}}/admin/users",
+							"host": [
+								"{{museum}}"
+							],
+							"path": [
+								"admin",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "messages",
+			"item": [
+				{
+					"name": "message",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "password",
+									"value": "min",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "ad",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "bravesmart-web",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "http://localhost:8020/auth/realms/bravesmart/protocol/openid-connect/token",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "password_credentials",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"message\": \"ehehehehehe\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{museum}}/message",
+							"host": [
+								"{{museum}}"
+							],
+							"path": [
+								"message"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "admin/message/{id}",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "password",
+									"value": "min",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "ad",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "bravesmart-web",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "http://localhost:8020/auth/realms/bravesmart/protocol/openid-connect/token",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "password_credentials",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{museum}}/admin/message/6",
+							"host": [
+								"{{museum}}"
+							],
+							"path": [
+								"admin",
+								"message",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "museums",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful request\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Success flag is true\", function() {\r",
+									"    pm.expect(pm.response.json().success)\r",
+									"    .to.eq(true);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "password",
+									"value": "min",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "ad",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "http://localhost:8020/auth/realms/bravesmart/protocol/openid-connect/token",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "bravesmart-web",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "password_credentials",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"localizations\": [\r\n        {\r\n            \"language\": \"EN\",\r\n            \"name\": \"Anatomy Museum, Faculty of Love and Hate\",\r\n            \"address\": \"University Medical School Teviot Place, Edinburgh EH8 9AG\",\r\n            \"city\": \"Edinburgh\",\r\n            \"country\": \"United Kingdom\",\r\n            \"phoneNumber\": \"(+44)0131 650 3113\",\r\n            \"museumType\": \"Medicine\",\r\n            \"googleLocation\": \"https://www.google.com/maps/search/Anatomy+Museum,+Faculty+of+Medicine+and+Veterinary+Medicine+edinburgh/@55.9471773,-3.20669,15z\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{museum}}/museums",
+							"host": [
+								"{{museum}}"
+							],
+							"path": [
+								"museums"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
