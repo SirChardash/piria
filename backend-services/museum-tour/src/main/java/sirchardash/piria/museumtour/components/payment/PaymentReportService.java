@@ -2,6 +2,8 @@ package sirchardash.piria.museumtour.components.payment;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import sirchardash.piria.virtualbank.controllers.paymentreport.PaymentReportRequest;
 import sirchardash.piria.virtualbank.controllers.paymentreport.PaymentReportResponse;
@@ -14,8 +16,10 @@ public class PaymentReportService {
 
     private final ManagedChannel channel;
 
-    PaymentReportService() {
-        channel = ManagedChannelBuilder.forAddress("localhost", 8083)
+    @Autowired
+    PaymentReportService(@Value("${virtual-bank.host}") String host,
+                         @Value("${virtual-bank.port}") int port) {
+        channel = ManagedChannelBuilder.forAddress(host, port)
                 .usePlaintext()
                 .build();
     }

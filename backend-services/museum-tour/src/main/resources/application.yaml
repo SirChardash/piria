@@ -27,7 +27,8 @@ user-access:
   username:
   password:
 
-server:
+virtual-bank:
+  host: 'localhost'
   port: 8081
 
 museum-tour:
