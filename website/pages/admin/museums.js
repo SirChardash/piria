@@ -8,6 +8,7 @@ import {Grid} from "@mui/material";
 import {useKeycloak} from "@react-keycloak/ssr";
 import axios from "axios";
 import FullScreenAlert from "../../components/fullScreenAlert";
+import endpoints from "../../endpoints";
 
 export default function Museums() {
     const [state, setState] = useState('input') // input, sending, error, success
@@ -31,7 +32,7 @@ export default function Museums() {
 
     function submit() {
         axios.request({
-            url: 'http://localhost:8081/museums',
+            url: endpoints.museumApp + '/museums',
             method: 'post',
             headers: {authorization: 'Bearer ' + keycloak.token},
             data: {localizations: [en, sr]}

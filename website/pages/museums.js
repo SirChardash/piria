@@ -8,6 +8,7 @@ import MuseumLoader from "../components/museumLoader";
 import fullL10n from "../l10n";
 import {logEvent} from "../lib/tracking";
 import {useKeycloak} from "@react-keycloak/ssr";
+import endpoints from "../endpoints";
 
 export default function Museums() {
     const [searchQuery, setSearchQuery] = useState(undefined)
@@ -20,7 +21,7 @@ export default function Museums() {
         setSearchQuery(router.query['s'])
     }
 
-    const searchUrl = 'http://localhost:8081/museums?query=' + searchQuery + '&language=' + l10n.endpointSlug
+    const searchUrl = endpoints.museumApp + '/museums?query=' + searchQuery + '&language=' + l10n.endpointSlug
     const searchField = <TextField fullWidth
                                    defaultValue={searchQuery}
                                    name='s'

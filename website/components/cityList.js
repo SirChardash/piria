@@ -4,6 +4,7 @@ import {CircularProgress, InputLabel, MenuItem, Select} from "@mui/material";
 import {useRouter} from "next/router";
 import fullL10n from "../l10n";
 import {useKeycloak} from "@react-keycloak/ssr";
+import endpoints from "../endpoints";
 
 export default function CityList({city, country, onChange}) {
     const {locale} = useRouter()
@@ -27,7 +28,7 @@ export default function CityList({city, country, onChange}) {
 
     const {
         data
-    } = useSWR('http://localhost:8081/geo/cities/' + country, url => fetcher(url, keycloak.token))
+    } = useSWR(endpoints.museumApp + '/geo/cities/' + country, url => fetcher(url, keycloak.token))
 
     if (!data) {
         return <CircularProgress/>

@@ -7,6 +7,7 @@ import fetcher from "../../lib/fetch";
 import ErrorAlert from "../../components/errorAlert";
 import {useKeycloak} from "@react-keycloak/ssr";
 import Loading from "../../components/loading";
+import endpoints from '../../endpoints'
 
 export default function Museum(props) {
     const {keycloak, initialized} = useKeycloak()
@@ -19,7 +20,7 @@ export default function Museum(props) {
         data,
         error,
         isValidating
-    } = useSWR('http://localhost:8081/museums/' + props.id, url => fetcher(url, keycloak.token))
+    } = useSWR(endpoints.museumApp + '/museums/' + props.id, url => fetcher(url, keycloak.token))
 
     const content = isValidating
         ? <Loading/>

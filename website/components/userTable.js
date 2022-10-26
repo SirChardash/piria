@@ -3,6 +3,7 @@ import styles from '../styles/userTable.module.css'
 import ResponsiveButton from "./responsiveButton";
 import {useRouter} from "next/router";
 import fullL10n from "../l10n";
+import endpoints from "../endpoints";
 
 export default function UserTable({data}) {
     const {locale} = useRouter()
@@ -31,13 +32,13 @@ export default function UserTable({data}) {
                             <TableCell>{user.email}</TableCell>
                             <TableCell>
                                 <ResponsiveButton
-                                    action={'http://localhost:8081/admin/user/' + user.id + '/resetPassword'}>
+                                    action={endpoints.museumApp + '/admin/user/' + user.id + '/resetPassword'}>
                                     {l10n.resetPasswordButton}
                                 </ResponsiveButton>
                             </TableCell>
                             <TableCell>
                                 <ResponsiveButton
-                                    action={'http://localhost:8081/admin/user/' + user.id + '/disable'}>
+                                    action={endpoints.museumApp + '/admin/user/' + user.id + '/disable'}>
                                     {l10n.disableLoginButton}
                                 </ResponsiveButton>
                             </TableCell>

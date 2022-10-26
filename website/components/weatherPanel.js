@@ -5,6 +5,7 @@ import fullL10n from "../l10n";
 import Loading from "./loading";
 import {useKeycloak} from "@react-keycloak/ssr";
 import fetcher from "../lib/fetch";
+import endpoints from "../endpoints";
 
 export default function WeatherPanel({countryCode}) {
     const {keycloak, initialized} = useKeycloak()
@@ -22,7 +23,7 @@ export default function WeatherPanel({countryCode}) {
         error,
         isValidating
     } = useSWR(
-        'http://localhost:8081/weather?language=' + l10n.endpointSlug + '&countryCode=' + countryCode.toUpperCase(),
+        endpoints.museumApp + '/weather?language=' + l10n.endpointSlug + '&countryCode=' + countryCode.toUpperCase(),
         url => fetcher(url, keycloak.token)
     )
 

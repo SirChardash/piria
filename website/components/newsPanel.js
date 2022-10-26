@@ -11,6 +11,7 @@ import Loading from "./loading";
 import {useKeycloak} from "@react-keycloak/ssr";
 import {logEvent} from "../lib/tracking";
 import getUserId from "../lib/userId";
+import endpoints from "../endpoints";
 
 export default function NewsPanel({items}) {
     const {keycloak, initialized} = useKeycloak()
@@ -26,7 +27,7 @@ export default function NewsPanel({items}) {
         data,
         error,
         isValidating
-    } = useSWR('http://localhost:8081/news', url => fetcher(url, keycloak.token))
+    } = useSWR(endpoints.museumApp + '/news', url => fetcher(url, keycloak.token))
 
 
     return isValidating

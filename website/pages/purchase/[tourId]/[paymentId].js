@@ -6,6 +6,7 @@ import FullScreenAlert from "../../../components/fullScreenAlert";
 import {useKeycloak} from "@react-keycloak/ssr";
 import fullL10n from "../../../l10n";
 import {useRouter} from "next/router";
+import endpoints from "../../../endpoints";
 
 export default function Purchase(props) {
     const [state, setState] = useState('ready') // ready, loading, done, error
@@ -17,7 +18,7 @@ export default function Purchase(props) {
     if (state === 'ready' && initialized && props.tourId && props.paymentId) {
         setState('loading')
         axios.post(
-            'http://localhost:8081/attendance/' + props.tourId + '/' + props.paymentId + '?locale=' + locale,
+            endpoints.museumApp + '/attendance/' + props.tourId + '/' + props.paymentId + '?locale=' + locale,
             '', {headers: {authorization: 'Bearer ' + keycloak.token}})
             .then(response => {
                 setState('done')

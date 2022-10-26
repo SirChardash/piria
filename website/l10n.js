@@ -205,6 +205,14 @@ const fullL10n = {
             successBody: 'You\'ve successfully added a new museum entry set. Check the museum list in a few minutes.',
             errorTitle: 'There was an error',
             errorBody: 'Double-check the data and try again.'
+        },
+        addTour: {
+            startTime: "Start",
+            duration: "Duration (hours)",
+            pictures: "Pictures (5-10 pictures)",
+            video: "Video",
+            videoLink: "Link",
+            videoFile: "Video File"
         }
     },
     sr: {
@@ -414,6 +422,14 @@ const fullL10n = {
             successBody: 'Uspješno ste dodali novi muzej. Dostupna lista muzeja ce se azurirati kroz koji minut.',
             errorTitle: 'Greška',
             errorBody: 'Molimo, provjerite unešene podatke i probajte ponovo.'
+        },
+        addTour: {
+            startTime: "Početak",
+            duration: "Trajanje (sati)",
+            pictures: "Slike (5-10 slika)",
+            video: "Video",
+            videoLink: "Link",
+            videoFile: "Video fajl"
         }
     }
 }

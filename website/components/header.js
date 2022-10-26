@@ -26,7 +26,7 @@ export default function Header() {
                 </Button>
             </Link>
             : <Link href={'/signIn'}>
-                <Button className={styles.button} onClick={() => logNavigation('signIn')}>
+                <Button className={styles.button}>
                     {l10n.signIn}
                 </Button>
             </Link>)

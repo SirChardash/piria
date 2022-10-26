@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import ResponsiveButton from "./responsiveButton";
 import {useRouter} from "next/router";
 import fullL10n from "../l10n";
+import endpoints from "../endpoints";
 
 export default function Message({data}) {
     const {locale} = useRouter()
@@ -30,7 +31,7 @@ export default function Message({data}) {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <ResponsiveButton endpoint={'http://localhost:8081/admin/message/' + data.id} method={'delete'}>
+                    <ResponsiveButton endpoint={endpoints.museumApp + '/admin/message/' + data.id} method={'delete'}>
                         {l10n.delete}
                     </ResponsiveButton>
                 </CardActions>

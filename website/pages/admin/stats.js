@@ -12,6 +12,7 @@ import Button from "@mui/material/Button";
 import axios from "axios";
 import {useRouter} from "next/router";
 import fullL10n from "../../l10n";
+import endpoints from "../../endpoints";
 
 export default function Stats() {
     const {keycloak, initialized} = useKeycloak()
@@ -28,7 +29,7 @@ export default function Stats() {
         error,
         isValidating
     } = useSWR(
-        'http://localhost:8081/admin/user/stats',
+        endpoints.museumApp + '/admin/user/stats',
         url => fetcher(url, keycloak.token)
     )
 
@@ -49,14 +50,14 @@ export default function Stats() {
             </Paper>
             <Button onClick={downloadLogs}><Download/>{l10n.downloadLogs}</Button>
             <Grid container py={3}>
-                <LogTableLoader endpoint={'http://localhost:8081/admin/user/logs'}/>
+                <LogTableLoader endpoint={endpoints.museumApp + '/admin/user/logs'}/>
             </Grid>
         </Layout>
     )
 
     function downloadLogs() {
         axios.get(
-            'http://localhost:8081/admin/user/logs/pdf',
+            endpoints.museumApp + '/admin/user/logs/pdf',
             {headers: {authorization: 'Bearer ' + keycloak.token}, responseType: 'blob'}
         ).then(result => {
             const url = window.URL.createObjectURL(new Blob([result.data]));

@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import TourLoader from "../components/tourLoader";
 import {useRouter} from "next/router";
 import fullL10n from "../l10n";
+import endpoints from "../endpoints";
 
 export default function Tours() {
     const [value, setValue] = useState(0);
@@ -27,16 +28,16 @@ export default function Tours() {
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-                <TourLoader endpoint={'http://localhost:8081/tours/previous'} noResultText={l10n.noRecentTours}/>
+                <TourLoader endpoint={endpoints.museumApp + '/tours/previous'} noResultText={l10n.noRecentTours}/>
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <TourLoader endpoint={'http://localhost:8081/tours/upcoming'}
+                <TourLoader endpoint={endpoints.museumApp + '/tours/upcoming'}
                             noResultText={l10n.noUpcomingTours}
                             canBook
                             context={'tours'}/>
             </TabPanel>
             <TabPanel value={value} index={2}>
-                <TourLoader endpoint={'http://localhost:8081/tours/booked'}
+                <TourLoader endpoint={endpoints.museumApp + '/tours/booked'}
                             noResultText={l10n.noBookedTours}
                             showStatus/>
             </TabPanel>

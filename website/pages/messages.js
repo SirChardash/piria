@@ -9,6 +9,7 @@ import Loading from "../components/loading";
 import FullScreenAlert from "../components/fullScreenAlert";
 import axios from "axios";
 import {useKeycloak} from "@react-keycloak/ssr";
+import endpoints from "../endpoints";
 
 export default function Messages() {
     const [state, setState] = useState('message') // message, sending, sent, error
@@ -66,7 +67,7 @@ export default function Messages() {
         event.preventDefault()
         setState('sending')
         axios.request({
-            url: 'http://localhost:8081/message',
+            url: endpoints.museumApp + '/message',
             method: 'post',
             headers: {authorization: 'Bearer ' + keycloak.token},
             data: {

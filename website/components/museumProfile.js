@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import {useRouter} from "next/router";
 import fullL10n from "../l10n";
 import TourLoader from "./tourLoader";
+import endpoints from "../endpoints";
 
 export default function MuseumProfile({data}) {
     const {locale} = useRouter()
@@ -27,7 +28,7 @@ export default function MuseumProfile({data}) {
                 <Typography variant="h5" color="text.secondary" component="div">
                     {l10n.tours}
                 </Typography>
-                <TourLoader endpoint={'http://localhost:8081/tours/upcoming/' + data.masterId}
+                <TourLoader endpoint={endpoints.museumApp + '/tours/upcoming/' + data.masterId}
                             noResultText={l10n.noTours}
                             canBook/>
             </Box>
