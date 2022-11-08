@@ -2,10 +2,11 @@ import '../styles/global.css'
 import cookie from 'cookie'
 import * as React from 'react'
 import {SSRCookies, SSRKeycloakProvider} from '@react-keycloak/ssr'
+import endpoints from "../endpoints";
 
 const keycloakCfg = {
     realm: 'bravesmart',
-    url: 'http://localhost:8020/auth/',
+    url: endpoints.authService + "/auth",
     clientId: 'bravesmart-web'
 }
 
