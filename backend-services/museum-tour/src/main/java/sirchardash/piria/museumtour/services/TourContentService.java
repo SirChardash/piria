@@ -40,7 +40,9 @@ public class TourContentService {
         return tour.getContent()
                 .stream()
                 .map(content -> new TourContentEntry(
-                        String.format("/content/%d", content.getId()),
+                        content.getType().equals(TourContent.Type.LINK)
+                                ? new String(content.getContent())
+                                : String.format("/content/%d", content.getId()),
                         content.getType().name()
                 )).collect(Collectors.toList());
     }

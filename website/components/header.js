@@ -79,9 +79,6 @@ export default function Header() {
                     <Link href={'/tours'} className={styles.button}>
                         <Button className={styles.button} onClick={() => logNavigation('tours')}>{l10n.tours}</Button>
                     </Link>
-                    <Link href={'/visit'} className={styles.button}>
-                        <Button className={styles.button} onClick={() => logNavigation('visit')}>{l10n.visit}</Button>
-                    </Link>
                     {adminButtons}
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}> </Typography>
                     {username}

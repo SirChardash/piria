@@ -39,7 +39,8 @@ export default function Tours() {
             <TabPanel value={value} index={2}>
                 <TourLoader endpoint={endpoints.museumApp + '/tours/booked'}
                             noResultText={l10n.noBookedTours}
-                            showStatus/>
+                            showStatus
+                            canVisit/>
             </TabPanel>
         </Layout>
     )

@@ -3,14 +3,16 @@ import Typography from "@mui/material/Typography";
 import PrettyDate from "./prettyDate";
 import fullL10n from "../l10n";
 import {useRouter} from "next/router";
-import styles from '../styles/tourList.module.css'
 import {parseISO} from "date-fns";
 import {logEvent} from "../lib/tracking";
 import getUserId from "../lib/userId";
 import {useKeycloak} from "@react-keycloak/ssr";
 import Button from "@mui/material/Button";
+import Link from "next/link";
+import * as React from "react";
+import styles from '../styles/header.module.css';
 
-export default function TourList({list, showStatus, canBook, context}) {
+export default function TourList({list, showStatus, canBook, context, canVisit}) {
     const {keycloak, initialized} = useKeycloak()
     const {locale} = useRouter()
     const l10n = fullL10n[locale].tours
@@ -27,20 +29,33 @@ export default function TourList({list, showStatus, canBook, context}) {
             : ''
 
         const paymentNumber = generatePaymentNumber()
-        const buttons = canBook
-            ? <CardActions className={styles.cardActions}>
-                <form action={'http://localhost:3005/' + locale} onSubmit={buyTicket}>
-                    <input value={paymentNumber} name={'paymentNumber'} hidden/>
-                    <input value={data.ticketPrice} name={'amount'} hidden/>
-                    <input value={'3205732519283123'} name={'receiver'} hidden/>
-                    <input value={'http://localhost:3000/purchase/' + data.id + '/' + paymentNumber} name={'callbackUrl'} hidden/>
-                    <input value={'attendance of ' + keycloak.idTokenParsed.sub + ' to tour ' + data.id}
-                           name={'purpose'} hidden/>
-                    <Button size={'small'} type={'submit'}>{l10n.buyTicket}</Button>
-                </form>
+        const buttons =
+            <CardActions className={styles.cardActions}>
+                {
+                    canBook
+                        ? <form action={'http://localhost:3005/' + locale} onSubmit={buyTicket}>
+                            <input value={paymentNumber} name={'paymentNumber'} hidden/>
+                            <input value={data.ticketPrice} name={'amount'} hidden/>
+                            <input value={'3205732519283123'} name={'receiver'} hidden/>
+                            <input value={'http://localhost:3000/purchase/' + data.id + '/' + paymentNumber}
+                                   name={'callbackUrl'} hidden/>
+                            <input value={'attendance of ' + keycloak.idTokenParsed.sub + ' to tour ' + data.id}
+                                   name={'purpose'} hidden/>
+                            <Button size={'small'} type={'submit'}>{l10n.buyTicket}</Button>
+                        </form>
+                        : ''
+                }
+
+                {
+                    canVisit
+                        ? <Link href={'/visit/' + data.id}>
+                            <Button size={'small'}>
+                                {l10n.visit}
+                            </Button>
+                        </Link>
+                        : ''
+                }
             </CardActions>
-            :
-            ''
 
         return (
             <Card sx={{minWidth: 275}} variant={'outlined'} className={styles.card}>

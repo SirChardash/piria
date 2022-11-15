@@ -138,7 +138,8 @@ const fullL10n = {
             to: 'to',
             inProgress: 'IN PROGRESS',
             finished: 'FINISHED',
-            buyTicket: 'BUY A TICKET'
+            buyTicket: 'BUY A TICKET',
+            visit: 'Visit'
         },
         prettyDate: {
             dateFormat: 'L. d. yyyy'
@@ -213,6 +214,11 @@ const fullL10n = {
             video: "Video",
             videoLink: "Link",
             videoFile: "Video File"
+        },
+        visit: {
+            "enter": "Enter",
+            "textAreaPlaceholder": "Enter your ticket id",
+            "error": "Get fukked"
         }
     },
     sr: {
@@ -354,7 +360,8 @@ const fullL10n = {
             to: 'do',
             inProgress: 'U TOKU',
             finished: 'ZAVRŠENO',
-            buyTicket: 'KUPI KARTU'
+            buyTicket: 'KUPI KARTU',
+            visit: 'Posjeti'
         },
         prettyDate: {
             dateFormat: 'd. L. yyyy'
@@ -430,6 +437,11 @@ const fullL10n = {
             video: "Video",
             videoLink: "Link",
             videoFile: "Video fajl"
+        },
+        visit: {
+            "enter": "Posjeti",
+            "textAreaPlaceholder": "Unesite kod ulaznice",
+            "error": "Jbgdruye"
         }
     }
 }
