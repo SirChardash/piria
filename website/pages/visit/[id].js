@@ -3,7 +3,7 @@ import TourVisit from "../../components/tourVisit";
 
 export default function Visit(props) {
     return (
-        <Layout>
+        <Layout authenticated>
             <TourVisit tourId={props.id}/>
         </Layout>
     )
