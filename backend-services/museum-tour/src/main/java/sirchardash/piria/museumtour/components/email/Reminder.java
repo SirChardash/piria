@@ -40,10 +40,6 @@ public class Reminder {
     public void remindForEnd(String locale, String address) {
         EmailLocalization.Template template = localization.get(locale);
 
-        System.out.println("$$$$$$$$$$$$$");
-        System.out.println(template.getReminderEndTitle());
-        System.out.println(template.getReminderEndBody());
-
         MimeMessage mimeMessage = sender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
         helper.setText(template.getReminderEndBody(), true);

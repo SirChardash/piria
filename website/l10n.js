@@ -210,10 +210,23 @@ const fullL10n = {
         addTour: {
             startTime: "Start",
             duration: "Duration (hours)",
+            title: "Title",
+            description: "Description",
             pictures: "Pictures (5-10 pictures)",
+            ticketPrice: "Ticket Price",
             video: "Video",
             videoLink: "Link",
-            videoFile: "Video File"
+            videoFile: "Video File",
+            submit: "Create Tour",
+            error: {
+                badPictureCount: "Please provide between 5 and 10 images.",
+                badDates: "Please provide start time and duration.",
+                noTitle: "Please write a title.",
+                noDescription: "Please write a description.",
+                noVideoFile: "Please provide a video file.",
+                noVideoLink: "Please provide a link to video.",
+                noTicketPrice: "Please provide the ticket price."
+            }
         },
         visit: {
             "enter": "Enter",
@@ -433,10 +446,23 @@ const fullL10n = {
         addTour: {
             startTime: "Početak",
             duration: "Trajanje (sati)",
+            title: "Naziv",
+            description: "Opis",
             pictures: "Slike (5-10 slika)",
+            ticketPrice: "Cijena ulaznice",
             video: "Video",
             videoLink: "Link",
-            videoFile: "Video fajl"
+            videoFile: "Video fajl",
+            submit: "Napravi posjetu",
+            error: {
+                badPictureCount: "Izmedju 5 i 10 slika, molicu lijepo.",
+                badDates: "Unesite validan početak i trajanje posjete.",
+                noTitle: "Unesite naziv posjete.",
+                noDescription: "Unesite kratki opis.",
+                noVideoFile: "Obezbjedite video fajl.",
+                noVideoLink: "Unesite link do videa.",
+                noTicketPrice: "Unesite cijenu ulaznice."
+            }
         },
         visit: {
             "enter": "Posjeti",

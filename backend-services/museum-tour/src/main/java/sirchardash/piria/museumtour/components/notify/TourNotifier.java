@@ -44,7 +44,6 @@ public class TourNotifier {
 
     private static boolean isFiveMinutesBeforeEnd(VirtualTourAttendance attendance) {
         long difference = Duration.between(LocalDateTime.now(), attendance.getTour().getEndTime()).getSeconds();
-        System.out.println(attendance.getId() + "#" + difference);
         return difference > 0 && difference <= 300;
     }
 

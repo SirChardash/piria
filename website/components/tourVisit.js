@@ -28,7 +28,7 @@ export default function TourVisit({tourId}) {
             <Grid item py={20} xs={9}>
                 {ticketTextField}
             </Grid>
-            <Grid container py={20} xs={3} justifyContent={'center'}>
+            <Grid container py={20} justifyContent={'center'}>
                 <Button type={"submit"} size={'large'} onClick={() => requestContent(ticket)}>{l10n.enter}</Button>
             </Grid>
         </Grid>

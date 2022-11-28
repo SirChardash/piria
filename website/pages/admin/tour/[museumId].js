@@ -1,12 +1,13 @@
-import FullScreenAlert from "../../../components/fullScreenAlert";
 import Layout from "../../../components/layout";
+import NewTourCard from "../../../components/newTourCard";
+import {useState} from "react";
 
 export default function NewTour(params) {
+    const [tour, setTour] = useState({})
+
     return (
         <Layout admin>
-            <FullScreenAlert title={'It is I ' + params.museumId} severity={'info'}>
-                The frenchiest fry.
-            </FullScreenAlert>
+            <NewTourCard state={tour} onChange={setTour} museumId={params.museumId}/>
         </Layout>
     )
 }
