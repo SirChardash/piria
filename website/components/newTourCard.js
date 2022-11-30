@@ -108,6 +108,7 @@ export default function NewTourCard({state, onChange, museumId}) {
         formData.append('museumId', museumId)
         formData.append('startTime', new Date(state.startDate).toISOString())
         formData.append('endTime', new Date(state.endDate).toISOString())
+        formData.append('ticketPrice', state.ticketPrice)
 
         if (initialized) {
             axios.post(
@@ -148,7 +149,6 @@ export default function NewTourCard({state, onChange, museumId}) {
 
     function setStartDate(event) {
         state['startDate'] = new Date(event.target.value).getTime()
-        console.log(state['startDate'])
         onChange(state)
         setWtf(!wtf)
     }
@@ -158,9 +158,7 @@ export default function NewTourCard({state, onChange, museumId}) {
             return
         }
 
-        console.log(state['startDate'])
         state['endDate'] = new Date(event.target.value * 3_600_000 + new Date(state['startDate']).getTime()).getTime()
-        console.log(state['endDate'])
         onChange(state)
         setWtf(!wtf)
     }

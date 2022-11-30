@@ -11,13 +11,11 @@ export default function Content({path, ticket, type}) {
 
     if (!requested) {
         setRequested(true)
-        console.log(endpoints.museumApp + path)
         axios.get(
             endpoints.museumApp + path,
             {headers: {authorization: 'Bearer ' + keycloak.token, 'x-tour-ticket': ticket}, responseType: 'arraybuffer'})
             .then(response => {
                 setContent(Buffer.from(response.data, 'binary').toString('base64'))
-                console.log(response)
             }, reason => {
             })
     }
@@ -25,7 +23,6 @@ export default function Content({path, ticket, type}) {
     if (content == null) {
         return <img alt={'...'}/>
     } else {
-        console.log(content)
         return <Grid item key={path} margin={3} padding={4}>
             {
                 type === 'image'

@@ -37,7 +37,6 @@ export default function TourVisit({tourId}) {
             : renderContent(content)
 
     function requestContent(ticket) {
-        console.log(tourId)
         if (state === 'waitingInput') {
             axios.get(
                 endpoints.museumApp + '/tours/' + tourId + '/content',
@@ -45,7 +44,6 @@ export default function TourVisit({tourId}) {
                 .then(response => {
                     setState('done')
                     setContent(response.data)
-                    console.log(content)
                 }, reason => {
                     setState('waitingInput')
                 })
@@ -58,7 +56,6 @@ export default function TourVisit({tourId}) {
             if (entry.type === 'IMAGE') {
                 return <Content path={entry.url} ticket={ticket} type={'image'}/>
             } else if (entry.type === 'LINK') {
-                console.log(entry.url)
                 return <iframe src={entry.url} width='100%' height={640}/>
             } else if (entry.type === 'VIDEO') {
                 return <Content path={entry.url} ticket={ticket} type={'video'}/>
