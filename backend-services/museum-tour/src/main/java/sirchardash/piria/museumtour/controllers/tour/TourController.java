@@ -61,14 +61,14 @@ class TourController {
     @GetMapping("/tours/upcoming")
     ResponseEntity<TourResponse> getUpcomingTours() {
         return ResponseEntity.ok(
-                new TourResponse(service.getByDate(LocalDateTime.now(), LocalDateTime.now().plusDays(30)))
+                new TourResponse(service.getByStartDate(LocalDateTime.now(), LocalDateTime.now().plusDays(30)))
         );
     }
 
     @GetMapping("/tours/previous")
     ResponseEntity<TourResponse> getToursForPastMonth() {
         return ResponseEntity.ok(
-                new TourResponse(service.getByDate(LocalDateTime.now().minusDays(30), LocalDateTime.now()))
+                new TourResponse(service.getByEndDate(LocalDateTime.now().minusDays(30), LocalDateTime.now()))
         );
     }
 

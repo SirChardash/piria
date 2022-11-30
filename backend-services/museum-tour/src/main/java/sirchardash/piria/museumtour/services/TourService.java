@@ -35,18 +35,29 @@ public class TourService {
     }
 
     public List<VirtualTour> getTours(int museumId, LocalDateTime startDate, LocalDateTime endDate) {
-        return byDate(getTours(museumId), startDate, endDate);
+        return byStartDate(getTours(museumId), startDate, endDate);
     }
 
-    private List<VirtualTour> byDate(List<VirtualTour> tours, LocalDateTime startDate, LocalDateTime endDate) {
+    private List<VirtualTour> byEndDate(List<VirtualTour> tours, LocalDateTime startDate, LocalDateTime endDate) {
         return tours.stream()
                 .filter(tour -> tour.getStartTime().isAfter(startDate))
                 .filter(tour -> tour.getStartTime().isBefore(endDate))
                 .collect(Collectors.toList());
     }
 
-    public List<VirtualTour> getByDate(LocalDateTime startDate, LocalDateTime endDate) {
-        return byDate(repository.findAll(), startDate, endDate);
+    private List<VirtualTour> byStartDate(List<VirtualTour> tours, LocalDateTime startDate, LocalDateTime endDate) {
+        return tours.stream()
+                .filter(tour -> tour.getStartTime().isAfter(startDate))
+                .filter(tour -> tour.getStartTime().isBefore(endDate))
+                .collect(Collectors.toList());
+    }
+
+    public List<VirtualTour> getByStartDate(LocalDateTime startDate, LocalDateTime endDate) {
+        return byStartDate(repository.findAll(), startDate, endDate);
+    }
+
+    public List<VirtualTour> getByEndDate(LocalDateTime startDate, LocalDateTime endDate) {
+        return byEndDate(repository.findAll(), startDate, endDate);
     }
 
     public List<VirtualTour> getForUser(String userId) {
