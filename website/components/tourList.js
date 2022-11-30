@@ -10,7 +10,7 @@ import {useKeycloak} from "@react-keycloak/ssr";
 import Button from "@mui/material/Button";
 import Link from "next/link";
 import * as React from "react";
-import styles from '../styles/header.module.css';
+import styles from '../styles/tourList.module.css';
 
 export default function TourList({list, showStatus, canBook, context, canVisit}) {
     const {keycloak, initialized} = useKeycloak()
