@@ -3,4 +3,7 @@ module.exports = {
         locales: ['en', 'sr'],
         defaultLocale: 'en',
     },
+    env: {
+        BANK_SERVICE_ENDPOINT: process.env.BANK_SERVICE_ENDPOINT
+    }
 }

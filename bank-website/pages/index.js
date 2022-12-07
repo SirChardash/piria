@@ -17,6 +17,7 @@ import {useState} from "react";
 import fullL10n from "../l10n";
 import {useRouter} from "next/router";
 import axios from "axios";
+import endpoints from "../endpoints";
 
 export default function Home() {
     const [paymentStep, setPaymentStep] = useState('pay') // pay, awaiting, result
@@ -149,7 +150,7 @@ export default function Home() {
         })], {
             type: "application/json"
         });
-        axios.post('http://localhost:8082/pay', blob, config)
+        axios.post(endpoints.bankService + '/pay', blob, config)
             .then(processGoodResponse)
             .catch(processBadResponse)
     }
