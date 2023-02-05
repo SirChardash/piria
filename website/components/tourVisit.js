@@ -56,7 +56,7 @@ export default function TourVisit({tourId}) {
             if (entry.type === 'IMAGE') {
                 return <Content path={entry.url} ticket={ticket} type={'image'}/>
             } else if (entry.type === 'LINK') {
-                return <iframe src={entry.url} width='100%' height={640}/>
+                return <iframe src={"https://www.youtube.com/embed/" + entry.url.replace(/.*=/, "")} width='100%' height={640}/>
             } else if (entry.type === 'VIDEO') {
                 return <Content path={entry.url} ticket={ticket} type={'video'}/>
             } else {
