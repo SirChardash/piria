@@ -74,7 +74,7 @@ class TourController {
 
     @GetMapping("/tours/booked")
     ResponseEntity<TourResponse> getBookedTours(Principal user) {
-        return ResponseEntity.ok(new TourResponse(service.getForUser(user.getName())));
+        return ResponseEntity.ok(new TourResponse(service.getBooked(user.getName())));
     }
 
 }

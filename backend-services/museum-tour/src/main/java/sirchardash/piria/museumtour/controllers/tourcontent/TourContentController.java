@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 import sirchardash.piria.museumtour.models.TourContentEntry;
 import sirchardash.piria.museumtour.services.TourContentService;
 
@@ -35,6 +36,16 @@ class TourContentController {
                                              @RequestHeader("x-tour-ticket") String tourTicket,
                                              Principal user) {
         return ResponseEntity.ok(service.getContent(contentId, tourTicket, user.getName()));
+    }
+
+    @GetMapping(value = "/content/video/{contentId}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    public ResponseEntity<StreamingResponseBody> getVideo(@PathVariable("contentId") int contentId,
+                                                          @RequestHeader("x-tour-ticket") String tourTicket,
+                                                          Principal user) {
+        StreamingResponseBody response = outputStream -> outputStream.write(
+                service.getContent(contentId, tourTicket, user.getName())
+        );
+        return ResponseEntity.ok(response);
     }
 
 }

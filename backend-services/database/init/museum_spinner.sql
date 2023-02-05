@@ -421,3 +421,13 @@ VALUES (1, 'EN', 'Skara Brae', 'KW16 3LR', 'Stromnes', 'Scotland', 'GB', '+44185
        (50, 'SR', 'Sušana u Gurnesu', 'Ejkernes, Ejvi, KW17 2NH', 'Mejnlend, Orknej', 'Škotska', 'GB', '+441856751414',
         'Arheologija',
         'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2047.5125342756617!2d-3.0835748839360106!3d59.123824981587425!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x489a54da9efa97a9%3A0x51bd22cc4887dcf4!2sBroch%20of%20Gurness!5e0!3m2!1sen!2sba!4v1642964681400!5m2!1sen!2sba');
+
+create table tour_content
+(
+    id              int auto_increment primary key,
+    virtual_tour_id int      not null,
+    content         longblob not null,
+    type            enum ('IMAGE', 'VIDEO', 'LINK') null,
+    constraint tour_content_id_uindex unique (id),
+    constraint tour_content_virtual_tour_id_fk foreign key (virtual_tour_id) references virtual_tour (id)
+);

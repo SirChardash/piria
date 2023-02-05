@@ -60,9 +60,10 @@ public class TourService {
         return byEndDate(repository.findAll(), startDate, endDate);
     }
 
-    public List<VirtualTour> getForUser(String userId) {
+    public List<VirtualTour> getBooked(String userId) {
         return attendanceRepository.findAllByUserId(userId).stream()
                 .map(VirtualTourAttendance::getTour)
+                .filter(attendance -> attendance.getEndTime().isAfter(LocalDateTime.now()))
                 .collect(Collectors.toList());
     }
 
